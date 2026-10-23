@@ -1,0 +1,34 @@
+# The CI home (ADR 0010): the repo and nothing else - no model, no lab.
+# It runs every check file that does not declare itself bench-only, plus the
+# committed-artifacts check. A green run means the code, suites and baselines
+# are sound. It does NOT mean the agent answers well: that is the bench's
+# measured run (`--tier fixed`), whose run record is the evidence.
+#
+# The bench runs this same command first (`--home bench` is a superset), so
+# this is never "the entry point nobody runs locally" (ADR 0008, option C).
+
+name: checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read            # least privilege: CI reads the repo, writes nothing
+
+jobs:
+  checks:
+    runs-on: ubuntu-24.04   # pinned, not -latest: the runner image is a condition too
+    timeout-minutes: 10     # a hung check fails the job instead of burning an hour
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"   # the bench's version (WSL, 2026-09-28)
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run the CI home
+        run: python tests/run_checks.py --home ci

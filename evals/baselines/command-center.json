@@ -1,0 +1,634 @@
+{
+  "record_version": 7,
+  "header": {
+    "suite_path": "evals/suites/command-center.jsonl",
+    "suite_sha256": "6cd419e55f8b51e794f24851f1851f3eb1ffba46a6f4dfa334523d9c496c723b",
+    "suite_header_sha256": "cab2be5d66149f5912b6a67c553e4ad8cc5bf1a98a976a9d7930f33af68ea01b",
+    "tier_selection": "fixed",
+    "scorer": "command-center",
+    "model_name": "none (fakes: scripted reviewer)",
+    "model_digest": "no-model-called",
+    "host_target": "FakeBench (in memory) + a fake job table - no machine, no Hyper-V, no model is touched",
+    "sampling": null,
+    "rebaseline": {
+      "replaced": "2026-10-22T15:45:42Z",
+      "removed": []
+    },
+    "started_at": "2026-10-23T03:52:29Z",
+    "incomplete": null,
+    "record_version": 7
+  },
+  "cases": [
+    {
+      "id": "clean-promoted",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 0,
+        "expected_exit": 0,
+        "state": "promoted",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after"
+        ],
+        "machine_changed": [
+          "feature:SNMP"
+        ],
+        "reason": "QE green after the live run",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "98e2ce46cddf07018be428521236e9eb7512479d9277503309b53f7de0a10c0c"
+    },
+    {
+      "id": "clean-spooler-promoted",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 0,
+        "expected_exit": 0,
+        "state": "promoted",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after"
+        ],
+        "machine_changed": [],
+        "reason": "QE green after the live run",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "1c5cc04b7a74509dce047ec79e937bd3b60e2578218b92469d4364e95f6307dd"
+    },
+    {
+      "id": "breaks-server-restored",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "restored",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after",
+          "restore",
+          "qe-confirm"
+        ],
+        "machine_changed": [],
+        "reason": "QE after exit 1: failing ['svc-spooler-disabled']",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "bda9f3ab0f9381ffca0c28353511a47ed33fbf7132d990a16307284da619127a"
+    },
+    {
+      "id": "script-fails-restored",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "restored",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "restore",
+          "qe-confirm"
+        ],
+        "machine_changed": [],
+        "reason": "the script failed on SRV01",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "b1e21cc4cdb3192a8ccfc66f6a67ceb9f5ba4f1cb882aa3d401ff7541690fed1"
+    },
+    {
+      "id": "reviewer-blocks",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "blocked",
+        "live_started": false,
+        "calls": [
+          "review"
+        ],
+        "machine_changed": [],
+        "reason": "reviewer: revise",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "dc56b820f6816bbf22b38805eb5a46e6ad1e7f62fdc220714173a090044d709e"
+    },
+    {
+      "id": "review-overridden-promoted",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 0,
+        "expected_exit": 0,
+        "state": "promoted",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after"
+        ],
+        "machine_changed": [
+          "feature:SNMP"
+        ],
+        "reason": "QE green after the live run",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "099f3b233573100d329dbf309289fb239560c3ad52ecb86b8f40b407938d609b"
+    },
+    {
+      "id": "review-override-declined",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "blocked",
+        "live_started": false,
+        "calls": [
+          "review"
+        ],
+        "machine_changed": [],
+        "reason": "reviewer: revise",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "3333fe39db88fc4c4aa85d353cecfa82b18b9b35c9670d7f01db039777b60da1"
+    },
+    {
+      "id": "review-override-no-reason",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "blocked",
+        "live_started": false,
+        "calls": [
+          "review"
+        ],
+        "machine_changed": [],
+        "reason": "reviewer: revise",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "67ec256c176d2c2f4b7ae75669d5f3782027a71a3198294b0ebbc2a8cf6de3de"
+    },
+    {
+      "id": "review-overridden-qe-catches",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "restored",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after",
+          "restore",
+          "qe-confirm"
+        ],
+        "machine_changed": [],
+        "reason": "QE after exit 1: failing ['svc-spooler-disabled']",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "8c31fa30f77581927adb5eb73294403b0eb5238aa9b614208d74da35262748df"
+    },
+    {
+      "id": "dry-run-fails",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "blocked",
+        "live_started": false,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run"
+        ],
+        "machine_changed": [],
+        "reason": "dry run failed",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "7bfb76e7a146fb643f11a9c6a44554099eb6cfe8254b268cf16004142d54e03a"
+    },
+    {
+      "id": "dry-run-refused",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "refused",
+        "live_started": false,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run"
+        ],
+        "machine_changed": [],
+        "reason": "dry run refused: line 2: 'auditpol' is a native executable - -WhatIf cannot stop it",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "789c1ebcc62f05ddc4fd6a82b267d7d70de58e7d6a198a6e0377632fbb2fdd21"
+    },
+    {
+      "id": "restore-fails",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 3,
+        "expected_exit": 3,
+        "state": "undescribed",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after",
+          "restore"
+        ],
+        "machine_changed": [
+          "service:Spooler"
+        ],
+        "reason": "QE after exit 1: failing ['svc-spooler-disabled']; restore failed: fake restore: injected tool failure",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "a5d9ab1e7f4c8ce12d2a0025f744a26e6210e5c5c77116ff80f7adb4b0f67161"
+    },
+    {
+      "id": "restore-unconfirmed",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 3,
+        "expected_exit": 3,
+        "state": "undescribed",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after",
+          "restore",
+          "qe-confirm"
+        ],
+        "machine_changed": [
+          "service:Spooler"
+        ],
+        "reason": "QE after exit 1: failing ['svc-spooler-disabled']; restore unconfirmed: ['svc-spooler-disabled']",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "0905562f1ecb65de90d860d09e4d6e93f49a8a6004f23b0a9ce6b4841a0cdd06"
+    },
+    {
+      "id": "confirm-fails",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 3,
+        "expected_exit": 3,
+        "state": "undescribed",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after",
+          "restore",
+          "qe-confirm"
+        ],
+        "machine_changed": [],
+        "reason": "QE after exit 1: failing ['svc-spooler-disabled']; restore unconfirmed: fake confirm: injected tool failure",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "598f657da27eab72f0c20c535f43933665d5c97d5999882178e053003438acf4"
+    },
+    {
+      "id": "tooling-before-live",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "not-started",
+        "live_started": false,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint"
+        ],
+        "machine_changed": [],
+        "reason": "checkpoint: fake checkpoint: injected tool failure",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "18ba1c0e69434de9f9fcbb18953383207e1addc53360a3dc021a218d953c12a6"
+    },
+    {
+      "id": "checkpoint-vanishes",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "not-started",
+        "live_started": false,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint"
+        ],
+        "machine_changed": [],
+        "reason": "checkpoint not confirmed",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "8a7df5d1b624f52cc831b7eeed4db970c1ceb71d19e9bcd32454a531e9f0d5f0"
+    },
+    {
+      "id": "qe-before-red",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "not-started",
+        "live_started": false,
+        "calls": [
+          "review",
+          "qe-before"
+        ],
+        "machine_changed": [],
+        "reason": "QE before exit 1: ['fw-domain-on']",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "ca16cd969027bed4f1a4b0888635eed638a6101a30620fa7662984b45347d46c"
+    },
+    {
+      "id": "dc-only-refused",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "refused",
+        "live_started": false,
+        "calls": [],
+        "machine_changed": [],
+        "reason": "DC-only: ActiveDirectory, Set-ADUser",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "717454d7613ccabf8dbd54bef2fdc6bad98c7489990cc45f7be5d1d3fea31584"
+    },
+    {
+      "id": "review-unreadable",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "not-started",
+        "live_started": false,
+        "calls": [
+          "review"
+        ],
+        "machine_changed": [],
+        "reason": "no review: fake review: injected tool failure",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "bff9036341d5afd4c629d90bf7d6c3e2757ff82ba3e4d8ceebf9e969eea79b59"
+    },
+    {
+      "id": "crash-before-live",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "state": "not-started",
+        "live_started": false,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run"
+        ],
+        "machine_changed": [],
+        "reason": "crash: RuntimeError: fake dry_run: injected crash",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "2fc095b5c1ecdaba2c6db082c81a8c01070d5bd9b2e0ff5186fb49730008f9fe"
+    },
+    {
+      "id": "crash-after-live",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 3,
+        "expected_exit": 3,
+        "state": "undescribed",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "qe-after"
+        ],
+        "machine_changed": [
+          "feature:SNMP"
+        ],
+        "reason": "crash: RuntimeError: fake qe_after: injected crash",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "8641aa146772d181c3489c3b736b0a1804458ae10760fd2b1d6e7628fcea90fc"
+    },
+    {
+      "id": "live-tooling-restored",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "promote",
+        "exit": 1,
+        "expected_exit": 1,
+        "state": "restored",
+        "live_started": true,
+        "calls": [
+          "review",
+          "qe-before",
+          "dry_run",
+          "checkpoint",
+          "live_run",
+          "restore",
+          "qe-confirm"
+        ],
+        "machine_changed": [],
+        "reason": "live run tooling: fake live_run: injected tool failure",
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "2488233f8ea8d7bd3e088f576d0ed8e7abd2ea18f67c6732f114665f6379d5ad"
+    },
+    {
+      "id": "route-unknown-job",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "route",
+        "job": "deploy",
+        "exit": 2,
+        "expected_exit": 2,
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "b5a06e8ad7f5a4dde6037d63d941757552d37553e72f4c30ba4560fd34f74225"
+    },
+    {
+      "id": "route-pass-through-0",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "route",
+        "job": "fake-writes",
+        "exit": 0,
+        "expected_exit": 0,
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "f946f2248ea751039291425eb1f2bd75175bd79369d95fa4b36ae7814b03a122"
+    },
+    {
+      "id": "route-pass-through-1",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "route",
+        "job": "fake-writes",
+        "exit": 1,
+        "expected_exit": 1,
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "e38c0a5f1e1eb34259b332942a73e1bb339cb8af0c6857f249de42887110cc93"
+    },
+    {
+      "id": "route-pass-through-2",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "route",
+        "job": "fake-writes",
+        "exit": 2,
+        "expected_exit": 2,
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "139af29bd11b801bf41fc2e6f46821afdf608e7585347982782c8f09505c0cf0"
+    },
+    {
+      "id": "route-pass-through-3",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "route",
+        "job": "fake-writes",
+        "exit": 3,
+        "expected_exit": 3,
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "08b5d27ad297b89771672e08795615fce55aa61b6467665f520d756566a0c704"
+    },
+    {
+      "id": "route-promote-no-reviewer",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "route",
+        "job": "promote",
+        "exit": 2,
+        "expected_exit": 2,
+        "problems": []
+      },
+      "note": "",
+      "case_sha256": "20744fdf7a947e76fe669c713c487812ad54a2e7e6131278b4ccad528dcd718a"
+    }
+  ]
+}

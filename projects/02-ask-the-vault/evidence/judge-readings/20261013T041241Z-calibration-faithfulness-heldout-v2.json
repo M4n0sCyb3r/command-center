@@ -1,0 +1,360 @@
+{
+  "kind": "faithfulness-calibration",
+  "condition": {
+    "started_at": "2026-10-13T04:12:41Z",
+    "pairs": "evals/fixtures/faithfulness-heldout-v2.jsonl",
+    "pairs_sha256": "f126a759b2e8879201a22997a5d80a2510fadd1faaf28731cb4dfc640fe50a6d",
+    "judge_prompt_sha256": "bf285729cdbb479e3f28d6355b7f04e6380de2f77a5e03073555dc2fcedab2f4",
+    "judge_max_tokens": 6144,
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "ollama_version": "0.40.3",
+    "fresh_load_per_pair": true
+  },
+  "summary": {
+    "n": 12,
+    "agreement": 0.4166666666666667,
+    "false_pass": 0,
+    "false_pass_rate": 0.0,
+    "false_fail": 7,
+    "false_fail_rate": 0.7777777777777778,
+    "passes_bar": false
+  },
+  "rows": [
+    {
+      "id": "heldout2-w32time-what",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The Windows Time service (W32Time) synchronizes date and time across all computers in an AD DS domain using the Network Time Protocol (NTP).",
+          "quote": "The Windows Time service, also known as W32Time, synchronizes the date and time for all computers running in an AD DS domain. Time synchronization is critical for the proper operation of many Windows services and line-of-business applications. The Windows Time service uses the Network Time Protocol (NTP) to synchronize computer clocks on the network so that an accurate clock value, or time stamp, can be assigned to network validation and resource access requests.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "This ensures accurate time stamps for network validation, resource access, and secure communication.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Domains care because time synchronization is critical for Kerberos v5 authentication (which underpins AD DS security), data replication accuracy, and transactional consistency.",
+          "quote": "Time synchronization is critical for the proper operation of many Windows services and line-of-business applications. The Windows Time service is essential to the successful operation of Kerberos version 5 authentication and, therefore, to AD DS-based authentication. Any Kerberos-aware application, including most security services, relies on time synchronization between the computers that are participating in the authentication request. AD DS domain controllers must also have synchronized clocks to help to ensure accurate data replication. Although originally designed to provide clock synchronization for Kerberos authentication, many current applications use timestamps to ensure transactional consistency, to record the time of important events, and other business-critical, time-sensitive information.",
+          "supported": false,
+          "why": "quote is not in the cited text"
+        },
+        {
+          "sentence": "Without synchronized clocks, Kerberos authentication could fail, compromising security and system reliability.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-wsus-auto-approve",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "No, WSUS does not approve updates automatically for a computer group.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Approval must be done manually by an administrator after testing.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "The documentation states that computers in a group automatically contact the WSUS server to obtain updates within 24 hours, but approval for installation on the group requires explicit action by the admin after verifying successful deployment via WSUS reports.",
+          "quote": "Computers in a computer group automatically contact the WSUS server over the next 24 hours to obtain updates. You can use the WSUS reporting feature to determine whether those updates were deployed to the test computers. When the tests are successfully completed, you can approve the updates for the applicable computer groups in your organization.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-bench-diagnosis",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Check if the server is running first by executing `Get-Process ollama` (PowerShell).",
+          "quote": "Get-Process ollama` (PowerShell)",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['first']"
+        },
+        {
+          "sentence": "If it's not running, start it using \u00a72.1.",
+          "quote": "Start it \u2014 \u00a72.1",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "A process that is up but refuses connections instantly (no port listening) indicates a different issue than a stopped process.",
+          "quote": "The tell that separates 1 from 4: a host that is up with nothing on the port refuses instantly. A hang in `sock.connect` means packets went nowhere \u2014 firewall drop or wrong address, not a stopped process.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-w32time-ntp-sntp",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The Windows Time service (W32Time) primarily uses the Network Time Protocol (NTP) to synchronize time across a network.",
+          "quote": "The Windows Time service uses NTP to help synchronize time across a network.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "While it supports the Simple Network Time Protocol (SNTP) for backward compatibility with older systems like Windows 2000, NTP is the main protocol used for accurate time synchronization in modern Windows environments.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-w32time-logging",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To enable detailed logging for Windows Time (W32Time), add the following registry entries under `HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config`: \n**FileLogEntries** (set to 0-300, e.g., 300 for maximum entries)\n**FileLogName** (specify a full path and filename for the log file, e.g., `C:\\Windows\\Temp\\W32Time.log`)\n**FileLogSize** (set to 1,000,000 or larger to control log file size before overwriting).",
+          "quote": "To enable enhanced W32Time logging, add the following registry entries into the `HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config` path.",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['0', '000', '1', '300']"
+        },
+        {
+          "sentence": "These settings enable detailed logging to a file, complementing the default event log entries.",
+          "quote": "Controls the number of entries created in the W32Time log file. The default value is **none**, which results in no logs of W32Time activity. Valid values are **0** to **300**. This value doesn't affect the event log entries that W32Time normally creates. ",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-wsus-approve-test",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To approve an update for your test group in WSUS, follow these steps: 1.",
+          "quote": "On the WSUS Administration Console, click **Updates**. In the right pane, an update status summary is displayed for **All Updates**, **Critical Updates**, **Security Updates**, and **WSUS Updates**.",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['1']"
+        },
+        {
+          "sentence": "Open the WSUS Administration Console and click **Updates**.",
+          "quote": "On the WSUS Administration Console, click **Updates**. In the right pane, an update status summary is displayed for **All Updates**, **Critical Updates**, **Security Updates**, and **WSUS Updates**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "2.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Click **Updates needed by computers** under the **All Updates** section.",
+          "quote": "In the **All Updates** section, click **Updates needed by computers**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "3.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Select the desired updates by clicking individual entries or using **Shift**/**Ctrl** for multiple selections.",
+          "quote": "In the **All Updates** section, select the updates that you want to approve for installation in your test computer group. Information about a selected update is available in the bottom pane of the **Updates** panel. To select multiple contiguous updates, hold down the **shift** key while clicking the update names. To select multiple noncontiguous updates, press down the **CTRL** key while clicking the update names.",
+          "supported": false,
+          "why": "quote is not in the cited text"
+        },
+        {
+          "sentence": "4.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Right-click the selection and click **Approve**.",
+          "quote": "Right-click the selection, and then click **Approve**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "5.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "In the **Approve Updates** dialog, select your test group from the dropdown menu and choose **Approved for Install**.",
+          "quote": "In the **Approve Updates** dialog box, select your test group, and then click the down arrow. Click **Approved for Install**, and then click **OK**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "6.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Click **OK** to confirm.",
+          "quote": "Click **Approved for Install**, and then click **OK**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The **Approval Progress** window will show the task status, and you can close it once complete.",
+          "quote": "The **Approval Progress** window appears, which shows the progress of the tasks that affect update approval. When the approval process is complete, click **Close**.",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['once']"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-servermanager-winrm-defaults",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Server Manager expects the following WinRM settings on the managed server: The WinRM service is running, A WinRM listener is configured to accept HTTP requests through port 5985, Port 5985 is enabled in Windows Firewall for WinRM traffic, and Both **Kerberos** and **Negotiate** authentication types are enabled.",
+          "quote": "The WinRM service is running.\n- A WinRM listener is created to accept HTTP requests through port number 5985.\n- Port number 5985 is enabled in Windows Firewall settings to allow requests through WinRM.\n- Both **Kerberos** and **Negotiate** authentication types are enabled.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "These defaults allow Server Manager to communicate with the remote server.",
+          "quote": "Server Manager relies on default WinRM listener settings on the remote servers that you want to manage. If the default authentication mechanism or the WinRM listener port number on a remote server has been changed from default settings, Server Manager cannot communicate with the remote server.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-bits-creationtime",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To find out when a BITS job was created, use the `bitsadmin /getcreationtime <job>` command, where `<job>` is the job's display name or GUID.",
+          "quote": "bitsadmin /getcreationtime <job>",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "For example: `bitsadmin /getcreationtime myDownloadJob`.",
+          "quote": "\n\n### Parameters\n\n| Parameter | Description |\n| -------------- | -------------- |\n| job | The job's display name or GUID. |",
+          "supported": false,
+          "why": "quote shares no content word with the sentence"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-dfs-root-referral",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Clients cache DFS namespace root referrals for a default duration of 300 seconds (five minutes).",
+          "quote": "On the **Referrals** tab, in the **Cache duration (in seconds)** text box, type the amount of time (in seconds) that clients cache namespace root referrals. The default setting is 300 seconds (five minutes).",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "To change this setting, open DFS Management (Administrative Tools), right-click the namespace, select Properties, then adjust the 'Cache duration (in seconds)' value on the Referrals tab.",
+          "quote": "Click **Start**, point to **Administrative Tools**, and then click **DFS Management**. In the console tree, under the **Namespaces** node, right-click a namespace, and then click **Properties**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Alternatively, use the Windows PowerShell cmdlet `Set-DfsnRoot TimeToLiveSec` (introduced in Windows Server 2012).",
+          "quote": "To change the amount of time that clients cache namespace root referrals by using Windows PowerShell, use the [Set-DfsnRoot TimeToLiveSec](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc753448(v=ws.11)) cmdlet. These cmdlets were introduced in Windows Server\u00a02012.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-diskpart-list",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "After you run the **list** command, an asterisk (*__*) appears next to the object of focus, indicating which disk or object DiskPart has selected.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-jea-dc-first",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Yes, you should set up the JEA endpoint on the member server first.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "The SOP explicitly states: 'Do the member server first.",
+          "quote": "Do the member server first.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "A domain controller is not where you discover that the module has a bug.' This ensures safety by isolating potential module issues from critical domain controller operations.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ]
+    },
+    {
+      "id": "heldout2-shell-identify",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "ModelError: the server rejected the request: 500 Server Error: Internal Server Error for url: http://<wsl-host>:11434/api/chat",
+      "checks": []
+    }
+  ]
+}

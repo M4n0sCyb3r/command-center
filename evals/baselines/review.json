@@ -1,0 +1,990 @@
+{
+  "record_version": 7,
+  "header": {
+    "suite_path": "evals/suites/review.jsonl",
+    "suite_sha256": "0da756fb68aa13779d98f252eff265d659f25a44a37d09bda1176b3552498d77",
+    "suite_header_sha256": "88d8b6fd4701999242c8bad4ce33012bd35a21373afb169696b4a3a8c2117a45",
+    "tier_selection": "fixed",
+    "scorer": "review",
+    "model_name": "hermes3:8b + qwen3:8b + qwen3:14b",
+    "model_digest": "hermes3:8b:4f6b83f30b62 qwen3:8b:500a1f067a9f qwen3:14b:bdbd181c33f2",
+    "host_target": "none - local Ollama; scripts are read as text, never executed",
+    "sampling": {
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95,
+      "repeat_penalty": 1.0,
+      "seed": 42,
+      "num_predict": 2048,
+      "num_ctx": 12288,
+      "max_tokens": 6144,
+      "timeout_s": 300,
+      "max_rounds": 2
+    },
+    "rebaseline": {
+      "replaced": null,
+      "removed": []
+    },
+    "started_at": "2026-10-19T17:35:04Z",
+    "incomplete": null,
+    "record_version": 7
+  },
+  "cases": [
+    {
+      "id": "01-L",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "01-L",
+          "split": "development",
+          "control": false,
+          "findings": 1,
+          "blocking": 0,
+          "family": "lint-visible",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 113,
+        "model_seconds": 2.6
+      },
+      "note": "",
+      "case_sha256": "61075104f21c793c205fc0c2108f97b8de58fc30436b1d35f55b55db4287e839"
+    },
+    {
+      "id": "01-G",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "01-G",
+          "split": "development",
+          "control": false,
+          "findings": 2,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 239,
+        "model_seconds": 3.3
+      },
+      "note": "",
+      "case_sha256": "f6b79327ab019e2b444c491f4113574d1f2179675277a0faa4779d0945412034"
+    },
+    {
+      "id": "01-B",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "01-B",
+          "split": "development",
+          "control": false,
+          "findings": 1,
+          "blocking": 0,
+          "family": "blast-radius",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 147,
+        "model_seconds": 2.8
+      },
+      "note": "",
+      "case_sha256": "80c4da91e61cde26a49a9f91843ebded59191beb7c5292cb5c9a582e2993aec2"
+    },
+    {
+      "id": "04-L",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "escalate-cap",
+        "rounds": 2,
+        "changed": true,
+        "calls": 7,
+        "round0": {
+          "id": "04-L",
+          "split": "development",
+          "control": false,
+          "findings": 3,
+          "blocking": 2,
+          "family": "lint-visible",
+          "caught": true,
+          "right_reason": false
+        },
+        "escalation": {
+          "original": {
+            "id": "04-L",
+            "split": "development",
+            "control": false,
+            "findings": 5,
+            "blocking": 4,
+            "family": "lint-visible",
+            "caught": true,
+            "right_reason": true
+          },
+          "current_verdict": "revise",
+          "calls": 2
+        },
+        "completion_tokens": 12281,
+        "model_seconds": 121.9
+      },
+      "note": "",
+      "case_sha256": "a273db56e86aae19c6701a35f762c4ad2da880c281e7e8269001866cf0923542"
+    },
+    {
+      "id": "04-G",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "error",
+        "rounds": 1,
+        "changed": true,
+        "calls": 3,
+        "round0": {
+          "id": "04-G",
+          "split": "development",
+          "control": false,
+          "findings": 2,
+          "blocking": 1,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 2480,
+        "model_seconds": 24.7
+      },
+      "note": "",
+      "case_sha256": "d68a9da0402d3dc0c05de05785090905d97e24b9548a4c88a2292049bdd675aa"
+    },
+    {
+      "id": "04-B",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "escalate-cap",
+        "rounds": 2,
+        "changed": true,
+        "calls": 7,
+        "round0": {
+          "id": "04-B",
+          "split": "development",
+          "control": false,
+          "findings": 5,
+          "blocking": 2,
+          "family": "blast-radius",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": {
+          "original": {
+            "id": "04-B",
+            "split": "development",
+            "control": false,
+            "findings": 5,
+            "blocking": 1,
+            "family": "blast-radius",
+            "caught": true,
+            "right_reason": true
+          },
+          "current_verdict": "revise",
+          "calls": 2
+        },
+        "completion_tokens": 12010,
+        "model_seconds": 120.6
+      },
+      "note": "",
+      "case_sha256": "5f222c07372dd254df39faf8cfbf3374041bae322bf42f7498ae41be33e8edb1"
+    },
+    {
+      "id": "06-G1",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "06-G1",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 17,
+        "model_seconds": 2.1
+      },
+      "note": "",
+      "case_sha256": "e7b5a23e94b0ca43eb06cac6f54e1c313118d0386f2129987ec88f4289bd70f3"
+    },
+    {
+      "id": "06-G2",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "06-G2",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 17,
+        "model_seconds": 1.9
+      },
+      "note": "",
+      "case_sha256": "905bbee35f162b1d573d8afd5c206f09f20a18c627625574c8d5433447fe6d04"
+    },
+    {
+      "id": "06-G3",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "06-G3",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 17,
+        "model_seconds": 1.9
+      },
+      "note": "",
+      "case_sha256": "461d5522a9326199b4f13531da48adc1c48c95ebc7f8476bab97478a501117c9"
+    },
+    {
+      "id": "07-L",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "escalate-cap",
+        "rounds": 2,
+        "changed": true,
+        "calls": 7,
+        "round0": {
+          "id": "07-L",
+          "split": "development",
+          "control": false,
+          "findings": 5,
+          "blocking": 3,
+          "family": "lint-visible",
+          "caught": true,
+          "right_reason": true
+        },
+        "escalation": {
+          "original": {
+            "id": "07-L",
+            "split": "development",
+            "control": false,
+            "findings": 4,
+            "blocking": 2,
+            "family": "lint-visible",
+            "caught": false,
+            "right_reason": false
+          },
+          "current_verdict": "revise",
+          "calls": 2
+        },
+        "completion_tokens": 7670,
+        "model_seconds": 87.0
+      },
+      "note": "",
+      "case_sha256": "a51472ad9324a3ade21c9db34f2414513b38a0d83cf3b1e2a8fdd856ae0c4131"
+    },
+    {
+      "id": "07-G",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "07-G",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 14,
+        "model_seconds": 2.1
+      },
+      "note": "",
+      "case_sha256": "a6fc0a134a15f36a1c5de6951e048fdf375abf63ec1c67d01228b8233ec65437"
+    },
+    {
+      "id": "07-B",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "error",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "07-B",
+          "split": "development",
+          "control": false,
+          "findings": 3,
+          "blocking": 2,
+          "family": "blast-radius",
+          "caught": true,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 393,
+        "model_seconds": 4.3
+      },
+      "note": "",
+      "case_sha256": "11ba87ebc2425bbe2eb15b04d7a662a57a0ed615212e2a6353baad703fd798f2"
+    },
+    {
+      "id": "08-L",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "08-L",
+          "split": "development",
+          "control": false,
+          "findings": 2,
+          "blocking": 0,
+          "family": "lint-visible",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 188,
+        "model_seconds": 3.1
+      },
+      "note": "",
+      "case_sha256": "298d4fd5ec477b074bd7a54e5fba55238ba445946f32d3e7cfffee42679c2f87"
+    },
+    {
+      "id": "08-G",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "08-G",
+          "split": "development",
+          "control": false,
+          "findings": 3,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 299,
+        "model_seconds": 3.7
+      },
+      "note": "",
+      "case_sha256": "c517d310bd5c2bf543519fa95bbfc9cf5dc0aebae5d327cb752dc6b67bf4c3ee"
+    },
+    {
+      "id": "08-B",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "08-B",
+          "split": "development",
+          "control": false,
+          "findings": 5,
+          "blocking": 0,
+          "family": "blast-radius",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 402,
+        "model_seconds": 4.5
+      },
+      "note": "",
+      "case_sha256": "f9a0ea1f414aaa0549cbf618d43f892fd9ac89886b60680ac29612173389db30"
+    },
+    {
+      "id": "10-G1",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "10-G1",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 14,
+        "model_seconds": 1.9
+      },
+      "note": "",
+      "case_sha256": "bd43a9a00e376b149a9fa3ac2aca7cff720a9a4243917ba1b45640b4b610e8d3"
+    },
+    {
+      "id": "10-G2",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "10-G2",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 17,
+        "model_seconds": 2.0
+      },
+      "note": "",
+      "case_sha256": "f67db991cbfba957f36f2f57f6659278b8728e247a2f8a302803cee798883ef5"
+    },
+    {
+      "id": "10-G3",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "10-G3",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 14,
+        "model_seconds": 1.9
+      },
+      "note": "",
+      "case_sha256": "b4e00fe53e9d83be4fe24376a6a45a08ba905d7b693edae3be95532a1b1ddb47"
+    },
+    {
+      "id": "11-L",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "11-L",
+          "split": "development",
+          "control": false,
+          "findings": 0,
+          "blocking": 0,
+          "family": "lint-visible",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 14,
+        "model_seconds": 1.9
+      },
+      "note": "",
+      "case_sha256": "a86ba95cd9f2cc0ae3330a6e53b1a3ae7b6aea02e922d7f5bd3cde2853e4b096"
+    },
+    {
+      "id": "11-G",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 1,
+        "changed": true,
+        "calls": 3,
+        "round0": {
+          "id": "11-G",
+          "split": "development",
+          "control": false,
+          "findings": 5,
+          "blocking": 1,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 4888,
+        "model_seconds": 40.1
+      },
+      "note": "",
+      "case_sha256": "e2434e555d227e33f9abf512cd92a9fd0f331a2cb8a3e9b9e2c94ad8c8038e62"
+    },
+    {
+      "id": "11-B",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "11-B",
+          "split": "development",
+          "control": false,
+          "findings": 2,
+          "blocking": 0,
+          "family": "blast-radius",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 211,
+        "model_seconds": 3.2
+      },
+      "note": "",
+      "case_sha256": "29369ac11e07354df6768077eff86a6079eefb95ad68b974292d7fb37810de2f"
+    },
+    {
+      "id": "12-L",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "escalate-cap",
+        "rounds": 2,
+        "changed": true,
+        "calls": 7,
+        "round0": {
+          "id": "12-L",
+          "split": "development",
+          "control": false,
+          "findings": 3,
+          "blocking": 3,
+          "family": "lint-visible",
+          "caught": true,
+          "right_reason": true
+        },
+        "escalation": {
+          "original": {
+            "id": "12-L",
+            "split": "development",
+            "control": false,
+            "findings": 4,
+            "blocking": 2,
+            "family": "lint-visible",
+            "caught": true,
+            "right_reason": true
+          },
+          "current_verdict": "revise",
+          "calls": 2
+        },
+        "completion_tokens": 13149,
+        "model_seconds": 132.8
+      },
+      "note": "",
+      "case_sha256": "6bfb3a8092573cee6372cc3c47e10e30fa64462af4e6f24dfb402cdcad64534a"
+    },
+    {
+      "id": "12-G",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "defect",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "12-G",
+          "split": "development",
+          "control": false,
+          "findings": 2,
+          "blocking": 0,
+          "family": "logic",
+          "caught": false,
+          "right_reason": false
+        },
+        "escalation": null,
+        "completion_tokens": 231,
+        "model_seconds": 3.5
+      },
+      "note": "",
+      "case_sha256": "8fd07c178f081d65b1b5ed5daa0f8b93b31eb37ef14b9eaae69b485b1782d74b"
+    },
+    {
+      "id": "12-B",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "defect",
+        "terminal": "needs-human",
+        "stop": "escalate-cap",
+        "rounds": 2,
+        "changed": true,
+        "calls": 7,
+        "round0": {
+          "id": "12-B",
+          "split": "development",
+          "control": false,
+          "findings": 5,
+          "blocking": 2,
+          "family": "blast-radius",
+          "caught": true,
+          "right_reason": false
+        },
+        "escalation": {
+          "original": {
+            "id": "12-B",
+            "split": "development",
+            "control": false,
+            "findings": 5,
+            "blocking": 3,
+            "family": "blast-radius",
+            "caught": true,
+            "right_reason": true
+          },
+          "current_verdict": "revise",
+          "calls": 2
+        },
+        "completion_tokens": 11304,
+        "model_seconds": 121.4
+      },
+      "note": "",
+      "case_sha256": "6f87695e2a204a1112ecb1d69d94355e050fe49ae61df6296708300b5a2377f4"
+    },
+    {
+      "id": "01-C",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "control",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "01-C",
+          "split": "development",
+          "control": true,
+          "findings": 2,
+          "blocking": 0,
+          "false_alarm": false
+        },
+        "escalation": null,
+        "completion_tokens": 214,
+        "model_seconds": 3.3
+      },
+      "note": "",
+      "case_sha256": "8ab0cb047801ea85cec4b04cce920d5c4699102d830d53b62d0b9da96f5f6670"
+    },
+    {
+      "id": "04-C",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "control",
+        "terminal": "needs-human",
+        "stop": "error",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "04-C",
+          "split": "development",
+          "control": true,
+          "findings": 5,
+          "blocking": 3,
+          "false_alarm": true
+        },
+        "escalation": null,
+        "completion_tokens": 486,
+        "model_seconds": 4.9
+      },
+      "note": "",
+      "case_sha256": "2f94e0cf5ccad007fdc7d83982aa6258120b8a020024298bbb2e01efa504ff2b"
+    },
+    {
+      "id": "06-C",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "control",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "06-C",
+          "split": "development",
+          "control": true,
+          "findings": 0,
+          "blocking": 0,
+          "false_alarm": false
+        },
+        "escalation": null,
+        "completion_tokens": 17,
+        "model_seconds": 2.2
+      },
+      "note": "",
+      "case_sha256": "33a07ae4c62e29cced1c8789c8ea54d526837e75f300a87d059eb617f5452417"
+    },
+    {
+      "id": "07-C",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "control",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "07-C",
+          "split": "development",
+          "control": true,
+          "findings": 0,
+          "blocking": 0,
+          "false_alarm": false
+        },
+        "escalation": null,
+        "completion_tokens": 14,
+        "model_seconds": 1.9
+      },
+      "note": "",
+      "case_sha256": "6c03f058ccd53bf51b314334ab3e3519d0ff5e21405cd3e21c13b3df3cd439fe"
+    },
+    {
+      "id": "08-C",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "control",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "08-C",
+          "split": "development",
+          "control": true,
+          "findings": 2,
+          "blocking": 0,
+          "false_alarm": false
+        },
+        "escalation": null,
+        "completion_tokens": 184,
+        "model_seconds": 3.0
+      },
+      "note": "",
+      "case_sha256": "ccb687c4a1ecc29de9b29eb2deebce5181cc7b1d0be4eb90d35158ef8f9a4834"
+    },
+    {
+      "id": "10-C",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "kind": "control",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 0,
+        "changed": false,
+        "calls": 1,
+        "round0": {
+          "id": "10-C",
+          "split": "development",
+          "control": true,
+          "findings": 0,
+          "blocking": 0,
+          "false_alarm": false
+        },
+        "escalation": null,
+        "completion_tokens": 14,
+        "model_seconds": 2.0
+      },
+      "note": "",
+      "case_sha256": "52ae2e0a509cbeb73c39f5a4f9c574d14f1317e9123b6403022a10addcf576d2"
+    },
+    {
+      "id": "11-C",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "control",
+        "terminal": "approved",
+        "stop": "approved",
+        "rounds": 1,
+        "changed": true,
+        "calls": 3,
+        "round0": {
+          "id": "11-C",
+          "split": "development",
+          "control": true,
+          "findings": 5,
+          "blocking": 3,
+          "false_alarm": true
+        },
+        "escalation": null,
+        "completion_tokens": 5625,
+        "model_seconds": 46.9
+      },
+      "note": "",
+      "case_sha256": "fc38dea6b39c257975c9a9ce3d763b3845cadbe365e537cf60b9c3137fd8fadc"
+    },
+    {
+      "id": "12-C",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "kind": "control",
+        "terminal": "needs-human",
+        "stop": "escalate-cap",
+        "rounds": 2,
+        "changed": true,
+        "calls": 7,
+        "round0": {
+          "id": "12-C",
+          "split": "development",
+          "control": true,
+          "findings": 5,
+          "blocking": 2,
+          "false_alarm": true
+        },
+        "escalation": {
+          "original": {
+            "id": "12-C",
+            "split": "development",
+            "control": true,
+            "findings": 2,
+            "blocking": 1,
+            "false_alarm": true
+          },
+          "current_verdict": "revise",
+          "calls": 2
+        },
+        "completion_tokens": 13773,
+        "model_seconds": 145.1
+      },
+      "note": "",
+      "case_sha256": "34b139a7637d51f518e5849adc94fee18612161a909484c6eec87df1e6e59d79"
+    }
+  ]
+}

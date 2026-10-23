@@ -1,0 +1,14 @@
+@{
+    # Role capability: the P05 verifier's extra reads (build step 7, ADR 0034).
+    # Mapped ONLY by AgentReader.pssc (SRV01). AgentReader-DC.pssc does not name it, so
+    # DC01's endpoint never shows these even when the module there is updated
+    # (Jose's pick, 2026-10-20: SRV01-only role).
+
+    Description      = 'P05 verifier: read-only Spooler state and RDP NLA value. No wildcards.'
+
+    ModulesToImport  = @('AgentReader')
+
+    # One entry per function, never a wildcard. host_client.py holds the other half of
+    # this list (ALLOWED_BY_HOST) and refuses to run if the endpoint disagrees.
+    VisibleFunctions = @('Get-AgentServiceState', 'Get-AgentRegistryState')
+}

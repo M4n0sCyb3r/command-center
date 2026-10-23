@@ -1,0 +1,29 @@
+{
+  "kind": "command-center-run",
+  "schema": 1,
+  "job": "promote",
+  "project": "P6",
+  "entry": "src/promote.py",
+  "writes": true,
+  "args": [
+    "projects/06-command-center/samples/promote-clean-applog.ps1"
+  ],
+  "command": [
+    "<repo>/.venv/bin/python",
+    "<repo>/src/promote.py",
+    "projects/06-command-center/samples/promote-clean-applog.ps1"
+  ],
+  "state": "finished",
+  "started": "2026-10-23T03:56:41Z",
+  "ended": "2026-10-23T04:11:19Z",
+  "duration_s": 876.407,
+  "child_returncode": 1,
+  "exit_code": 1,
+  "evidence": [
+    "20261023T035642Z-promote-promote-clean-applog-c72e81.json"
+  ],
+  "models": {
+    "qwen3:14b": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8"
+  },
+  "ollama_version": "0.40.8"
+}

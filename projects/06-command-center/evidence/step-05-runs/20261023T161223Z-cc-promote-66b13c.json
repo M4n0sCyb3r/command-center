@@ -1,0 +1,29 @@
+{
+  "kind": "command-center-run",
+  "schema": 1,
+  "job": "promote",
+  "project": "P6",
+  "entry": "src/promote.py",
+  "writes": true,
+  "args": [
+    "projects/06-command-center/samples/promote-bad-syslog.ps1"
+  ],
+  "command": [
+    "<repo>/.venv/bin/python",
+    "<repo>/src/promote.py",
+    "projects/06-command-center/samples/promote-bad-syslog.ps1"
+  ],
+  "state": "finished",
+  "started": "2026-10-23T16:12:23Z",
+  "ended": "2026-10-23T16:31:54Z",
+  "duration_s": 1169.101,
+  "child_returncode": 1,
+  "exit_code": 1,
+  "evidence": [
+    "20261023T161225Z-promote-promote-bad-syslog-728c90.json"
+  ],
+  "models": {
+    "qwen3:14b": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8"
+  },
+  "ollama_version": "0.40.8"
+}

@@ -1,0 +1,28 @@
+{"suite": "answer", "scorer": "answer", "description": "The answer step (ADR 0025). Answerable: the model answers AND cites the expected chunk. Unanswerable: an honest refusal by either layer - retrieval (refused-no-retrieval) or the model (refused-not-in-sources); which layer refused is detail. 16 answerable + 4 out-of-domain from retrieval.jsonl, + the 7 near-misses that were evals/fixtures/answer-refusal.jsonl (ADR 0023 call 2: they waited there until this scorer existed)."}
+{"id": "restart-symptoms", "tier": "fixed", "question": "print jobs are piling up and nothing comes out", "expect": "data/runbooks/service-restart.md#symptoms", "category": "answerable"}
+{"id": "restart-procedure", "tier": "fixed", "question": "how do I safely bounce a service", "expect": "data/runbooks/service-restart.md#procedure", "category": "answerable"}
+{"id": "restart-recovery", "tier": "fixed", "question": "it keeps dying a couple minutes after I start it again", "expect": "data/runbooks/service-restart.md#recovery-options", "category": "answerable"}
+{"id": "disk-procedure", "tier": "fixed", "question": "C drive is nearly full, what do I clear out first", "expect": "data/runbooks/disk-space.md#procedure", "category": "answerable"}
+{"id": "disk-thresholds", "tier": "fixed", "question": "at what point do we call the box failed instead of degraded", "expect": "data/runbooks/disk-space.md#thresholds", "category": "answerable"}
+{"id": "timesync-symptoms", "tier": "fixed", "question": "kerberos keeps rejecting credentials that are definitely correct", "expect": "data/runbooks/time-sync.md#symptoms", "category": "answerable"}
+{"id": "timesync-escalation", "tier": "fixed", "question": "member server is still off after I fixed it, who owns this now", "expect": "data/runbooks/time-sync.md#escalation", "category": "answerable"}
+{"id": "winrm-symptoms", "tier": "fixed", "question": "remote powershell won't connect but the host answers ping", "expect": "data/runbooks/winrm-remoting.md#symptoms", "category": "answerable"}
+{"id": "winrm-firewall", "tier": "fixed", "question": "how wide should the rule be opened for management traffic", "expect": "data/runbooks/winrm-remoting.md#firewall-notes", "category": "answerable"}
+{"id": "patching-symptoms", "tier": "fixed", "question": "compliance says we are missing updates but the server looks fine", "expect": "data/runbooks/patching-window.md#symptoms", "category": "answerable"}
+{"id": "patching-change-control", "tier": "fixed", "question": "can I push a patch outside the agreed window", "expect": "data/runbooks/patching-window.md#change-control", "category": "answerable"}
+{"id": "patching-procedure", "tier": "fixed", "question": "how do I prove the reboot actually applied anything", "expect": "data/runbooks/patching-window.md#procedure", "category": "answerable"}
+{"id": "sop-bench-failure", "tier": "fixed", "question": "I closed a powershell window and now every model call times out", "expect": "sops/bench-startup.md#4-failure-modes-seen-in-practice", "category": "answerable"}
+{"id": "sop-shell-failure", "tier": "fixed", "question": "my profile won't load on a new laptop, it says running scripts is disabled", "expect": "sops/identify-the-shell.md#failure-modes", "category": "answerable"}
+{"id": "sop-jea-failure", "tier": "fixed", "question": "environment variables come back empty inside the remote session but the same code works in a normal shell", "expect": "sops/jea-read-only-endpoint.md#failure-modes", "category": "answerable"}
+{"id": "sop-closeout-failure", "tier": "fixed", "question": "the log says it shipped but the change was never in the file", "expect": "sops/lab-session-closeout.md#failure-modes", "category": "answerable"}
+{"id": "unanswerable-out-of-domain", "tier": "fixed", "question": "what is the capital of France", "expect": null, "category": "out-of-domain"}
+{"id": "unanswerable-cooking", "tier": "fixed", "question": "what temperature do I bake chicken thighs at", "expect": null, "category": "out-of-domain"}
+{"id": "unanswerable-sports", "tier": "fixed", "question": "who won the world series last year", "expect": null, "category": "out-of-domain"}
+{"id": "unanswerable-sourdough", "tier": "fixed", "question": "how do I restart my sourdough starter after it sat in the fridge for a month", "expect": null, "category": "out-of-domain"}
+{"id": "unanswerable-no-runbook", "tier": "fixed", "question": "how do I reset a user password in active directory", "expect": null, "category": "near-miss"}
+{"id": "unanswerable-startup-type", "tier": "fixed", "question": "How do I change a Windows service from Manual startup to Automatic startup?", "expect": null, "category": "near-miss"}
+{"id": "unanswerable-disk-quota", "tier": "fixed", "question": "How do I set a disk quota for a user on a Windows Server volume?", "expect": null, "category": "near-miss"}
+{"id": "unanswerable-patch-rollback", "tier": "fixed", "question": "How do I roll back a Windows patch after it causes an application problem?", "expect": null, "category": "near-miss"}
+{"id": "unanswerable-time-zone", "tier": "fixed", "question": "the server clock is right but it's showing the wrong time zone, how do I fix that", "expect": null, "category": "near-miss"}
+{"id": "unanswerable-winrm-https", "tier": "fixed", "question": "How do I replace the HTTPS certificate used by WinRM for remote connections?", "expect": null, "category": "near-miss"}
+{"id": "unanswerable-page-file", "tier": "fixed", "question": "can I move the page file off C to get some space back", "expect": null, "category": "near-miss"}

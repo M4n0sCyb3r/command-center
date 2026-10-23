@@ -1,0 +1,222 @@
+{
+  "kind": "promote-run",
+  "schema": 1,
+  "script": "projects/06-command-center/samples/promote-bad-syslog.ps1",
+  "script_sha256": "2bb632b1fe737a36e4fc43ea0f14631a026ebdec940b1f902b0c69ab728d489e",
+  "bench": "SRV01 (srv01, 10.10.10.20) via the QE lab's Ansible inventory as Administrator; checkpoint/restore by a person at the Hyper-V host",
+  "reviewer": "qwen3:14b",
+  "started": "2026-10-23T04:39:03Z",
+  "ended": "2026-10-23T05:02:16Z",
+  "state": "promoted",
+  "live_started": true,
+  "checkpoint": "p06-promote-2bb632b1-dcee57",
+  "steps": [
+    {
+      "step": "read",
+      "result": "ok",
+      "at": "2026-10-23T04:39:03Z",
+      "bytes": 195
+    },
+    {
+      "step": "classify",
+      "result": "ok",
+      "at": "2026-10-23T04:39:03Z",
+      "note": "no DC-only token found (a floor, not a classifier)"
+    },
+    {
+      "step": "review",
+      "result": "revise",
+      "at": "2026-10-23T04:39:27Z",
+      "findings": [
+        {
+          "line_start": 4,
+          "line_end": 4,
+          "category": "correctness",
+          "severity": "blocking",
+          "why": "Trailing slash causes syntax error",
+          "fix": "Remove the trailing slash from the command line"
+        },
+        {
+          "line_start": 4,
+          "line_end": 4,
+          "category": "error-handling",
+          "severity": "advisory",
+          "why": "No error handling for Limit-EventLog failures",
+          "fix": "Wrap the command in a try-catch block"
+        },
+        {
+          "line_start": 1,
+          "line_end": 1,
+          "category": "correctness",
+          "severity": "advisory",
+          "why": "ShouldProcess not utilized in the cmdlet binding",
+          "fix": "Remove SupportsShouldProcess if not using ShouldProcess"
+        }
+      ],
+      "meta": {
+        "model": "qwen3:14b",
+        "model_digest": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8",
+        "ollama_version": "0.40.8",
+        "script_sha256": "d4fcd76567851a3067dc9f0e2b89c2be72a19b72d068e326e465d9194e2f3414"
+      }
+    },
+    {
+      "step": "review-override",
+      "result": "overridden",
+      "at": "2026-10-23T04:41:08Z",
+      "by": "operator",
+      "reason": "false alarm: line 4 has no slash; QE will judge the change itself"
+    },
+    {
+      "step": "qe-before",
+      "result": "green",
+      "at": "2026-10-23T04:42:04Z",
+      "exit_code": 0
+    },
+    {
+      "step": "dry-run",
+      "result": "ok",
+      "at": "2026-10-23T04:42:10Z",
+      "output": "commands: line 4: Limit-EventLog (Cmdlet)\nWhat if: Performing the operation \"Limit-EventLog\" on target \"Do you want to change the properties of the \"System\" log on the \"localhost\" computer?\"."
+    },
+    {
+      "step": "checkpoint",
+      "result": "confirmed",
+      "at": "2026-10-23T05:01:24Z",
+      "name": "p06-promote-2bb632b1-dcee57"
+    },
+    {
+      "step": "live-run",
+      "result": "ok",
+      "at": "2026-10-23T05:01:27Z",
+      "output": ""
+    },
+    {
+      "step": "qe-after",
+      "result": "green",
+      "at": "2026-10-23T05:02:16Z",
+      "exit_code": 0,
+      "failing": []
+    },
+    {
+      "step": "promote",
+      "result": "ok",
+      "at": "2026-10-23T05:02:16Z",
+      "to": "<repo>/promoted/promote-bad-syslog-2bb632b1"
+    }
+  ],
+  "qe_before": {
+    "exit_code": 0,
+    "checks": {
+      "Server Identity and Domain Role": "pass",
+      "Windows Time Synchronization": "pass",
+      "Network Configuration": "pass",
+      "Microsoft Defender Health": "pass",
+      "Windows Service - WinRM": "pass",
+      "DNS Client": "pass",
+      "Windows Feature - Windows-Defender": "pass",
+      "Windows Feature - PowerShell": "pass",
+      "Windows Firewall - Domain Profile": "pass",
+      "Windows Event Log - System": "pass",
+      "Recent System Event Health": "pass",
+      "Patch and Reboot Health": "pass",
+      "Scheduled Task Configuration": "pass",
+      "Account Policy Configuration": "pass",
+      "Administrators Group Membership": "pass",
+      "Account State - Administrator": "pass",
+      "Account State - Guest": "pass",
+      "Account State - DefaultAccount": "pass",
+      "Account State - WDAGUtilityAccount": "pass",
+      "User Right - se_service_logon_right": "pass",
+      "User Right - se_remote_interactive_logon_right": "pass",
+      "User Right - se_deny_remote_interactive_logon_right": "pass",
+      "User Right - se_deny_service_logon_right": "pass",
+      "Audit Policy - logon": "pass",
+      "Audit Policy - account_lockout": "pass",
+      "Audit Policy - user_account_management": "pass",
+      "Audit Policy - security_group_management": "pass",
+      "Security Option - lm_compatibility_level": "pass",
+      "Security Option - restrict_anonymous": "pass",
+      "Security Option - restrict_anonymous_sam": "pass",
+      "scope:identity": "pass",
+      "scope:time": "pass",
+      "scope:network": "pass",
+      "scope:defender": "pass",
+      "scope:services": "pass",
+      "scope:dns": "pass",
+      "scope:features": "pass",
+      "scope:firewall": "pass",
+      "scope:eventlog": "pass",
+      "scope:eventhealth": "pass",
+      "scope:patchhealth": "pass",
+      "scope:scheduledtask": "pass",
+      "scope:accountpolicy": "pass",
+      "scope:admingroup": "pass",
+      "scope:accountstate": "pass",
+      "scope:userrights": "pass",
+      "scope:auditpolicy": "pass",
+      "scope:securityoptions": "pass"
+    }
+  },
+  "qe_after": {
+    "exit_code": 0,
+    "checks": {
+      "Server Identity and Domain Role": "pass",
+      "Windows Time Synchronization": "pass",
+      "Network Configuration": "pass",
+      "Microsoft Defender Health": "pass",
+      "Windows Service - WinRM": "pass",
+      "DNS Client": "pass",
+      "Windows Feature - Windows-Defender": "pass",
+      "Windows Feature - PowerShell": "pass",
+      "Windows Firewall - Domain Profile": "pass",
+      "Windows Event Log - System": "pass",
+      "Recent System Event Health": "pass",
+      "Patch and Reboot Health": "pass",
+      "Scheduled Task Configuration": "pass",
+      "Account Policy Configuration": "pass",
+      "Administrators Group Membership": "pass",
+      "Account State - Administrator": "pass",
+      "Account State - Guest": "pass",
+      "Account State - DefaultAccount": "pass",
+      "Account State - WDAGUtilityAccount": "pass",
+      "User Right - se_service_logon_right": "pass",
+      "User Right - se_remote_interactive_logon_right": "pass",
+      "User Right - se_deny_remote_interactive_logon_right": "pass",
+      "User Right - se_deny_service_logon_right": "pass",
+      "Audit Policy - logon": "pass",
+      "Audit Policy - account_lockout": "pass",
+      "Audit Policy - user_account_management": "pass",
+      "Audit Policy - security_group_management": "pass",
+      "Security Option - lm_compatibility_level": "pass",
+      "Security Option - restrict_anonymous": "pass",
+      "Security Option - restrict_anonymous_sam": "pass",
+      "scope:identity": "pass",
+      "scope:time": "pass",
+      "scope:network": "pass",
+      "scope:defender": "pass",
+      "scope:services": "pass",
+      "scope:dns": "pass",
+      "scope:features": "pass",
+      "scope:firewall": "pass",
+      "scope:eventlog": "pass",
+      "scope:eventhealth": "pass",
+      "scope:patchhealth": "pass",
+      "scope:scheduledtask": "pass",
+      "scope:accountpolicy": "pass",
+      "scope:admingroup": "pass",
+      "scope:accountstate": "pass",
+      "scope:userrights": "pass",
+      "scope:auditpolicy": "pass",
+      "scope:securityoptions": "pass"
+    }
+  },
+  "qe_restored": null,
+  "promoted_to": "<repo>/promoted/promote-bad-syslog-2bb632b1",
+  "exit_code": 0,
+  "reason": "QE green after the live run",
+  "review_overridden": {
+    "by": "operator",
+    "reason": "false alarm: line 4 has no slash; QE will judge the change itself"
+  }
+}

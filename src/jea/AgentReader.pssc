@@ -1,0 +1,33 @@
+@{
+    # Session configuration: WHO may connect, and HOW the session behaves.
+    # Used once, at registration; Register-PSSessionConfiguration copies it.
+
+    SchemaVersion       = '2.0.0.0'
+    GUID                = '5ae4bac5-df54-443d-b36b-a4a88df8bc7e'
+    Author              = 'Jose'
+    Description         = 'P01 Wintel Validation Agent - read-only JEA endpoint.'
+
+    # Starts the session with almost nothing in it (Get-Command, Exit-PSSession
+    # and a few formatting helpers), then adds only what the role allows.
+    SessionType         = 'RestrictedRemoteServer'
+
+    # Callers send named commands with parameters, never script text
+    # (ADR 0002: the model never writes PowerShell). RestrictedRemoteServer
+    # already implies this; written out so nobody has to know that.
+    LanguageMode        = 'NoLanguage'
+
+    # Commands run as a temporary local administrator account.
+    # On SRV01 that is local admin only. DC01 needs a narrower identity
+    # (ADR 0003) - do not register this file on a domain controller as is.
+    RunAsVirtualAccount = $true
+
+    # Every session is recorded here: who connected, what ran, what came back.
+    TranscriptDirectory = 'C:\ProgramData\JEA\Transcripts\AgentReader'
+
+    # ADR 0004: the role names the account itself, not a group.
+    # P05 step 7: SRV01 also maps AgentReaderVerify (the verifier's two reads).
+    # This file is SRV01's; DC01 registers AgentReader-DC.pssc, which does not.
+    RoleDefinitions     = @{
+        'CORP\svc-agent-ro' = @{ RoleCapabilities = 'AgentReader', 'AgentReaderVerify' }
+    }
+}

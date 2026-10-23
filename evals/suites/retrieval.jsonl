@@ -1,0 +1,21 @@
+{"suite": "retrieval", "scorer": "retrieval", "description": "Retrieval over the runbook corpus: 16 answerable (12 runbook + 4 SOP failure-mode tables, added P02 step 8), 4 out-of-domain questions that must be refused (one borrows a corpus word). Near-miss negatives live in evals/fixtures/answer-refusal.jsonl (ADR 0023)."}
+{"id": "restart-symptoms", "tier": "fixed", "question": "print jobs are piling up and nothing comes out", "expect": "data/runbooks/service-restart.md#symptoms"}
+{"id": "restart-procedure", "tier": "fixed", "question": "how do I safely bounce a service", "expect": "data/runbooks/service-restart.md#procedure"}
+{"id": "restart-recovery", "tier": "fixed", "question": "it keeps dying a couple minutes after I start it again", "expect": "data/runbooks/service-restart.md#recovery-options"}
+{"id": "disk-procedure", "tier": "fixed", "question": "C drive is nearly full, what do I clear out first", "expect": "data/runbooks/disk-space.md#procedure"}
+{"id": "disk-thresholds", "tier": "fixed", "question": "at what point do we call the box failed instead of degraded", "expect": "data/runbooks/disk-space.md#thresholds"}
+{"id": "timesync-symptoms", "tier": "fixed", "question": "kerberos keeps rejecting credentials that are definitely correct", "expect": "data/runbooks/time-sync.md#symptoms"}
+{"id": "timesync-escalation", "tier": "fixed", "question": "member server is still off after I fixed it, who owns this now", "expect": "data/runbooks/time-sync.md#escalation"}
+{"id": "winrm-symptoms", "tier": "fixed", "question": "remote powershell won't connect but the host answers ping", "expect": "data/runbooks/winrm-remoting.md#symptoms"}
+{"id": "winrm-firewall", "tier": "fixed", "question": "how wide should the rule be opened for management traffic", "expect": "data/runbooks/winrm-remoting.md#firewall-notes"}
+{"id": "patching-symptoms", "tier": "fixed", "question": "compliance says we are missing updates but the server looks fine", "expect": "data/runbooks/patching-window.md#symptoms"}
+{"id": "patching-change-control", "tier": "fixed", "question": "can I push a patch outside the agreed window", "expect": "data/runbooks/patching-window.md#change-control"}
+{"id": "patching-procedure", "tier": "fixed", "question": "how do I prove the reboot actually applied anything", "expect": "data/runbooks/patching-window.md#procedure"}
+{"id": "sop-bench-failure", "tier": "fixed", "question": "I closed a powershell window and now every model call times out", "expect": "sops/bench-startup.md#4-failure-modes-seen-in-practice"}
+{"id": "sop-shell-failure", "tier": "fixed", "question": "my profile won't load on a new laptop, it says running scripts is disabled", "expect": "sops/identify-the-shell.md#failure-modes"}
+{"id": "sop-jea-failure", "tier": "fixed", "question": "environment variables come back empty inside the remote session but the same code works in a normal shell", "expect": "sops/jea-read-only-endpoint.md#failure-modes"}
+{"id": "sop-closeout-failure", "tier": "fixed", "question": "the log says it shipped but the change was never in the file", "expect": "sops/lab-session-closeout.md#failure-modes"}
+{"id": "unanswerable-out-of-domain", "tier": "fixed", "question": "what is the capital of France", "expect": null}
+{"id": "unanswerable-cooking", "tier": "fixed", "question": "what temperature do I bake chicken thighs at", "expect": null}
+{"id": "unanswerable-sports", "tier": "fixed", "question": "who won the world series last year", "expect": null}
+{"id": "unanswerable-sourdough", "tier": "fixed", "question": "how do I restart my sourdough starter after it sat in the fridge for a month", "expect": null}

@@ -1,0 +1,7 @@
+@{
+    # ROLE CAPABILITY: WHAT may run. This list IS the agent's blast radius on SRV01
+    # (ADR 0034). Adding a name here is a reviewed change, never a convenience.
+    Description      = 'P05 agent: three fixed remediation functions we wrote and reviewed. No wildcards, no cmdlets.'
+    ModulesToImport  = @('AgentRemediator')
+    VisibleFunctions = @('Set-AgentServiceConfig', 'Set-AgentAuditSetting', 'Set-AgentRegistryValue')
+}

@@ -1,0 +1,319 @@
+{
+  "kind": "faithfulness-calibration",
+  "condition": {
+    "started_at": "2026-10-13T03:44:28Z",
+    "pairs": "evals/fixtures/faithfulness-heldout.jsonl",
+    "pairs_sha256": "fc6f0a0ac49837e0677e3a5679be2ffed1e189de2bf9756c47936a6e5c9858fb",
+    "judge_prompt_sha256": "bf285729cdbb479e3f28d6355b7f04e6380de2f77a5e03073555dc2fcedab2f4",
+    "judge_max_tokens": 6144,
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "ollama_version": "0.40.3",
+    "fresh_load_per_pair": true
+  },
+  "summary": {
+    "n": 12,
+    "agreement": 0.9166666666666666,
+    "false_pass": 0,
+    "false_pass_rate": 0.0,
+    "false_fail": 1,
+    "false_fail_rate": 0.1111111111111111,
+    "passes_bar": true
+  },
+  "rows": [
+    {
+      "id": "heldout-w32tm-port",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The Windows Time service uses UDP port 123 for network time synchronization as per the Network Time Protocol (NTP) specification.",
+          "quote": "W32Time follows the Network Time Protocol (NTP) specification, which requires the use of User Datagram Protocol (UDP) port 123 for all time synchronization.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-sc-query-active",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To list only the running services, run the command **sc.exe query**.",
+          "quote": "To display information for active services only, type either of the following commands: sc.exe query",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "This command displays information for active services only.",
+          "quote": "To display information for active services only, type either of the following commands: sc.exe query",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-cleanmgr-sageset",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "agrees": false,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To save disk cleanup settings for later use, use the `/sageset:n` parameter followed by a number `n` (0-9999).",
+          "quote": "The `n` value, which is stored in the registry, allows you to specify tasks for Disk Cleanup to run. The `n` value can be any integer value from 0 to 9999.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "This creates a registry key to store your selected settings.",
+          "quote": "creates a registry key to store the settings that you select.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "For example, `cleanmgr /sageset:1` saves the settings as profile 1.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "You can later rerun these settings using `cleanmgr /sagerun:1`.",
+          "quote": "Runs the specified tasks that are assigned to the n value if you use the **/sageset** option.",
+          "supported": false,
+          "why": "quote shares no content word with the sentence"
+        }
+      ]
+    },
+    {
+      "id": "heldout-cleanmgr-switches",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The Cleanmgr switches for low disk space are /lowdisk and /verylowdisk. /lowdisk runs with default settings, while /verylowdisk runs with default settings and no user prompts.",
+          "quote": "Run with the default settings.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-wsus-pickup",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Clients will typically pick up approved updates within 24 hours after approval, as indicated by the WSUS documentation.",
+          "quote": "Computers in a computer group automatically contact the WSUS server over the next 24 hours to obtain updates.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-wsus-verify",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To check if approved updates were installed, use the WSUS Reports feature.",
+          "quote": "24 hours after you approve the updates, you can use the WSUS Reports feature to determine whether the updates were deployed to the test group computers.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Navigate to **Reports** > **Update Status Summary** in the WSUS Administration Console.",
+          "quote": "In the navigation pane of the WSUS Administration Console, click **Reports**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Filter updates if needed (e.g., by classification), run the report, and review the status summary in the report pane.",
+          "quote": "On the **Reports** page, click the **Update Status Summary** report. The **Updates Report** window appears. If you want to filter the list of updates, select the criteria that you want to use, for example, **Include updates in these classifications**, and then click **Run Report**. You will see the **Updates Report** pane. You can check the status of individual updates by selecting the update in the left section of the pane. The last section of the report pane shows the status summary of the update.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The status of individual updates and deployment progress to the test group computers will be displayed.",
+          "quote": "24 hours after you approve the updates, you can use the WSUS Reports feature to determine whether the updates were deployed to the test group computers. To check the status of an update, you can use the WSUS Reports feature as follows. ... You can check the status of individual updates by selecting the update in the left section of the pane. The last section of the report pane shows the status summary of the update.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "This process confirms whether updates were successfully deployed after the 24-hour window following approval.",
+          "quote": "24 hours after you approve the updates, you can use the WSUS Reports feature to determine whether the updates were deployed to the test group computers.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-dfs-referral",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To change how long clients cache DFS folder referrals:\nClick **Start**, point to **Administrative Tools**, and then click **DFS Management**.",
+          "quote": "Click **Start** , point to **Administrative Tools**, and then click **DFS Management**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "In the console tree, under the **Namespaces** node, right-click a folder that has targets, and then click **Properties**.",
+          "quote": "In the console tree, under the **Namespaces** node, right-click a folder that has targets, and then click **Properties**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "On the **Referrals** tab, in the **Cache duration (in seconds)** text box, type the desired time in seconds (default is 1800 seconds or 30 minutes).",
+          "quote": "On the **Referrals** tab, in the **Cache duration (in seconds)** text box, type the amount of time (in seconds) that clients cache folder referrals. The default setting is 1800 seconds (30 minutes).",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-timesync-external",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "No, a domain member cannot pull time directly from an internet NTP server.",
+          "quote": "never from an external server directly",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The procedure states that a domain member must take time from the domain hierarchy, never from an external server directly.",
+          "quote": "A domain member must take time from the domain hierarchy, never from an external server directly",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-winrm-test-from",
+      "label": "faithful",
+      "judged": "faithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Test connectivity from the control node, not from the target, because a test run on the target proves nothing about the path.",
+          "quote": "Test connectivity from the control node, not from the target, because a test run on the target proves nothing about the path.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-bits-repair",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To fix the BITS service configuration when it fails to start, run the command `bitsadmin /util /repairservice` in an elevated Command Prompt.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "This resolves issues with service configuration and dependencies.",
+          "quote": "This switch attempts to resolve errors related to incorrect service configuration and dependencies on Windows services (such as LANManworkstation) and the network directory.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Use `bitsadmin /util /repairservice /force` to delete and recreate the service if needed, though this may set the service description to English in a localized system.",
+          "quote": "Parameters\n| Parameter | Description |\n| --------- | ----------- |\n| /force | Optional. Deletes and creates the service again.|\n\n> [!NOTE]\n> If BITS creates the service again, the service description string might be set to English even in a localized system.",
+          "supported": true,
+          "why": "ok"
+        }
+      ]
+    },
+    {
+      "id": "heldout-diskpart-focus",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "In DiskPart, commands act on the currently focused object.",
+          "quote": "When you select an object, the focus remains on that object until you select a different object.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "If your commands are affecting the wrong disk, ensure you explicitly select the correct disk/volume using the `select disk <number>` or `select volume <number>` command before executing operations.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Focus remains on the selected object until changed, so verify the current focus with `detail` or `list` commands to avoid unintended actions.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ]
+    },
+    {
+      "id": "heldout-servermanager-enable",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "agrees": true,
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To enable remote management for Server Manager to reach a server, follow these steps:\n\n**Using Windows PowerShell**: Open an elevated PowerShell session and run `Configure-SMremoting.exe -enable` to enable all required firewall rules.",
+          "quote": "1.  On the computer that you want to manage remotely, do one of the following to open a Windows PowerShell session with elevated user rights.\n\n    -   On the Windows desktop, right-click **Windows PowerShell** on the taskbar, and then click **Run as Administrator**.\n\n    -   On the Windows **start** screen, right-click **Windows PowerShell**, and then on the app bar, click **Run as Administrator**.\n\n2.  type the following, and then press **Enter** to enable all required firewall rule exceptions.\n\n    **Configure-SMremoting.exe -enable**",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "**Using the Windows interface**: In Server Manager, navigate to the **Local Server** page, click the hyperlinked **remote management** property, and select **Enable remote management of this server from other computers**.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "**Using the command line**: Run `Configure-SMremoting.exe -enable` in an elevated command prompt.",
+          "quote": "3.  Do one of the following:\n\n    -   To enable remote management, type **Configure-SMremoting.exe -enable**, and then press **Enter**.",
+          "supported": false,
+          "why": "quote is not in the cited text"
+        },
+        {
+          "sentence": "Ensure firewall rules like **COM+ Network Access (DCOM-In)** and **remote Event Log Management** are enabled.",
+          "quote": "3.  verify that exceptions to the following firewall rules are enabled, and have not been disabled by Group Policy settings. If any are not enabled, go on to the next step.\n\n    -   COM+ Network Access (DCOM-In)\n\n    -   remote Event Log Management (NP-In)\n\n    -   remote Event Log, Management (RPC)\n\n    -   remote Event Log Management (RPC-EPMAP)",
+          "supported": false,
+          "why": "quote is not in the cited text"
+        },
+        {
+          "sentence": "For older Windows Server versions, install required updates like Windows Management Framework (WMF) 3.0/4.0/5.0 to ensure manageability.",
+          "quote": "To manage servers that are running Windows Server releases older than Windows Server 2016, install the following software and updates to make the older releases of Windows Server manageable by using Server Manager in Windows Server 2016.\n\n|Operating System|Required Software|Manageability|\n|----------|-----------|---------|\n| Windows Server 2012 R2  or  Windows Server 2012 |-   [.NET Framework 4.6](https://www.microsoft.com/download/details.aspx?id=45497)<br />-   [Windows Management Framework 5.0](https://go.microsoft.com/fwlink/?LinkID=395058). The Windows Management Framework 5.0 download package updates Windows Management Instrumentation (WMI) providers on  Windows Server 2012 R2 ,  Windows Server 2012 , and  Windows Server 2008 R2 . The updated WMI providers let Server Manager collect information about roles and features that are installed on the managed servers. Until the update is applied, servers that are running  Windows Server 2012 R2 ,  Windows Server 2012 , or  Windows Server 2008 R2  have a manageability status of **Not accessible**.<br />-   The performance update associated with [Knowledge Base article 2682011](https://go.microsoft.com/fwlink/p/?LinkID=245487) is no longer necessary on servers that are running  Windows Server 2012 R2  or  Windows Server 2012 .||\n| Windows Server 2008 R2 |-   [.NET Framework 4.5](https://www.microsoft.com/download/details.aspx?id=30653)<br />-   [Windows Management Framework 4.0](https://support.microsoft.com/en-us/topic/description-of-wmf-4-0-for-windows-7-sp1-windows-embedded-standard-7-sp1-and-windows-server-2008-r2-sp1-e3c830c7-269a-8ae0-d7e9-5ab4a0c37484). The Windows Management Framework 4.0 download package updates Windows Management Instrumentation (WMI) providers on  Windows Server 2008 R2 . The updated WMI providers let Server Manager collect information about roles and features that are installed on the managed servers. Until the update is applied, servers that are running  Windows Server 2008 R2  have a manageability status of **Not accessible**.<br />-   The performance update associated with [Knowledge Base article 2682011](https://go.microsoft.com/fwlink/p/?LinkID=245487) lets Server Manager collect performance data from  Windows Server 2008 R2 .||\n| Windows Server 2008 |-   [.NET Framework 4](https://www.microsoft.com/download/details.aspx?id=17718)<br />-   [Windows Management Framework 3.0](https://go.microsoft.com/fwlink/?LinkID=229019) The Windows Management Framework 3.0 download package updates Windows Management Instrumentation (WMI) providers on  Windows Server 2008 . The updated WMI providers let Server Manager collect information about roles and features that are installed on the managed servers. Until the update is applied, servers that are running  Windows Server 2008  have a manageability status of **Not accessible - verify earlier versions run Windows Management Framework 3.0**.<br />-   The performance update associated with [Knowledge Base article 2682011](https://go.microsoft.com/fwlink/p/?LinkID=245487) lets Server Manager collect performance data from  Windows Server 2008 .||",
+          "supported": false,
+          "why": "quote is not in the cited text"
+        }
+      ]
+    }
+  ]
+}

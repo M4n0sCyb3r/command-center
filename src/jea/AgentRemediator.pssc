@@ -1,0 +1,27 @@
+@{
+    # Session configuration: WHO may connect, and HOW the session behaves.
+    # Used once, at registration; Register-PSSessionConfiguration copies it.
+    # SRV01 ONLY (ADR 0033: DC01 is out of scope for P05) - never register this on a DC,
+    # where RunAsVirtualAccount means Domain Admins (ADR 0003).
+
+    SchemaVersion       = '2.0.0.0'
+    GUID                = '89e10f3f-a01d-4f84-8354-cd4fd283837a'
+    Author              = 'Jose'
+    Description         = 'P05 Remediation Agent - write JEA endpoint (three fixed functions).'
+
+    SessionType         = 'RestrictedRemoteServer'
+    LanguageMode        = 'NoLanguage'
+
+    # A temporary local administrator per session, on a MEMBER server. Its ceiling is the
+    # visible-function list in AgentRemediator.psrc, not this account.
+    RunAsVirtualAccount = $true
+
+    # The host-side second record (ADR 0038): who connected, what ran, what came back.
+    TranscriptDirectory = 'C:\ProgramData\JEA\Transcripts\AgentRemediator'
+
+    # ADR 0004: the role names the account itself, not a group. ADR 0034: the WRITE
+    # account only - svc-agent-ro (the verifier) is deliberately absent.
+    RoleDefinitions     = @{
+        'CORP\svc-agent-rw' = @{ RoleCapabilities = 'AgentRemediator' }
+    }
+}

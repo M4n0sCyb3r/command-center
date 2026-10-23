@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "decided_in": "ADR 0035; values picked by Jose 2026-10-19 (P05 build step 1). Step 6 confirms each against SRV01 before the agent first runs there; any change is a commit, never an edit during a run.",
+  "host_scope": "SRV01 (member server). DC01 is out of scope (ADR 0033).",
+  "watched": [
+    {
+      "id": "service:Spooler",
+      "class": "service",
+      "name": "Spooler",
+      "why": "Print Spooler disabled on servers is common hardening (PrintNightmare). Breaking it cannot touch WinRM, Kerberos or the agent's connection.",
+      "fields": {"start_type": "disabled", "status": "stopped"}
+    },
+    {
+      "id": "audit:Logon",
+      "class": "audit",
+      "name": "Logon",
+      "why": "Project 1 already reads this subcategory through AgentReader (Get-AgentAuditPolicy). Turning auditing off does not affect the agent's access.",
+      "fields": {"setting": "Success and Failure"}
+    },
+    {
+      "id": "registry:rdp-nla",
+      "class": "registry",
+      "name": "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp\\UserAuthentication",
+      "why": "RDP Network Level Authentication on. The agent uses WinRM, not RDP, so the drift cannot lock it out.",
+      "fields": {"value": 1}
+    }
+  ]
+}

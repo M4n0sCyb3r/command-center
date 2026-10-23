@@ -1,0 +1,21 @@
+﻿{
+    "analyzer":  "PSScriptAnalyzer 1.25.0",
+    "folder":  "set/reference",
+    "files":  [
+                  "01-Start-StoppedAutoServices.ps1",
+                  "02-Clear-OldLogFiles.ps1",
+                  "03-Get-LowDiskReport.ps1",
+                  "04-Test-TimeOffset.ps1",
+                  "05-Set-ServiceStartupType.ps1",
+                  "06-Export-LocalAdminMembers.ps1",
+                  "07-Move-OldFilesToArchive.ps1",
+                  "08-Test-WinRMReadiness.ps1",
+                  "09-Register-CleanupTask.ps1",
+                  "10-Test-PendingReboot.ps1",
+                  "11-Remove-StaleProfiles.ps1",
+                  "12-Backup-ConfigFiles.ps1"
+              ],
+    "findings":  [
+
+                 ]
+}

@@ -1,0 +1,7 @@
+{
+  "ollama_version": "0.40.8",
+  "verified_at": "2026-10-22T04:53:31Z",
+  "verified_by": "tools/upgrade_check.py: gate PASS, 0 truncated, all 20 retrieval cases identical (result, rank, top score) to evals/baselines/retrieval.json",
+  "note": "Moved only by tools/upgrade_check.py after a clean re-measurement. See src/bench_check.py check C.",
+  "covers": "retrieval (embeddings) only - generation (the answer step, the judge) is NOT re-verified; compare readings across versions with the version in view"
+}

@@ -1,0 +1,276 @@
+{
+  "kind": "faithfulness-calibration",
+  "condition": {
+    "started_at": "2026-10-16T17:14:03Z",
+    "pairs": "evals/fixtures/faithfulness-heldout-v3.jsonl",
+    "pairs_sha256": "58b2f06bcceef9ee62d7b85ee0c4629df31f7139216c441ef537e424f072866c",
+    "judge_prompt_sha256": "bf285729cdbb479e3f28d6355b7f04e6380de2f77a5e03073555dc2fcedab2f4",
+    "judge_max_tokens": 6144,
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "ollama_version": "0.40.4",
+    "fresh_load_per_pair": true
+  },
+  "summary": {
+    "n": 11,
+    "agreement": 0.6363636363636364,
+    "false_pass": 0,
+    "wrong_reason": 0,
+    "false_pass_rate": 0.0,
+    "false_fail": 4,
+    "false_fail_rate": 0.4,
+    "errors": 0,
+    "passes_bar": false
+  },
+  "rows": [
+    {
+      "id": "heldout3-bench-ollama-where",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The Ollama server runs **on Windows**, not WSL2.",
+          "quote": "Ollama server | **Windows**, not WSL | a process named `ollama`, listening on 11434",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "`localhost` inside WSL2 is NAT'd and does not reach Windows.",
+          "quote": "WSL2 is NAT'd, so `localhost` inside WSL is not Windows.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The labs reach the Windows machine through the default gateway, which changes on reboot, making the Windows `localhost` unreachable from WSL2.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "heldout3-bench-up",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The bench is considered up when all four conditions are met: `Get-Process ollama` returns a process with 11434 in `Listen`, the WSL prompt is prefixed `(.venv)` and `which python` points to `.venv/bin/python`, `python src/bench_check.py` outputs `PASS: bench online` and exits `0`, and `ollama list` shows the required models.",
+          "quote": "Get-Process ollama` returns a process, and 11434 is in `Listen`",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['0', 'four']"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "heldout3-shell-prompt-limits",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The machine-name prompt **does not work in PowerShell ISE** because `$PROFILE` is per user and host application, and ISE is a different host.",
+          "quote": "A window opened as a *different* user, or PowerShell ISE, will not pick it up. Re-run there if needed.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "It also **does not work in WSL/bash** (covered in the source as a separate case).",
+          "quote": "It does **not** cover WSL bash. That prompt already shows `user@<host>`, and the giveaway for a wrong paste there is `command not found` on a PowerShell cmdlet.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "heldout3-jea-not-admin",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "JEA provides a **second wall** of security built by a different system, whereas a service account in Administrators relies on a single wall.",
+          "quote": "JEA supplies a **second wall, built by a different system**. The account holds nothing; the endpoint supplies elevation for a named list of commands and refuses everything else. Both walls have to fail before anything happens.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The JEA endpoint restricts elevation to a named list of commands and refuses everything else, requiring **both walls to fail** before any action occurs.",
+          "quote": "The account holds nothing; the endpoint supplies elevation for a named list of commands and refuses everything else. Both walls have to fail before anything happens.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "In contrast, a naive approach with an admin account and allow-list depends on a single wall, which is less secure if the allow-list has bugs, mis-parsed arguments, or injected prompts.",
+          "quote": "The naive version is a service account in `Administrators` plus an allow-list in your code. That is one wall, built by the thing being contained. If the allow-list has a bug, a prompt is injected, or an argument is mis-parsed, nothing else is in the way.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "heldout3-jea-before",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Before registering a JEA endpoint, you need: A domain (or local) account to create the service account (and on a DC, a group and GPO), A healthy and reachable WinRM on the target server (verified beforehand), A validation baseline for re-running after registration, and Console access to each target server (as registration restarts WinRM and cannot be executed remotely).",
+          "quote": "A domain (or local) account that can create the service account and, on a DC, a group and a GPO.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "heldout3-closeout-gates",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The assistant cannot push to GitHub or delete files in the lab repo.",
+          "quote": "The assistant cannot delete files in this repo.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Pushes require a human action (the proxy returns 403 for github.com, treated as an approval gate), and file-deletion permissions were intentionally declined to prevent automated removal of work.",
+          "quote": "The assistant commits locally; the proxy returns 403 for github.com from its shell. Treat that as the approval gate, not a defect \u2014 nothing reaches the remote without a person running the command.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The assistant's device has no network route to github.com, and the repo's safety gates prohibit automated deletion.",
+          "quote": "The assistant's device shell has **no** network route to github.com.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "heldout3-closeout-done",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "A lab session is actually closed out when all seven conditions in the Verification section are true: The artifact exists and its own check passes with exit 0, A commit exists naming the lab, The `notes/` card is written with glossary and README rows added, The PDF is rebuilt and committed, The artifact is updated at its existing URL, The position is recorded once in its home with a `LOG.md` entry, and `git log --oneline -1 main origin/main` prints one line covering both refs.",
+          "quote": "The session is closed out when all seven are true:",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['0', '1', 'one']"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "heldout3-w32time-domain-default",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "A domain-joined computer synchronizes time through the domain hierarchy by default.",
+          "quote": "By default, a computer that's joined to a domain synchronizes time through a domain hierarchy of time sources.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "It uses the Net Time 5 Directory Service (NT5DS) client type, which pulls time from the domain hierarchy rather than external servers.",
+          "quote": "Most domain-joined computers have a time client type of Net Time 5 Directory Service (NT5DS), which means that they synchronize time from the domain hierarchy.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The registry entry **Type** defaults to **NT5DS** for domain members, ensuring synchronization with the domain's time sources.",
+          "quote": "The default value on domain members is **NT5DS**.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "heldout3-w32tm-set-back",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The `w32tm` sets the clock back immediately if either of the following conditions is true: `CurrentTimeOffset` > `MaxAllowedPhaseOffset`, or `(CurrentTimeOffset) / (PhaseCorrectRate \u00d7 UpdateInterval)` > `SystemClockRate / 2`.",
+          "quote": "CurrentTimeOffset &gt; MaxAllowedPhaseOffset: Set the computer clock immediately.",
+          "supported": false,
+          "why": "quote lacks the sentence's number(s) ['2']"
+        },
+        {
+          "sentence": "If these conditions are not met, the clock is adjusted gradually.",
+          "quote": "CurrentTimeOffset &le; MaxAllowedPhaseOffset: Adjust the computer clock gradually by using the clock rate.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "For example, if the offset is within `MaxAllowedPhaseOffset` but the phase correction calculation exceeds the threshold, the clock is set immediately.",
+          "quote": "This condition is false. Therefore, `w32tm` sets the clock back immediately.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "heldout3-dfs-referral-what",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "A DFS referral is an ordered list of targets that a client computer receives from a domain controller or namespace server when the user accesses a namespace root or folder with targets in the namespace.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "This referral directs the client to the appropriate servers or locations within the Distributed File System (DFS) namespace.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "heldout3-servermanager-answer-file",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To turn off Server Manager remote management by default in an unattended install, create an unattended answer file using Windows System Image Manager (Windows SIM).",
+          "quote": "create an unattended installation answer file for Windows Server 2016 installations by using Windows System Image Manager (Windows SIM).",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "In the answer file, set the setting **Microsoft-Windows-Web-Services-for-Management-Core\\EnableServerremoteManagement** to **False**.",
+          "quote": "set **Microsoft-Windows-Web-Services-for-Management-Core /EnableServerremoteManagement** to **False**.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "This disables remote management during OS setup, but administrators can re-enable it later via PowerShell or the GUI if needed.",
+          "quote": "This setting disables remote management as part of the operating system setup process. Configuring this setting does not prevent an administrator from enabling Server Manager remote management on a server after operating system setup is complete. Administrators can enable Server Manager remote management again by using steps in [To configure Server Manager remote management by using the Windows interface](#to-enable-server-manager-remote-management-by-using-the-windows-interface) or [To enable Server Manager remote management by using Windows PowerShell](#to-enable-server-manager-remote-management-by-using-windows-powershell) in this topic.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    }
+  ]
+}

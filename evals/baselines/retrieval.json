@@ -1,0 +1,403 @@
+{
+  "record_version": 7,
+  "header": {
+    "suite_path": "evals/suites/retrieval.jsonl",
+    "suite_sha256": "9185781cdc708801a1eba3232520806ab550716bd838e376dad8defe7e64e3e9",
+    "suite_header_sha256": "1b542d7d2f9c89948aac41d49c01b2686ba5e7c0d587a9c46c3c1081373e9ca0",
+    "tier_selection": "fixed",
+    "scorer": "retrieval",
+    "model_name": "nomic-embed-text",
+    "model_digest": "5d5ef03573edd6a04d3ad404d3f107b8360e0059c73d6d0bc131cfae13f022f3",
+    "host_target": "none - local index (data/index.json, gitignored)",
+    "sampling": null,
+    "rebaseline": {
+      "replaced": "2026-10-18T02:32:19Z",
+      "removed": []
+    },
+    "started_at": "2026-10-22T04:51:46Z",
+    "incomplete": null,
+    "record_version": 7
+  },
+  "cases": [
+    {
+      "id": "restart-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "print jobs are piling up and nothing comes out",
+        "answerable": true,
+        "expect": "data/runbooks/service-restart.md#symptoms",
+        "rank": 1,
+        "top_score": 0.5511134711295764,
+        "hit_ids": [
+          "data/runbooks/service-restart.md#symptoms",
+          "sops/lab-session-closeout.md#scope-and-non-scope",
+          "sops/lab-session-closeout.md#overview"
+        ]
+      },
+      "note": "",
+      "case_sha256": "c1505c50eb888eaceaa2bd5be12b3525921a29166ad17ba715c2be6661f37eee"
+    },
+    {
+      "id": "restart-procedure",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "question": "how do I safely bounce a service",
+        "answerable": true,
+        "expect": "data/runbooks/service-restart.md#procedure",
+        "rank": 0,
+        "top_score": 0.6469237584509524,
+        "hit_ids": [
+          "sops/jea-read-only-endpoint.md#safety",
+          "sops/jea-read-only-endpoint.md#preconditions",
+          "data/runbooks/service-restart.md#recovery-options"
+        ]
+      },
+      "note": "",
+      "case_sha256": "5889c8408d19e2f17cb2ef3d0390d48f3fcff1f5bfdaf2376f18bda2e8dae7b4"
+    },
+    {
+      "id": "restart-recovery",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "it keeps dying a couple minutes after I start it again",
+        "answerable": true,
+        "expect": "data/runbooks/service-restart.md#recovery-options",
+        "rank": 1,
+        "top_score": 0.5932292261389713,
+        "hit_ids": [
+          "data/runbooks/service-restart.md#recovery-options",
+          "data/runbooks/service-restart.md#symptoms",
+          "data/runbooks/service-restart.md#procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "c1d26fd91468c1b2787bd14a81b6f39bc527d89bba637fa9f4604d64c61229bd"
+    },
+    {
+      "id": "disk-procedure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "C drive is nearly full, what do I clear out first",
+        "answerable": true,
+        "expect": "data/runbooks/disk-space.md#procedure",
+        "rank": 1,
+        "top_score": 0.6639679869084505,
+        "hit_ids": [
+          "data/runbooks/disk-space.md#procedure",
+          "data/runbooks/disk-space.md#thresholds",
+          "data/microsoft/cleanmgr.md#overview"
+        ]
+      },
+      "note": "",
+      "case_sha256": "4b65c4b06f19148370de213f5ea7aadaf698dc2ab8b45cc6f5e4faaa64637342"
+    },
+    {
+      "id": "disk-thresholds",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "at what point do we call the box failed instead of degraded",
+        "answerable": true,
+        "expect": "data/runbooks/disk-space.md#thresholds",
+        "rank": 1,
+        "top_score": 0.6497783333342558,
+        "hit_ids": [
+          "data/runbooks/disk-space.md#thresholds",
+          "sops/bench-startup.md#4-failure-modes-seen-in-practice",
+          "sops/lab-session-closeout.md#failure-modes"
+        ]
+      },
+      "note": "",
+      "case_sha256": "55c8cabdea34c3fcd125f449a12e7020994c2837a26364e7831ba1b561d6d830"
+    },
+    {
+      "id": "timesync-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "kerberos keeps rejecting credentials that are definitely correct",
+        "answerable": true,
+        "expect": "data/runbooks/time-sync.md#symptoms",
+        "rank": 1,
+        "top_score": 0.7146991802394427,
+        "hit_ids": [
+          "data/runbooks/time-sync.md#symptoms",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings",
+          "sops/jea-read-only-endpoint.md#preconditions"
+        ]
+      },
+      "note": "",
+      "case_sha256": "e242670fd942c1d8a2a2cfc7b65e9f980626a3c066e66838eb5766c30958021d"
+    },
+    {
+      "id": "timesync-escalation",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "member server is still off after I fixed it, who owns this now",
+        "answerable": true,
+        "expect": "data/runbooks/time-sync.md#escalation",
+        "rank": 1,
+        "top_score": 0.612638483438354,
+        "hit_ids": [
+          "data/runbooks/time-sync.md#escalation",
+          "data/runbooks/time-sync.md#procedure",
+          "data/runbooks/service-restart.md#symptoms"
+        ]
+      },
+      "note": "",
+      "case_sha256": "5db28816cf447385561ae661a916f3c0d2f950eacdda2a1cd5a263dac4654d68"
+    },
+    {
+      "id": "winrm-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "remote powershell won't connect but the host answers ping",
+        "answerable": true,
+        "expect": "data/runbooks/winrm-remoting.md#symptoms",
+        "rank": 1,
+        "top_score": 0.663379170351427,
+        "hit_ids": [
+          "data/runbooks/winrm-remoting.md#symptoms",
+          "sops/identify-the-shell.md#purpose",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings"
+        ]
+      },
+      "note": "",
+      "case_sha256": "ece3ee8fa2f8d93a90e1cfdbf352cba18fd618628f115a41964704aff5d399c6"
+    },
+    {
+      "id": "winrm-firewall",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "how wide should the rule be opened for management traffic",
+        "answerable": true,
+        "expect": "data/runbooks/winrm-remoting.md#firewall-notes",
+        "rank": 1,
+        "top_score": 0.6408964550721352,
+        "hit_ids": [
+          "data/runbooks/winrm-remoting.md#firewall-notes",
+          "data/runbooks/disk-space.md#thresholds",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings"
+        ]
+      },
+      "note": "",
+      "case_sha256": "79881c306740012da26f1a08a9fef131d26196d19680e8a9ca396d772a969862"
+    },
+    {
+      "id": "patching-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "compliance says we are missing updates but the server looks fine",
+        "answerable": true,
+        "expect": "data/runbooks/patching-window.md#symptoms",
+        "rank": 1,
+        "top_score": 0.6998381587393385,
+        "hit_ids": [
+          "data/runbooks/patching-window.md#symptoms",
+          "data/microsoft/3-approve-and-deploy-updates-in-wsus.md#overview",
+          "data/runbooks/patching-window.md#procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "449936ba1d18ab1a645f9faa73fc35e81ac054cab51389e250b423b5b4985488"
+    },
+    {
+      "id": "patching-change-control",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "can I push a patch outside the agreed window",
+        "answerable": true,
+        "expect": "data/runbooks/patching-window.md#change-control",
+        "rank": 1,
+        "top_score": 0.725264325983022,
+        "hit_ids": [
+          "data/runbooks/patching-window.md#change-control",
+          "data/runbooks/patching-window.md#procedure",
+          "data/runbooks/patching-window.md#symptoms"
+        ]
+      },
+      "note": "",
+      "case_sha256": "3337390a72119eef785da61f5e12a466c5b9f71a8675bd94cef9f52daff95fb8"
+    },
+    {
+      "id": "patching-procedure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "how do I prove the reboot actually applied anything",
+        "answerable": true,
+        "expect": "data/runbooks/patching-window.md#procedure",
+        "rank": 1,
+        "top_score": 0.6642260984608622,
+        "hit_ids": [
+          "data/runbooks/patching-window.md#procedure",
+          "data/runbooks/winrm-remoting.md#procedure",
+          "data/runbooks/service-restart.md#procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "21fc77b307cfc5f540ddf93cb520c2623b10c29c86ed9066be23e6ea9eb8129e"
+    },
+    {
+      "id": "sop-bench-failure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "I closed a powershell window and now every model call times out",
+        "answerable": true,
+        "expect": "sops/bench-startup.md#4-failure-modes-seen-in-practice",
+        "rank": 2,
+        "top_score": 0.629540743567084,
+        "hit_ids": [
+          "data/runbooks/service-restart.md#symptoms",
+          "sops/bench-startup.md#4-failure-modes-seen-in-practice",
+          "sops/bench-startup.md#2-procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "c23332ff7843ac57968a98a12a785efe2a4a45cabfd05641838dbe35fd9f9d20"
+    },
+    {
+      "id": "sop-shell-failure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "my profile won't load on a new laptop, it says running scripts is disabled",
+        "answerable": true,
+        "expect": "sops/identify-the-shell.md#failure-modes",
+        "rank": 1,
+        "top_score": 0.6817573125448527,
+        "hit_ids": [
+          "sops/identify-the-shell.md#failure-modes",
+          "sops/identify-the-shell.md#scope-and-limits",
+          "sops/identify-the-shell.md#procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "6e6a14e4d45decf99c4732fe5e474d09849e17d0b7707dc6f56aa2bbf724309e"
+    },
+    {
+      "id": "sop-jea-failure",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "question": "environment variables come back empty inside the remote session but the same code works in a normal shell",
+        "answerable": true,
+        "expect": "sops/jea-read-only-endpoint.md#failure-modes",
+        "rank": 0,
+        "top_score": 0.6224202188156861,
+        "hit_ids": [
+          "data/runbooks/winrm-remoting.md#symptoms",
+          "sops/identify-the-shell.md#failure-modes",
+          "data/runbooks/winrm-remoting.md#procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "de0eabd3a5449ea6e48583d41897f87ed136da4147cf77279a96d7ef6148e163"
+    },
+    {
+      "id": "sop-closeout-failure",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "question": "the log says it shipped but the change was never in the file",
+        "answerable": true,
+        "expect": "sops/lab-session-closeout.md#failure-modes",
+        "rank": 0,
+        "top_score": 0.5795505394743984,
+        "hit_ids": [
+          "data/runbooks/patching-window.md#change-control",
+          "data/runbooks/patching-window.md#procedure",
+          "data/runbooks/patching-window.md#symptoms"
+        ]
+      },
+      "note": "",
+      "case_sha256": "a22416f40bf59a42cf6154d2a4d147c9073cf8270d2cae95e0838837412832a0"
+    },
+    {
+      "id": "unanswerable-out-of-domain",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "what is the capital of France",
+        "answerable": false,
+        "expect": null,
+        "rank": 0,
+        "top_score": 0.3717848329941477,
+        "hit_ids": [
+          "sops/identify-the-shell.md#overview",
+          "data/microsoft/change-the-amount-of-time-that-clients-cache-referrals.md#to-change-the-amount-of-time-that-clients-cache-namespace-root-referrals",
+          "data/microsoft/change-the-amount-of-time-that-clients-cache-referrals.md#to-change-the-amount-of-time-that-clients-cache-folder-referrals"
+        ]
+      },
+      "note": "",
+      "case_sha256": "979cfc29131c93d2a7ebe3308ff97f2a902f0a424863b5f80beef7c1d0479da6"
+    },
+    {
+      "id": "unanswerable-cooking",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "what temperature do I bake chicken thighs at",
+        "answerable": false,
+        "expect": null,
+        "rank": 0,
+        "top_score": 0.4649656687411874,
+        "hit_ids": [
+          "sops/bench-startup.md#3-diagnosis-order-when-bench-check-fails",
+          "sops/bench-startup.md#5-verification",
+          "sops/bench-startup.md#4-failure-modes-seen-in-practice"
+        ]
+      },
+      "note": "",
+      "case_sha256": "411e16cd5c3ca784a9aa16a84312911a6ea076f7c85fa10e483e7c58eac5f218"
+    },
+    {
+      "id": "unanswerable-sports",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "question": "who won the world series last year",
+        "answerable": false,
+        "expect": null,
+        "rank": 0,
+        "top_score": 0.39446249664576094,
+        "hit_ids": [
+          "data/microsoft/3-approve-and-deploy-updates-in-wsus.md#overview",
+          "sops/identify-the-shell.md#purpose",
+          "data/runbooks/patching-window.md#change-control"
+        ]
+      },
+      "note": "",
+      "case_sha256": "3ce8618b1063005119330cc2804ba419f83750fab0ffc7bca0a64cc24c874462"
+    },
+    {
+      "id": "unanswerable-sourdough",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "question": "how do I restart my sourdough starter after it sat in the fridge for a month",
+        "answerable": false,
+        "expect": null,
+        "rank": 0,
+        "top_score": 0.5824582646482497,
+        "hit_ids": [
+          "data/runbooks/service-restart.md#procedure",
+          "data/runbooks/service-restart.md#recovery-options",
+          "data/runbooks/patching-window.md#procedure"
+        ]
+      },
+      "note": "",
+      "case_sha256": "a9607189fddc04d25c229ee269b8e331bb2e024166a4f0ba2e34cdbbb00a0c5f"
+    }
+  ]
+}

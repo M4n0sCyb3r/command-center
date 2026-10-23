@@ -1,0 +1,202 @@
+---
+# P06 build step 4 - promote's hands on SRV01. Called ONLY by src/srv01_bench.py.
+#
+#   ansible-playbook -i ~/windows-qe-lab/inventory/hosts.yml playbooks/ansible/p06-srv01.yml \
+#       --limit srv01 -e @<request.json> --vault-password-file /dev/fd/N
+#
+# The QE lab's inventory and vault are REUSED, not copied (the QE lab stays unchanged - ADR
+# 0042). `hosts: srv01` is fixed here AND --limit srv01 is passed by the caller: two locks, so
+# a mistake in one never reaches DC01 (ADR 0005, 0033).
+#
+# One action per call (p06_action):
+#   marker_write  write p06_marker_value to the marker file           (the flow's bookkeeping)
+#   marker_read   read the marker file
+#   analyze       copy the script; PowerShell's OWN parser lists its commands, resolved ON
+#                 SRV01; refusals: native executables, dynamic invocation, remote targets,
+#                 .NET static calls, redirection, no SupportsShouldProcess (Jose's pick 3)
+#   whatif        run the copied script with -WhatIf
+#   run           run the copied script for real
+# Every action writes ONE JSON result to p06_out on the control node; the caller reads that,
+# never the Ansible recap (the QE lab's rule: the evidence is the file, not the log).
+
+- name: P06 promote - one action on SRV01
+  hosts: srv01
+  gather_facts: false
+
+  vars:
+    p06_dir: 'C:\ProgramData\P06'
+    p06_marker: 'C:\ProgramData\P06\promote-marker.txt'
+    p06_remote_script: 'C:\ProgramData\P06\run\{{ p06_script_sha | default("none") }}.ps1'
+    p06_result: {}
+
+  tasks:
+    - name: Refuse anything but SRV01 (second lock)
+      ansible.builtin.assert:
+        that:
+          - inventory_hostname == 'srv01'
+          - p06_action in ['marker_write', 'marker_read', 'analyze', 'whatif', 'run']
+        quiet: true
+
+    # EACH TASK REGISTERS ITS OWN VARIABLE (r_<action>). Found on the first bench run,
+    # 2026-10-22: with one shared `register: p06_ps`, a SKIPPED task still registers - it
+    # overwrote the marker read with {skipped: true}, and the read came back None.
+    - name: Do the one action; the result file is written even if it fails
+      block:
+        - name: Marker - write
+          when: p06_action == 'marker_write'
+          ansible.windows.win_powershell:
+            script: |
+              param([string]$Path, [string]$Value)
+              New-Item -ItemType Directory -Force -Path (Split-Path $Path) | Out-Null
+              Set-Content -LiteralPath $Path -Value $Value -Encoding UTF8 -NoNewline
+              [PSCustomObject]@{ value = (Get-Content -LiteralPath $Path -Raw) }
+            parameters:
+              Path: '{{ p06_marker }}'
+              Value: '{{ p06_marker_value }}'
+          register: r_marker_write
+
+        - name: Marker - read
+          when: p06_action == 'marker_read'
+          ansible.windows.win_powershell:
+            script: |
+              param([string]$Path)
+              $v = if (Test-Path -LiteralPath $Path) { Get-Content -LiteralPath $Path -Raw } else { $null }
+              [PSCustomObject]@{ value = $v }
+            parameters:
+              Path: '{{ p06_marker }}'
+          register: r_marker_read
+          changed_when: false
+
+        - name: Make the script folder on SRV01
+          when: p06_action in ['analyze', 'whatif', 'run']
+          ansible.windows.win_file:
+            path: '{{ p06_dir }}\run'
+            state: directory
+
+        - name: Copy the script to SRV01
+          when: p06_action in ['analyze', 'whatif', 'run']
+          ansible.windows.win_copy:
+            src: '{{ p06_script_local }}'
+            dest: '{{ p06_remote_script }}'
+
+        - name: Analyze - PowerShell's parser, commands resolved on SRV01
+          when: p06_action == 'analyze'
+          ansible.windows.win_powershell:
+            script: |
+              param([string]$Path)
+              $L = [System.Management.Automation.Language.Ast]
+              $tokens = $null; $errors = $null
+              $ast = [System.Management.Automation.Language.Parser]::ParseFile($Path, [ref]$tokens, [ref]$errors)
+              $refusals = [System.Collections.Generic.List[string]]::new()
+              $commands = [System.Collections.Generic.List[string]]::new()   # strings: win_powershell flattens nested objects past depth 2 (found 2026-10-22)
+              foreach ($e in $errors) { $refusals.Add("parse error line $($e.Extent.StartLineNumber): $($e.Message)") }
+
+              $should = $false
+              if ($ast.ParamBlock) {
+                foreach ($a in $ast.ParamBlock.Attributes) {
+                  if ($a.TypeName.Name -eq 'CmdletBinding') {
+                    foreach ($n in $a.NamedArguments) {
+                      if ($n.ArgumentName -eq 'SupportsShouldProcess' -and
+                          ($n.ExpressionOmitted -or "$($n.Argument)" -match 'true')) { $should = $true }
+                    }
+                  }
+                }
+              }
+              if (-not $should) { $refusals.Add('script does not declare [CmdletBinding(SupportsShouldProcess)] - -WhatIf would not reach it') }
+
+              $defined = @($ast.FindAll({ param($n) $n -is [System.Management.Automation.Language.FunctionDefinitionAst] }, $true) | ForEach-Object { $_.Name })
+              $remoteCmds = 'Invoke-Command','Enter-PSSession','New-PSSession','New-CimSession','Invoke-WmiMethod','Start-Process','Invoke-Expression','Start-Job','Register-ScheduledJob'
+              $remoteParams = 'ComputerName','CimSession','Session','PSSession','HostName','VMName','VMId','ContainerId','Cn'
+
+              foreach ($c in $ast.FindAll({ param($n) $n -is [System.Management.Automation.Language.CommandAst] }, $true)) {
+                $name = $c.GetCommandName()
+                $line = $c.Extent.StartLineNumber
+                if (-not $name) { $refusals.Add("line ${line}: dynamic invocation (& / . with a non-literal name)"); continue }
+                $kind = if ($defined -contains $name) { 'ScriptFunction' } else {
+                  $ci = Get-Command -Name $name -ErrorAction SilentlyContinue | Select-Object -First 1
+                  if ($ci -and $ci.CommandType -eq 'Alias') { $ci = $ci.ResolvedCommand }   # sc, ls ...
+                  if ($ci) { "$($ci.CommandType)" } else { 'Unresolved' }
+                }
+                $commands.Add("line ${line}: $name ($kind)")
+                if ($kind -eq 'Application') { $refusals.Add("line ${line}: '$name' is a native executable - -WhatIf cannot stop it") }
+                # A cmdlet that changes state but has no -WhatIf ignores $WhatIfPreference and
+                # WRITES during the dry run (found designing step 5: Write-EventLog). Read-only
+                # verbs and the console writers are exempt; everything else must take -WhatIf.
+                if ($ci -and $kind -in 'Cmdlet','Function') {
+                  $real = $ci.Name                                   # an alias (ls) judged by what it runs (Get-ChildItem)
+                  $verb = ($real -split '-', 2)[0]
+                  $readOnly = 'Get','Test','Find','Measure','Select','Where','ForEach','Sort','Group','Format','Compare','Resolve','Search','Show','ConvertTo','ConvertFrom','Join','Split','Read','Wait','Trace'
+                  $console = 'Write-Output','Write-Verbose','Write-Host','Write-Warning','Write-Error','Write-Information','Write-Debug','Write-Progress'
+                  if ($readOnly -notcontains $verb -and $console -notcontains $real -and -not $ci.Parameters.ContainsKey('WhatIf')) {
+                    $refusals.Add("line ${line}: '$name' changes state but cannot take -WhatIf - it would run for real in the dry run")
+                  }
+                }
+                if ($kind -eq 'Unresolved') { $refusals.Add("line ${line}: '$name' does not resolve on SRV01") }
+                if ($remoteCmds -contains $name) { $refusals.Add("line ${line}: '$name' can run code elsewhere or out of band") }
+                foreach ($el in $c.CommandElements) {
+                  if ($el -is [System.Management.Automation.Language.CommandParameterAst] -and $remoteParams -contains $el.ParameterName) {
+                    $refusals.Add("line ${line}: -$($el.ParameterName) targets another machine")
+                  }
+                }
+              }
+              foreach ($m in $ast.FindAll({ param($n) $n -is [System.Management.Automation.Language.InvokeMemberExpressionAst] -and $n.Static }, $true)) {
+                $refusals.Add("line $($m.Extent.StartLineNumber): .NET static call $($m.Extent.Text) - -WhatIf cannot stop it")
+              }
+              foreach ($r in $ast.FindAll({ param($n) $n -is [System.Management.Automation.Language.FileRedirectionAst] }, $true)) {
+                $refusals.Add("line $($r.Extent.StartLineNumber): redirection to a file - -WhatIf cannot stop it")
+              }
+              [PSCustomObject]@{ refusals = @($refusals); commands = @($commands); should_process = $should }
+            parameters:
+              Path: '{{ p06_remote_script }}'
+          register: r_analyze
+          changed_when: false
+
+        - name: Dry run - the script with -WhatIf
+          when: p06_action == 'whatif'
+          ansible.windows.win_powershell:
+            script: |
+              param([string]$Path)
+              $out = & $Path -WhatIf | Out-String          # errors stay on the error stream: the bench reads them
+              [PSCustomObject]@{ output = $out }
+            parameters:
+              Path: '{{ p06_remote_script }}'
+          register: r_whatif
+          changed_when: false
+
+        - name: Live run - the script for real
+          when: p06_action == 'run'
+          ansible.windows.win_powershell:
+            script: |
+              param([string]$Path)
+              $out = & $Path | Out-String          # errors stay on the error stream: the bench reads them
+              [PSCustomObject]@{ output = $out }
+            parameters:
+              Path: '{{ p06_remote_script }}'
+          register: r_run
+
+
+      rescue:
+        - name: Note the failure (the result file below carries it)
+          ansible.builtin.set_fact:
+            p06_failure: "{{ ansible_failed_task.name | default('?') }}: {{ ansible_failed_result.msg | default('failed') }}"
+
+      always:
+        - name: Write the one result file on the control node
+          delegate_to: localhost
+          vars:
+            p06_ps: "{{ lookup('ansible.builtin.vars', 'r_' ~ p06_action, default={}) }}"
+          ansible.builtin.copy:
+            dest: '{{ p06_out }}'
+            mode: '0600'
+            content: >-
+              {{
+                {
+                  'action': p06_action,
+                  'failed': (p06_failure is defined) or (p06_ps.failed | default(false)),
+                  'output': p06_ps.output | default([]),
+                  'host_out': p06_ps.host_out | default(''),
+                  'error': p06_ps.error | default([]) | map(attribute='output') | list,
+                  'msg': p06_failure | default(p06_ps.msg | default(''))
+                } | to_nice_json
+              }}
+          changed_when: false

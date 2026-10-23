@@ -1,0 +1,44 @@
+@{
+    # Session configuration for DOMAIN CONTROLLERS.
+    #
+    # Identical to AgentReader.pssc except for the run-as identity. The endpoint
+    # NAME is still 'AgentReader' on both servers - only this file differs - so
+    # callers (src/host_client.py) need no change.
+    #
+    # Two files rather than one parameterised file because a .pssc is data that
+    # Register-PSSessionConfiguration COPIES at registration. What is registered
+    # on a machine is a snapshot, so the repo should hold exactly the snapshots
+    # that exist. Two ceilings, two files, both reviewable.
+
+    SchemaVersion       = '2.0.0.0'
+    GUID                = '99a12f3a-7e5f-432e-92ca-6750f27086fb'
+    Author              = 'Jose'
+    Description         = 'P01 Wintel Validation Agent - read-only JEA endpoint (domain controller variant).'
+
+    SessionType         = 'RestrictedRemoteServer'
+    LanguageMode        = 'NoLanguage'
+
+    # ADR 0005. A domain controller has no local groups, so a plain virtual
+    # account lands in Domain Admins. RunAsVirtualAccountGroups names the groups
+    # the temporary account joins INSTEAD of that default.
+    #
+    # JEA-AgentReader-RunAs is a Domain Local security group that holds exactly
+    # one right, granted by the GPO 'JEA-AgentReader-Rights' linked to the
+    # Domain Controllers OU: SeSecurityPrivilege ("Manage auditing and security
+    # log"), which is what auditpol /get requires.
+    #
+    # The group is deliberately EMPTY. Its only members are the per-session
+    # virtual accounts WinRM creates and destroys. Do not add users to it.
+    #
+    # Backout is the GPO link, not a VM checkpoint: reverting a domain
+    # controller from a checkpoint risks a USN rollback.
+    RunAsVirtualAccount       = $true
+    RunAsVirtualAccountGroups = 'JEA-AgentReader-RunAs'
+
+    TranscriptDirectory = 'C:\ProgramData\JEA\Transcripts\AgentReader'
+
+    # ADR 0004: the role names the account itself, not a group.
+    RoleDefinitions     = @{
+        'CORP\svc-agent-ro' = @{ RoleCapabilities = 'AgentReader' }
+    }
+}

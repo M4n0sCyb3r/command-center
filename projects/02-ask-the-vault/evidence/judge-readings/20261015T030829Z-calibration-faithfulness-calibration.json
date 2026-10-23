@@ -1,0 +1,498 @@
+{
+  "kind": "faithfulness-calibration",
+  "condition": {
+    "started_at": "2026-10-15T03:08:29Z",
+    "pairs": "evals/fixtures/faithfulness-calibration.jsonl",
+    "pairs_sha256": "f6cad67b5de37d3bfee164444a175258e8985d7e3f30c74d15d7c864a6fd3026",
+    "judge_prompt_sha256": "bf285729cdbb479e3f28d6355b7f04e6380de2f77a5e03073555dc2fcedab2f4",
+    "judge_max_tokens": 6144,
+    "model": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "ollama_version": "0.40.4",
+    "fresh_load_per_pair": true
+  },
+  "summary": {
+    "n": 21,
+    "agreement": 0.8571428571428571,
+    "false_pass": 0,
+    "wrong_reason": 0,
+    "false_pass_rate": 0.0,
+    "false_fail": 3,
+    "false_fail_rate": 0.23076923076923078,
+    "errors": 0,
+    "passes_bar": false
+  },
+  "rows": [
+    {
+      "id": "thresholds-faithful",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Fifteen percent free is the warning line and ten percent is the action line.",
+          "quote": "Fifteen percent free is the warning line and ten percent the action line.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Below five percent the host is treated as failed, because the recovery steps need space to run.",
+          "quote": "Below five percent the host is treated as failed rather than degraded, because the recovery steps themselves need space to run.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "thresholds-number",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Fifteen percent free is the warning line and ten percent is the action line.",
+          "quote": "Fifteen percent free is the warning line and ten percent the action line.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Below two percent the host is treated as failed rather than degraded.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "procedure-faithful",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Measure before deleting and record free space.",
+          "quote": "Measure before deleting. Record free space, then find the largest directories on the volume.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Clear the update cache and rotate logs first, because both regenerate and neither is evidence.",
+          "quote": "Clear the update cache and rotate logs first, because both regenerate and neither is evidence.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "procedure-added-step",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Clear the update cache and rotate logs first, because both regenerate.",
+          "quote": "Clear the update cache and rotate logs first, because both regenerate and neither is evidence.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Then empty the recycle bin for every user profile on the volume.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "escalation-faithful",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "If the member is configured correctly and drift persists, the fault is upstream at the domain controller holding the PDC emulator role.",
+          "quote": "If the member is configured correctly and drift persists, the fault is upstream at the domain controller holding the PDC emulator role.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Stop working on the member.",
+          "quote": "Stop working on the member.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "escalation-inverted",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The fault is upstream at the domain controller holding the PDC emulator role.",
+          "quote": "If the member is configured correctly and drift persists, the fault is upstream at the domain controller holding the PDC emulator role. Stop working on the member.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Keep resyncing the member every few minutes until the drift clears.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "skew-faithful",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The ticket is rejected even though the password is correct.",
+          "quote": "The account is valid and the password is correct, but the ticket is rejected.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Drift above five minutes breaks Kerberos outright, and smaller drift produces failures that look random.",
+          "quote": "Drift above five minutes breaks Kerberos outright; smaller drift produces failures that look random.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "skew-number",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The ticket is rejected even though the password is correct.",
+          "quote": "The account is valid and the password is correct, but the ticket is rejected.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Drift above thirty seconds breaks Kerberos outright.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "firewall-faithful",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The rule must be scoped to the management network.",
+          "quote": "The rule must be scoped to the management network.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "A rule opened to any address is a finding at audit even when remoting works.",
+          "quote": "A rule opened to any address is a finding at audit even when remoting works, and 'it works' is not the standard being measured.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "firewall-false-beside-true",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The rule must be scoped to the management network.",
+          "quote": "The rule must be scoped to the management network.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Port 5986 should also be opened to all addresses so that HTTPS remoting works from anywhere.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "recovery-faithful",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "If the service stops again within minutes, stop restarting it.",
+          "quote": "If the service stops again within minutes, stop restarting it.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Set the recovery action to restart on first failure only and collect the failure event before the next attempt.",
+          "quote": "Set the recovery action to restart on first failure only, and collect the failure event before the next attempt.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "patching-added-claim",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Reboot inside the agreed window, then confirm the build number changed.",
+          "quote": "Stage updates, reboot inside the agreed window, then confirm the build number changed.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "If the build number did not change, reboot a second time and the updates will apply.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "real-restart-procedure",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "To safely bounce a service, if it stops repeatedly within minutes, set the recovery action to \"restart on first failure only\" and collect the failure event before the next attempt.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "A service that stops repeatedly likely has an underlying cause such as a missing dependency or changed permissions that need to be addressed.",
+          "quote": "A service that stops repeatedly is reporting a cause that lives somewhere else, usually a missing dependency or a changed permission.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "real-restart-recovery",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "If the service stops again within minutes after restarting, set the recovery action to 'restart on first failure only' to prevent repeated restarts.",
+          "quote": "Set the recovery action to restart on first failure only",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Collect the failure event log entry before the next attempt.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "Repeated stops typically indicate a missing dependency or changed permissions affecting the service.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "real-disk-procedure",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "First, clear the update cache and rotate logs, as these regenerate and are not critical evidence.",
+          "quote": "Clear the update cache and rotate logs first, because both regenerate and neither is evidence.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Then use Cleanmgr to delete Temp files, Internet files, downloaded files, and Recycle Bin files.",
+          "quote": "You can use command-line options to specify that **Cleanmgr** cleans up Temp files, Internet files, downloaded files, and Recycle Bin files.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Always verify ownership of files before deletion.",
+          "quote": "Never delete a file whose owner you cannot name.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "real-disk-thresholds",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The host is treated as failed rather than degraded when disk space falls below five percent free space.",
+          "quote": "Below five percent the host is treated as failed rather than degraded, because the recovery steps themselves need space to run.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "real-winrm-firewall",
+      "label": "faithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "The firewall rule for management traffic must be scoped specifically to the management network.",
+          "quote": "The rule must be scoped to the management network.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Opening the rule to any address is considered a finding during audits, even if remoting functionality works.",
+          "quote": "A rule opened to any address is a finding at audit even when remoting works, and 'it works' is not the standard being measured.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The rule should not be broadly open; it must restrict traffic to the intended management network segment.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "FALSE FAIL"
+    },
+    {
+      "id": "real-patching-change-control",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "No patch is applied outside the agreed window without a written exception.",
+          "quote": "No patch is applied outside the agreed window without a written exception.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "The exception must name the requester, the reason, and include a rollback step.",
+          "quote": "The exception names the requester, the reason and the rollback step.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "An undocumented patch is indistinguishable from an incident.",
+          "quote": "An undocumented patch is indistinguishable from an incident.",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "real-patching-procedure",
+      "label": "faithful",
+      "judged": "faithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Confirm the build number changed after the reboot.",
+          "quote": "then confirm the build number changed",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "A reboot that does not alter the build number indicates that no updates were applied.",
+          "quote": "A reboot that does not change the build number applied nothing",
+          "supported": true,
+          "why": "ok"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "real-restart-symptoms",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Print jobs piling up with no output typically indicates a stopped service (e.g., print spooler) causing dependent features to fail silently.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        },
+        {
+          "sentence": "The event log shows one entry at failure time, with no subsequent entries, as stopped services stop writing logs.",
+          "quote": "The event log usually holds one entry at the moment of failure and nothing afterward, because a stopped service writes nothing.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "This aligns with the described symptoms of a stuck service impacting print queues.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    },
+    {
+      "id": "real-timesync-symptoms",
+      "label": "unfaithful",
+      "judged": "unfaithful",
+      "error": "",
+      "checks": [
+        {
+          "sentence": "Kerberos authentication failures with correct credentials often relate to time drift.",
+          "quote": "Authentication fails intermittently with clock skew errors. The account is valid and the password is correct, but the ticket is rejected.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Drift above five minutes breaks Kerberos outright, while smaller drift can cause intermittent failures.",
+          "quote": "Drift above five minutes breaks Kerberos outright; smaller drift produces failures that look random.",
+          "supported": true,
+          "why": "ok"
+        },
+        {
+          "sentence": "Verify time synchronization with the domain controller using NTP (Network Time Protocol) to resolve this issue.",
+          "quote": "",
+          "supported": false,
+          "why": "no quote - the judge found no support"
+        }
+      ],
+      "outcome": "AGREE"
+    }
+  ]
+}

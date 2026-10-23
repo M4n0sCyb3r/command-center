@@ -1,0 +1,390 @@
+{
+  "kind": "validate",
+  "schema": 1,
+  "server": "srv01",
+  "address": "10.10.10.20",
+  "account": "CORP\\svc-agent-ro",
+  "command": "Get-AgentAuditPolicy",
+  "started": "2026-10-23T18:54:27Z",
+  "expect": [],
+  "rows": [
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Security System Extension",
+      "Guid": "{0CCE9211-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "System Integrity",
+      "Guid": "{0CCE9212-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success and Failure"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "IPsec Driver",
+      "Guid": "{0CCE9213-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other System Events",
+      "Guid": "{0CCE9214-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success and Failure"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Security State Change",
+      "Guid": "{0CCE9210-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Logon",
+      "Guid": "{0CCE9215-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success and Failure"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Logoff",
+      "Guid": "{0CCE9216-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Account Lockout",
+      "Guid": "{0CCE9217-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "IPsec Main Mode",
+      "Guid": "{0CCE9218-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "IPsec Quick Mode",
+      "Guid": "{0CCE9219-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "IPsec Extended Mode",
+      "Guid": "{0CCE921A-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Special Logon",
+      "Guid": "{0CCE921B-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other Logon/Logoff Events",
+      "Guid": "{0CCE921C-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Network Policy Server",
+      "Guid": "{0CCE9243-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success and Failure"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "User / Device Claims",
+      "Guid": "{0CCE9247-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Group Membership",
+      "Guid": "{0CCE9249-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Access Rights",
+      "Guid": "{0CCE924B-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "File System",
+      "Guid": "{0CCE921D-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Registry",
+      "Guid": "{0CCE921E-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Kernel Object",
+      "Guid": "{0CCE921F-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "SAM",
+      "Guid": "{0CCE9220-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Certification Services",
+      "Guid": "{0CCE9221-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Application Generated",
+      "Guid": "{0CCE9222-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Handle Manipulation",
+      "Guid": "{0CCE9223-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "File Share",
+      "Guid": "{0CCE9224-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Filtering Platform Packet Drop",
+      "Guid": "{0CCE9225-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Filtering Platform Connection",
+      "Guid": "{0CCE9226-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other Object Access Events",
+      "Guid": "{0CCE9227-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Detailed File Share",
+      "Guid": "{0CCE9244-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Removable Storage",
+      "Guid": "{0CCE9245-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Central Policy Staging",
+      "Guid": "{0CCE9246-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Non Sensitive Privilege Use",
+      "Guid": "{0CCE9229-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other Privilege Use Events",
+      "Guid": "{0CCE922A-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Sensitive Privilege Use",
+      "Guid": "{0CCE9228-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Process Creation",
+      "Guid": "{0CCE922B-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Process Termination",
+      "Guid": "{0CCE922C-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "DPAPI Activity",
+      "Guid": "{0CCE922D-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "RPC Events",
+      "Guid": "{0CCE922E-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Plug and Play Events",
+      "Guid": "{0CCE9248-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Token Right Adjusted Events",
+      "Guid": "{0CCE924A-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Audit Policy Change",
+      "Guid": "{0CCE922F-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Authentication Policy Change",
+      "Guid": "{0CCE9230-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Authorization Policy Change",
+      "Guid": "{0CCE9231-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "MPSSVC Rule-Level Policy Change",
+      "Guid": "{0CCE9232-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Filtering Platform Policy Change",
+      "Guid": "{0CCE9233-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other Policy Change Events",
+      "Guid": "{0CCE9234-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Computer Account Management",
+      "Guid": "{0CCE9236-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Security Group Management",
+      "Guid": "{0CCE9237-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Distribution Group Management",
+      "Guid": "{0CCE9238-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Application Group Management",
+      "Guid": "{0CCE9239-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other Account Management Events",
+      "Guid": "{0CCE923A-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "User Account Management",
+      "Guid": "{0CCE9235-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Directory Service Access",
+      "Guid": "{0CCE923B-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Directory Service Changes",
+      "Guid": "{0CCE923C-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Directory Service Replication",
+      "Guid": "{0CCE923D-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Detailed Directory Service Replication",
+      "Guid": "{0CCE923E-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Kerberos Service Ticket Operations",
+      "Guid": "{0CCE9240-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Other Account Logon Events",
+      "Guid": "{0CCE9241-69AE-11D9-BED3-505054503030}",
+      "Setting": "No Auditing"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Kerberos Authentication Service",
+      "Guid": "{0CCE9242-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    },
+    {
+      "Computer": "SRV01",
+      "Subcategory": "Credential Validation",
+      "Guid": "{0CCE923F-69AE-11D9-BED3-505054503030}",
+      "Setting": "Success"
+    }
+  ],
+  "checks": [],
+  "exit_code": 0,
+  "endpoint": "AgentReader",
+  "visible": [
+    "Clear-Host",
+    "Exit-PSSession",
+    "Get-AgentAuditPolicy",
+    "Get-AgentRegistryState",
+    "Get-AgentServiceState",
+    "Get-Command",
+    "Get-FormatData",
+    "Get-Help",
+    "Measure-Object",
+    "Out-Default",
+    "Select-Object"
+  ],
+  "call_seconds": 0.093,
+  "ended": "2026-10-23T18:55:33Z"
+}

@@ -1,0 +1,340 @@
+{
+  "record_version": 7,
+  "header": {
+    "suite_path": "evals/suites/remediation.jsonl",
+    "suite_sha256": "ed23a5d62cec205e895c98f2823f8e219488d68595d6aaf0889e5943158b7224",
+    "suite_header_sha256": "f5b6829b02b7a1d6955be8132635ddb7ce5463ccc249fd971805ab6f2093da61",
+    "tier_selection": "fixed",
+    "scorer": "remediation",
+    "model_name": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "host_target": "fake target (FakeHost, in memory) - no machine is read or written",
+    "sampling": {
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95,
+      "repeat_penalty": 1.0,
+      "seed": 42,
+      "num_predict": 2048,
+      "num_ctx": 8192,
+      "max_tokens": 6144,
+      "timeout_s": 300
+    },
+    "rebaseline": {
+      "replaced": null,
+      "removed": []
+    },
+    "started_at": "2026-10-21T01:02:26Z",
+    "incomplete": null,
+    "record_version": 7
+  },
+  "cases": [
+    {
+      "id": "service-clean",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "service",
+        "sabotage": "none",
+        "model": "live",
+        "expected": "verified",
+        "outcome": "verified",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentServiceConfig",
+          "item": "service:Spooler",
+          "values": {
+            "start_type": "disabled",
+            "status": "stopped"
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 10,
+        "reasons": [],
+        "completion_tokens": 559,
+        "model_seconds": 6.036
+      },
+      "note": "",
+      "case_sha256": "b62036b913b66df3ce6360371850d0fbb376d869ce70050f22e8872c2de77384"
+    },
+    {
+      "id": "audit-clean",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "audit",
+        "sabotage": "none",
+        "model": "live",
+        "expected": "verified",
+        "outcome": "verified",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentAuditSetting",
+          "item": "audit:Logon",
+          "values": {
+            "setting": "Success and Failure"
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 10,
+        "reasons": [],
+        "completion_tokens": 210,
+        "model_seconds": 3.482
+      },
+      "note": "",
+      "case_sha256": "2d8e9e5ec2ec933c2f835d2167633409fe4efb9941add017fd9032c1bc9acf61"
+    },
+    {
+      "id": "registry-clean",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "registry",
+        "sabotage": "none",
+        "model": "live",
+        "expected": "verified",
+        "outcome": "verified",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentRegistryValue",
+          "item": "registry:rdp-nla",
+          "values": {
+            "value": 1
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 10,
+        "reasons": [],
+        "completion_tokens": 316,
+        "model_seconds": 4.169
+      },
+      "note": "",
+      "case_sha256": "e6a06d8278c9413827ec3f76952beafe82698db17cac061d7cb5efc95efb5ae0"
+    },
+    {
+      "id": "service-broken-fix",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "service",
+        "sabotage": "broken",
+        "model": "live",
+        "expected": "rolled-back",
+        "outcome": "rolled-back",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentServiceConfig",
+          "item": "service:Spooler",
+          "values": {
+            "start_type": "disabled",
+            "status": "stopped"
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 12,
+        "reasons": [
+          "rule 1: service:Spooler is {'start_type': 'automatic', 'status': 'running'} not baseline {'start_type': 'disabled', 'status': 'stopped'}",
+          "rule 2: service:Spooler changed [] to {'start_type': 'automatic', 'status': 'running'}; the preview promised ['start_type', 'status'] to {'start_type': 'disabled', 'status': 'stopped'}"
+        ],
+        "completion_tokens": 559,
+        "model_seconds": 6.195
+      },
+      "note": "",
+      "case_sha256": "43ef65839e07b713bb090ddf588de48c0e42dec5b2223568792c7d9e440f2a96"
+    },
+    {
+      "id": "audit-broken-fix",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "audit",
+        "sabotage": "broken",
+        "model": "live",
+        "expected": "rolled-back",
+        "outcome": "rolled-back",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentAuditSetting",
+          "item": "audit:Logon",
+          "values": {
+            "setting": "Success and Failure"
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 12,
+        "reasons": [
+          "rule 1: audit:Logon is {'setting': 'Success'} not baseline {'setting': 'Success and Failure'}",
+          "rule 2: audit:Logon changed ['setting'] to {'setting': 'Success'}; the preview promised ['setting'] to {'setting': 'Success and Failure'}"
+        ],
+        "completion_tokens": 210,
+        "model_seconds": 3.46
+      },
+      "note": "",
+      "case_sha256": "e1524b633e5af80ac6f5746f100f74ddb151d8b57a0bb72eb2abd2dfdc67d51b"
+    },
+    {
+      "id": "registry-broken-fix",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "registry",
+        "sabotage": "broken",
+        "model": "live",
+        "expected": "rolled-back",
+        "outcome": "rolled-back",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentRegistryValue",
+          "item": "registry:rdp-nla",
+          "values": {
+            "value": 1
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 12,
+        "reasons": [
+          "rule 1: registry:rdp-nla is {'value': 0} not baseline {'value': 1}",
+          "rule 2: registry:rdp-nla changed [] to {'value': 0}; the preview promised ['value'] to {'value': 1}"
+        ],
+        "completion_tokens": 316,
+        "model_seconds": 4.232
+      },
+      "note": "",
+      "case_sha256": "e40d7b374daf221707dd810987ec467e50fd40909102188fcfb4ad81ef4e1b95"
+    },
+    {
+      "id": "off-menu",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "registry",
+        "sabotage": "none",
+        "model": "scripted",
+        "expected": "refused",
+        "outcome": "refused",
+        "right_fix": false,
+        "call": null,
+        "audit_problems": [],
+        "audit_lines": 3,
+        "reasons": [
+          "gate 0a: the reply was not a valid proposal (not JSON, or not the proposal schema)"
+        ],
+        "completion_tokens": null,
+        "model_seconds": 0.0
+      },
+      "note": "",
+      "case_sha256": "3e76b587fdc78a7dd79ec0782f0757e286e9772ddf5cfea64ef5ae553c533253"
+    },
+    {
+      "id": "wrong-argument",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "service",
+        "sabotage": "none",
+        "model": "scripted",
+        "expected": "rolled-back",
+        "outcome": "rolled-back",
+        "right_fix": false,
+        "call": {
+          "function": "Set-AgentServiceConfig",
+          "item": "service:Spooler",
+          "values": {
+            "start_type": "manual",
+            "status": "stopped"
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 12,
+        "reasons": [
+          "rule 1: service:Spooler is {'start_type': 'manual', 'status': 'stopped'} not baseline {'start_type': 'disabled', 'status': 'stopped'}"
+        ],
+        "completion_tokens": null,
+        "model_seconds": 0.0
+      },
+      "note": "",
+      "case_sha256": "358863e0b879bab9e6f6e591ff442af1fe18fb2a7d89e9cbbc092d897d93eaff"
+    },
+    {
+      "id": "declined",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "audit",
+        "sabotage": "none",
+        "model": "live",
+        "expected": "declined",
+        "outcome": "declined",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentAuditSetting",
+          "item": "audit:Logon",
+          "values": {
+            "setting": "Success and Failure"
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 6,
+        "reasons": [],
+        "completion_tokens": 210,
+        "model_seconds": 3.434
+      },
+      "note": "",
+      "case_sha256": "fd5333a6c2acc3d6215587ac769486c9381de5aafdf717a5a6df871474472571"
+    },
+    {
+      "id": "broken-rollback",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "registry",
+        "sabotage": "broken-rollback",
+        "model": "live",
+        "expected": "rollback-failed",
+        "outcome": "rollback-failed",
+        "right_fix": true,
+        "call": {
+          "function": "Set-AgentRegistryValue",
+          "item": "registry:rdp-nla",
+          "values": {
+            "value": 1
+          }
+        },
+        "audit_problems": [],
+        "audit_lines": 12,
+        "reasons": [
+          "rule 1: registry:rdp-nla is {'value': 0} not baseline {'value': 1}",
+          "rule 2: registry:rdp-nla changed [] to {'value': 0}; the preview promised ['value'] to {'value': 1}",
+          "rollback: registry:rdp-nla is {'value': 1} not {'value': 0}"
+        ],
+        "completion_tokens": 316,
+        "model_seconds": 4.114
+      },
+      "note": "",
+      "case_sha256": "8034ffaa7576ffe0d15e0a7058d3c106183f72dfe58d1c9b76792af90d3264c6"
+    },
+    {
+      "id": "audit-write-fails",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "class": "service",
+        "sabotage": "none",
+        "model": "scripted",
+        "expected": "stopped-before-apply",
+        "outcome": "stopped-before-apply",
+        "right_fix": null,
+        "call": null,
+        "audit_problems": [],
+        "audit_lines": 6,
+        "reasons": [
+          "intent: audit write failed: simulated disk failure"
+        ],
+        "completion_tokens": null,
+        "model_seconds": null
+      },
+      "note": "",
+      "case_sha256": "37288f01afbabbbea6fcd97a2403c24b1cce26c020d940a4ada51263df5a57b0"
+    }
+  ]
+}

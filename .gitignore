@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Secrets — never commit these
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+credentials*
+
+# Eval runs and traces are regenerated; keep suites, not results. Exclude the
+# CONTENTS, not the directory: git does not descend into an excluded directory,
+# so a !negation inside one never fires. Note the old rule said *.json and Lab
+# 12 writes *.jsonl - an ignore rule is a claim about a format, and it goes
+# stale when the format does.
+evals/runs/*
+!evals/runs/README.md
+
+# Local vector stores and caches
+.chroma/
+*.sqlite3
+.cache/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# The desktop app drops files Claude sends into here. Those are deliveries, not
+# repo content - anything that belongs in the repo is written to its real path.
+Claude outputs/
+
+# Obsidian vault settings - local to this machine, not part of the repo
+.obsidian/
+data/index.json
+
+# A local-only list read by a private build tool; never committed.
+.showcase-deny

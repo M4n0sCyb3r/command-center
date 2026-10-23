@@ -1,0 +1,1532 @@
+{
+  "arm": "escalator",
+  "model": "qwen3:14b",
+  "split": "development",
+  "items": 32,
+  "sampling": {
+    "temperature": 0.6,
+    "top_k": 20,
+    "top_p": 0.95,
+    "repeat_penalty": 1.0,
+    "seed": 42,
+    "num_predict": 6144
+  },
+  "num_ctx": 12288,
+  "timeout_s": 300,
+  "rubric_sha256": "be2a52695c6fb2cd",
+  "summary": {
+    "caught": 17,
+    "defects": 24,
+    "right_reason": 14,
+    "false_alarms": 5,
+    "controls": 8,
+    "by_family": {
+      "lint-visible": {
+        "caught": 3,
+        "of": 6
+      },
+      "logic": {
+        "caught": 9,
+        "of": 12
+      },
+      "blast-radius": {
+        "caught": 5,
+        "of": 6
+      }
+    },
+    "errors": 0,
+    "prompt_tokens": 32911,
+    "completion_tokens": 53714,
+    "model_seconds": 731.5
+  },
+  "rows": [
+    {
+      "id": "01-L",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 940,
+      "completion_tokens": 1411,
+      "duration_s": 24.082,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 26, \"line_end\": 27, \"category\": \"error-handling\", \"severity\": \"blocking\", \"why\": \"Catch block swallows exceptions without reporting failures\", \"fix\": \"Add error logging or rethrow the exception\"}, {\"line_start\": 13, \"line_end\": 13, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"$failed variable is initialized but never incremented\", \"fix\": \"Increment $failed when service start fails\"}, {\"line_start\": 31, \"line_end\": 32, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Exit code always 0 despite potential failures\", \"fix\": \"Check $failed and exit 1 if non-zero\"}, {\"line_start\": 23, \"line_end\": 23, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"No error handling for Start-Service failures beyond catch block\", \"fix\": \"Add specific error handling or logging in catch block\"}, {\"line_start\": 10, \"line_end\": 10, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Exclude parameter uses lowercase 'sppsvc' inconsistently\", \"fix\": \"Standardize service names in exclude list\"}]}",
+      "findings": 5,
+      "blocking": 3,
+      "family": "lint-visible",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 26,
+            "line_end": 27,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Catch block swallows exceptions without reporting failures",
+            "fix": "Add error logging or rethrow the exception"
+          },
+          {
+            "line_start": 13,
+            "line_end": 13,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "$failed variable is initialized but never incremented",
+            "fix": "Increment $failed when service start fails"
+          },
+          {
+            "line_start": 31,
+            "line_end": 32,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Exit code always 0 despite potential failures",
+            "fix": "Check $failed and exit 1 if non-zero"
+          },
+          {
+            "line_start": 23,
+            "line_end": 23,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "No error handling for Start-Service failures beyond catch block",
+            "fix": "Add specific error handling or logging in catch block"
+          },
+          {
+            "line_start": 10,
+            "line_end": 10,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Exclude parameter uses lowercase 'sppsvc' inconsistently",
+            "fix": "Standardize service names in exclude list"
+          }
+        ]
+      },
+      "wall_s": 24.116
+    },
+    {
+      "id": "01-G",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 973,
+      "completion_tokens": 1123,
+      "duration_s": 15.691,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 17, \"line_end\": 17, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Inverts exclusion logic; skips services that should be processed\", \"fix\": \"Change '-notcontains' to '-contains' in the 'if' condition\"}, {\"line_start\": 34, \"line_end\": 34, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Non-standard exit code usage; PowerShell typically uses 0 for success\", \"fix\": \"Replace 'exit 1' with 'exit $failed' for clearer failure indication\"}, {\"line_start\": 24, \"line_end\": 24, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Uses Write-Output for operational status messages\", \"fix\": \"Replace with Write-Verbose or Write-Host for better output categorization\"}, {\"line_start\": 27, \"line_end\": 27, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Warning message lacks context about service state\", \"fix\": \"Add service state information to the warning message\"}, {\"line_start\": 10, \"line_end\": 10, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Exclude parameter lacks description in help\", \"fix\": \"Add parameter description in .PARAMETER section\"}]}",
+      "findings": 5,
+      "blocking": 1,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 17,
+            "line_end": 17,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Inverts exclusion logic; skips services that should be processed",
+            "fix": "Change '-notcontains' to '-contains' in the 'if' condition"
+          },
+          {
+            "line_start": 34,
+            "line_end": 34,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Non-standard exit code usage; PowerShell typically uses 0 for success",
+            "fix": "Replace 'exit 1' with 'exit $failed' for clearer failure indication"
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses Write-Output for operational status messages",
+            "fix": "Replace with Write-Verbose or Write-Host for better output categorization"
+          },
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Warning message lacks context about service state",
+            "fix": "Add service state information to the warning message"
+          },
+          {
+            "line_start": 10,
+            "line_end": 10,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Exclude parameter lacks description in help",
+            "fix": "Add parameter description in .PARAMETER section"
+          }
+        ]
+      },
+      "wall_s": 15.723
+    },
+    {
+      "id": "01-B",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 965,
+      "completion_tokens": 1271,
+      "duration_s": 17.97,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 14, \"line_end\": 14, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Filter does not check StartMode, may start non-auto services\", \"fix\": \"Add StartMode = 'Auto' to the Win32_Service filter\"}, {\"line_start\": 24, \"line_end\": 24, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Uses Write-Output for status messages instead of Write-Verbose\", \"fix\": \"Replace Write-Output with Write-Verbose\"}, {\"line_start\": 36, \"line_end\": 36, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"exit 0 should be replaced with return 0 for consistency\", \"fix\": \"Change exit 0 to return 0\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "blast-radius",
+      "caught": true,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 14,
+            "line_end": 14,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Filter does not check StartMode, may start non-auto services",
+            "fix": "Add StartMode = 'Auto' to the Win32_Service filter"
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses Write-Output for status messages instead of Write-Verbose",
+            "fix": "Replace Write-Output with Write-Verbose"
+          },
+          {
+            "line_start": 36,
+            "line_end": 36,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "exit 0 should be replaced with return 0 for consistency",
+            "fix": "Change exit 0 to return 0"
+          }
+        ]
+      },
+      "wall_s": 17.998
+    },
+    {
+      "id": "04-L",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1057,
+      "completion_tokens": 927,
+      "duration_s": 13.772,
+      "raw": "{\n\n\"verdict\": \"revise\",\n\"findings\": [\n    {\n        \"line_start\": 17,\n        \"line_end\": 17,\n        \"category\": \"security\",\n        \"severity\": \"blocking\",\n        \"why\": \"Uses Invoke-Expression with user-provided $ReferenceServer, enabling code injection attacks.\",\n        \"fix\": \"Replace with [System.Diagnostics.Process]::Start() for safe command execution.\"\n    },\n    {\n        \"line_start\": 24,\n        \"line_end\": 24,\n        \"category\": \"correctness\",\n        \"severity\": \"blocking\",\n        \"why\": \"Regex may fail to parse valid offset formats due to insufficient whitespace handling.\",\n        \"fix\": \"Update regex to ',\\\\s*([+-]?\\\\d+\\\\.\\\\d+)s' to handle optional signs and varied spacing.\"\n    },\n    {\n        \"line_start\": 25,\n        \"line_end\": 25,\n        \"category\": \"correctness\",\n        \"severity\": \"blocking\",\n        \"why\": \"Incorrectly accesses $Matches[1] instead of using $Matches.Groups[1].Value.\",\n        \"fix\": \"Replace with [double]$Matches.Groups[1].Value to properly extract regex capture groups.\"\n    },\n    {\n        \"line_start\": 30,\n        \"line_end\": 30,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"Exits with code 2 but doesn't log the specific parsing failure reason.\",\n        \"fix\": \"Add Write-Error with detailed parsing failure context before exiting.\"\n    },\n    {\n        \"line_start\": 34,\n        \"line_end\": 34,\n        \"category\": \"style\",\n        \"severity\": \"advisory\",\n        \"why\": \"Uses ForEach-Object and Measure-Object when Where-Object could be more efficient.\",\n        \"fix\": \"Replace with ($offsets | Measure-Object -Property Value -Maximum).Maximum\"\n    }\n] }",
+      "findings": 5,
+      "blocking": 3,
+      "family": "lint-visible",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 17,
+            "line_end": 17,
+            "category": "security",
+            "severity": "blocking",
+            "why": "Uses Invoke-Expression with user-provided $ReferenceServer, enabling code injection attacks.",
+            "fix": "Replace with [System.Diagnostics.Process]::Start() for safe command execution."
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Regex may fail to parse valid offset formats due to insufficient whitespace handling.",
+            "fix": "Update regex to ',\\s*([+-]?\\d+\\.\\d+)s' to handle optional signs and varied spacing."
+          },
+          {
+            "line_start": 25,
+            "line_end": 25,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Incorrectly accesses $Matches[1] instead of using $Matches.Groups[1].Value.",
+            "fix": "Replace with [double]$Matches.Groups[1].Value to properly extract regex capture groups."
+          },
+          {
+            "line_start": 30,
+            "line_end": 30,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Exits with code 2 but doesn't log the specific parsing failure reason.",
+            "fix": "Add Write-Error with detailed parsing failure context before exiting."
+          },
+          {
+            "line_start": 34,
+            "line_end": 34,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses ForEach-Object and Measure-Object when Where-Object could be more efficient.",
+            "fix": "Replace with ($offsets | Measure-Object -Property Value -Maximum).Maximum"
+          }
+        ]
+      },
+      "wall_s": 13.8
+    },
+    {
+      "id": "04-G",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1040,
+      "completion_tokens": 1849,
+      "duration_s": 24.311,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 34, \"line_end\": 34, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Measure-Object -Maximum is used incorrectly to find the maximum numeric value; it counts object groups, not numerical maxima.\", \"fix\": \"Use ($offsets | Measure-Object -Property Value -Maximum).Maximum or [math]::Max($offsets) instead.\"}, {\"line_start\": 24, \"line_end\": 24, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Regex may fail to capture non-integer offsets or alternative formatting in w32tm output.\", \"fix\": \"Adjust regex to handle more varied numeric formats, e.g., ([+-]?\\\\d+\\\\.\\\\d+)s.\"}, {\"line_start\": 17, \"line_end\": 17, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"w32tm.exe output is captured but not validated for expected success state.\", \"fix\": \"Check $output for expected success indicators in addition to $LASTEXITCODE.\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 34,
+            "line_end": 34,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Measure-Object -Maximum is used incorrectly to find the maximum numeric value; it counts object groups, not numerical maxima.",
+            "fix": "Use ($offsets | Measure-Object -Property Value -Maximum).Maximum or [math]::Max($offsets) instead."
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Regex may fail to capture non-integer offsets or alternative formatting in w32tm output.",
+            "fix": "Adjust regex to handle more varied numeric formats, e.g., ([+-]?\\d+\\.\\d+)s."
+          },
+          {
+            "line_start": 17,
+            "line_end": 17,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "w32tm.exe output is captured but not validated for expected success state.",
+            "fix": "Check $output for expected success indicators in addition to $LASTEXITCODE."
+          }
+        ]
+      },
+      "wall_s": 24.34
+    },
+    {
+      "id": "04-B",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1087,
+      "completion_tokens": 1322,
+      "duration_s": 18.403,
+      "raw": "{\n\n\"verdict\": \"revise\",\n\"findings\": [\n    {\n        \"line_start\": 24,\n        \"line_end\": 25,\n        \"category\": \"correctness\",\n        \"severity\": \"blocking\",\n        \"why\": \"Regex incorrectly assumes commas precede offsets, which may not match actual w32tm output formats.\",\n        \"fix\": \"Update regex to match actual w32tm output patterns (e.g., remove leading comma match).\"\n    },\n    {\n        \"line_start\": 37,\n        \"line_end\": 37,\n        \"category\": \"blast-radius\",\n        \"severity\": \"blocking\",\n        \"why\": \"Modifies system time configuration without checking administrative privileges or confirming intent.\",\n        \"fix\": \"Add -ErrorAction Stop and verify success of w32tm /config before exiting.\"\n    },\n    {\n        \"line_start\": 37,\n        \"line_end\": 37,\n        \"category\": \"error-handling\",\n        \"severity\": \"blocking\",\n        \"why\": \"Does not check exit code after modifying time configuration, risking silent failures.\",\n        \"fix\": \"Capture and validate exit code of w32tm /config command.\"\n    },\n    {\n        \"line_start\": 18,\n        \"line_end\": 21,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"Relies on $LASTEXITCODE without explicitly capturing command failure via -ErrorAction Stop.\",\n        \"fix\": \"Add -ErrorAction Stop to w32tm.exe call to ensure proper error propagation.\"\n    },\n    {\n        \"line_start\": 34,\n        \"line_end\": 34,\n        \"category\": \"style\",\n        \"severity\": \"advisory\",\n        \"why\": \"Uses Measure-Object -Maximum with ambiguous variable naming.\",\n        \"fix\": \"Rename $worst to $maxOffset for clarity.\"\n    }\n] }",
+      "findings": 5,
+      "blocking": 3,
+      "family": "blast-radius",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 24,
+            "line_end": 25,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Regex incorrectly assumes commas precede offsets, which may not match actual w32tm output formats.",
+            "fix": "Update regex to match actual w32tm output patterns (e.g., remove leading comma match)."
+          },
+          {
+            "line_start": 37,
+            "line_end": 37,
+            "category": "blast-radius",
+            "severity": "blocking",
+            "why": "Modifies system time configuration without checking administrative privileges or confirming intent.",
+            "fix": "Add -ErrorAction Stop and verify success of w32tm /config before exiting."
+          },
+          {
+            "line_start": 37,
+            "line_end": 37,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Does not check exit code after modifying time configuration, risking silent failures.",
+            "fix": "Capture and validate exit code of w32tm /config command."
+          },
+          {
+            "line_start": 18,
+            "line_end": 21,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Relies on $LASTEXITCODE without explicitly capturing command failure via -ErrorAction Stop.",
+            "fix": "Add -ErrorAction Stop to w32tm.exe call to ensure proper error propagation."
+          },
+          {
+            "line_start": 34,
+            "line_end": 34,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses Measure-Object -Maximum with ambiguous variable naming.",
+            "fix": "Rename $worst to $maxOffset for clarity."
+          }
+        ]
+      },
+      "wall_s": 18.43
+    },
+    {
+      "id": "06-G1",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 945,
+      "completion_tokens": 1427,
+      "duration_s": 19.547,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 15, \"line_end\": 17, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Inverted condition checks if parent exists but reports error when it does not\", \"fix\": \"Invert condition to check if parent does not exist or is not a container\"}, {\"line_start\": 16, \"line_end\": 16, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Error message claims parent does not exist when condition checks if it does\", \"fix\": \"Correct error message to reflect actual condition check\"}, {\"line_start\": 28, \"line_end\": 30, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Export-Csv may overwrite existing files without confirmation\", \"fix\": \"Add -Force parameter or check for existing file\"}, {\"line_start\": 32, \"line_end\": 32, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Write-Output uses string concatenation instead of -f operator\", \"fix\": \"Use Write-Output -f 'Exported {0} member(s) to {1}'\"}, {\"line_start\": 10, \"line_end\": 10, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Mandatory parameter lacks validation for valid path format\", \"fix\": \"Add ValidateScript to check OutputPath is a valid file path\"}]}",
+      "findings": 5,
+      "blocking": 2,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 15,
+            "line_end": 17,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Inverted condition checks if parent exists but reports error when it does not",
+            "fix": "Invert condition to check if parent does not exist or is not a container"
+          },
+          {
+            "line_start": 16,
+            "line_end": 16,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Error message claims parent does not exist when condition checks if it does",
+            "fix": "Correct error message to reflect actual condition check"
+          },
+          {
+            "line_start": 28,
+            "line_end": 30,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Export-Csv may overwrite existing files without confirmation",
+            "fix": "Add -Force parameter or check for existing file"
+          },
+          {
+            "line_start": 32,
+            "line_end": 32,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Write-Output uses string concatenation instead of -f operator",
+            "fix": "Use Write-Output -f 'Exported {0} member(s) to {1}'"
+          },
+          {
+            "line_start": 10,
+            "line_end": 10,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Mandatory parameter lacks validation for valid path format",
+            "fix": "Add ValidateScript to check OutputPath is a valid file path"
+          }
+        ]
+      },
+      "wall_s": 19.575
+    },
+    {
+      "id": "06-G2",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 947,
+      "completion_tokens": 1388,
+      "duration_s": 19.048,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 25, \"line_end\": 25, \"category\": \"error-handling\", \"severity\": \"blocking\", \"why\": \"Script exits with 0 after catching an error, masking the failure.\", \"fix\": \"Change exit 0 to a non-zero exit code like exit 1.\"}, {\"line_start\": 17, \"line_end\": 17, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Exit code 2 is non-standard and inconsistent with other error exits.\", \"fix\": \"Use a more standard exit code like 1 for general errors.\"}, {\"line_start\": 24, \"line_end\": 24, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Error message lacks context about potential causes (e.g., permissions).\", \"fix\": \"Add details like 'Check permissions or group existence' to the error message.\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 25,
+            "line_end": 25,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Script exits with 0 after catching an error, masking the failure.",
+            "fix": "Change exit 0 to a non-zero exit code like exit 1."
+          },
+          {
+            "line_start": 17,
+            "line_end": 17,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Exit code 2 is non-standard and inconsistent with other error exits.",
+            "fix": "Use a more standard exit code like 1 for general errors."
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Error message lacks context about potential causes (e.g., permissions).",
+            "fix": "Add details like 'Check permissions or group existence' to the error message."
+          }
+        ]
+      },
+      "wall_s": 19.077
+    },
+    {
+      "id": "06-G3",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 942,
+      "completion_tokens": 1622,
+      "duration_s": 21.843,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 28, \"line_end\": 30, \"category\": \"error-handling\", \"severity\": \"blocking\", \"why\": \"Export-Csv errors are unhandled, leading to uncaught exceptions.\", \"fix\": \"Wrap Export-Csv in try/catch to handle export failures.\"}, {\"line_start\": 10, \"line_end\": 17, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"OutputPath validation only checks parent directory, not if path is a valid file.\", \"fix\": \"Validate OutputPath is a valid file path using Test-Path -PathType Leaf.\"}, {\"line_start\": 17, \"line_end\": 25, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Inconsistent exit codes (2) used in multiple error paths.\", \"fix\": \"Standardize exit codes (e.g., 1 for general errors, 2 for input validation failures).\"}]}",
+      "findings": 3,
+      "blocking": 2,
+      "family": "logic",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 28,
+            "line_end": 30,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Export-Csv errors are unhandled, leading to uncaught exceptions.",
+            "fix": "Wrap Export-Csv in try/catch to handle export failures."
+          },
+          {
+            "line_start": 10,
+            "line_end": 17,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "OutputPath validation only checks parent directory, not if path is a valid file.",
+            "fix": "Validate OutputPath is a valid file path using Test-Path -PathType Leaf."
+          },
+          {
+            "line_start": 17,
+            "line_end": 25,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Inconsistent exit codes (2) used in multiple error paths.",
+            "fix": "Standardize exit codes (e.g., 1 for general errors, 2 for input validation failures)."
+          }
+        ]
+      },
+      "wall_s": 21.872
+    },
+    {
+      "id": "07-L",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1104,
+      "completion_tokens": 768,
+      "duration_s": 11.628,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 31, \"line_end\": 31, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Uses undefined variable $toMove instead of $toMoves\", \"fix\": \"Change $toMove to $toMoves\"}, {\"line_start\": 23, \"line_end\": 23, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Exits with non-standard error code 2 without detailed error\", \"fix\": \"Use standard exit codes or throw terminating errors\"}, {\"line_start\": 42, \"line_end\": 42, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Output message could clarify when KeepNewest exceeds file count\", \"fix\": \"Rephrase to explicitly mention 'fewer than $KeepNewest' when applicable\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "lint-visible",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 31,
+            "line_end": 31,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Uses undefined variable $toMove instead of $toMoves",
+            "fix": "Change $toMove to $toMoves"
+          },
+          {
+            "line_start": 23,
+            "line_end": 23,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Exits with non-standard error code 2 without detailed error",
+            "fix": "Use standard exit codes or throw terminating errors"
+          },
+          {
+            "line_start": 42,
+            "line_end": 42,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Output message could clarify when KeepNewest exceeds file count",
+            "fix": "Rephrase to explicitly mention 'fewer than $KeepNewest' when applicable"
+          }
+        ]
+      },
+      "wall_s": 11.656
+    },
+    {
+      "id": "07-G",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1102,
+      "completion_tokens": 1605,
+      "duration_s": 21.697,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 42, \"line_end\": 42, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Syntax error: trailing slash in string causes script to fail\", \"fix\": \"Remove trailing slash from Write-Output line\"}, {\"line_start\": 38, \"line_end\": 38, \"category\": \"error-handling\", \"severity\": \"blocking\", \"why\": \"Move-Item lacks try/catch to handle partial failures\", \"fix\": \"Wrap Move-Item in try/catch block\"}, {\"line_start\": 23, \"line_end\": 23, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"exit 2 uses non-terminating error without exception\", \"fix\": \"Use throw instead of exit for terminating errors\"}, {\"line_start\": 20, \"line_end\": 25, \"category\": \"blast-radius\", \"severity\": \"advisory\", \"why\": \"ArchivePath existence check prevents creation if missing\", \"fix\": \"Add directory creation logic if ArchivePath doesn't exist\"}, {\"line_start\": 33, \"line_end\": 36, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Skipping existing files may leave duplicates in archive\", \"fix\": \"Add overwrite logic or rename conflicting files\"}]}",
+      "findings": 5,
+      "blocking": 2,
+      "family": "logic",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 42,
+            "line_end": 42,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Syntax error: trailing slash in string causes script to fail",
+            "fix": "Remove trailing slash from Write-Output line"
+          },
+          {
+            "line_start": 38,
+            "line_end": 38,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Move-Item lacks try/catch to handle partial failures",
+            "fix": "Wrap Move-Item in try/catch block"
+          },
+          {
+            "line_start": 23,
+            "line_end": 23,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "exit 2 uses non-terminating error without exception",
+            "fix": "Use throw instead of exit for terminating errors"
+          },
+          {
+            "line_start": 20,
+            "line_end": 25,
+            "category": "blast-radius",
+            "severity": "advisory",
+            "why": "ArchivePath existence check prevents creation if missing",
+            "fix": "Add directory creation logic if ArchivePath doesn't exist"
+          },
+          {
+            "line_start": 33,
+            "line_end": 36,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Skipping existing files may leave duplicates in archive",
+            "fix": "Add overwrite logic or rename conflicting files"
+          }
+        ]
+      },
+      "wall_s": 21.724
+    },
+    {
+      "id": "07-B",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1108,
+      "completion_tokens": 2615,
+      "duration_s": 33.447,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 27, \"line_end\": 27, \"category\": \"blast-radius\", \"severity\": \"blocking\", \"why\": \"The -Recurse parameter may move files from subdirectories, which could be unintended.\", \"fix\": \"Remove -Recurse to process only immediate files in the source folder.\"}, {\"line_start\": 32, \"line_end\": 32, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Using only the file name may cause overwriting or skipping files in the archive.\", \"fix\": \"Include the original file path in the destination to avoid name collisions.\"}, {\"line_start\": 42, \"line_end\": 42, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"The use of [math]::Min is redundant and unnecessary.\", \"fix\": \"Simplify to just $KeepNewest since it's the intended number of files to keep.\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "blast-radius",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "blast-radius",
+            "severity": "blocking",
+            "why": "The -Recurse parameter may move files from subdirectories, which could be unintended.",
+            "fix": "Remove -Recurse to process only immediate files in the source folder."
+          },
+          {
+            "line_start": 32,
+            "line_end": 32,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Using only the file name may cause overwriting or skipping files in the archive.",
+            "fix": "Include the original file path in the destination to avoid name collisions."
+          },
+          {
+            "line_start": 42,
+            "line_end": 42,
+            "category": "style",
+            "severity": "advisory",
+            "why": "The use of [math]::Min is redundant and unnecessary.",
+            "fix": "Simplify to just $KeepNewest since it's the intended number of files to keep."
+          }
+        ]
+      },
+      "wall_s": 33.477
+    },
+    {
+      "id": "08-L",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1041,
+      "completion_tokens": 1879,
+      "duration_s": 24.627,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 27, \"line_end\": 27, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Compares boolean $rule.Enabled to string 'True', which will always be $true\", \"fix\": \"Change to $rule.Enabled -ne $true\"}, {\"line_start\": 13, \"line_end\": 13, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Swallows errors from Get-WmiObject with -ErrorAction SilentlyContinue\", \"fix\": \"Use -ErrorAction Stop and handle exceptions\"}, {\"line_start\": 21, \"line_end\": 21, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Swallows errors from Get-ChildItem with -ErrorAction SilentlyContinue\", \"fix\": \"Use -ErrorAction Stop and handle exceptions\"}, {\"line_start\": 26, \"line_end\": 26, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Swallows errors from Get-NetFirewallRule with -ErrorAction SilentlyContinue\", \"fix\": \"Use -ErrorAction Stop and handle exceptions\"}]}",
+      "findings": 4,
+      "blocking": 1,
+      "family": "lint-visible",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Compares boolean $rule.Enabled to string 'True', which will always be $true",
+            "fix": "Change to $rule.Enabled -ne $true"
+          },
+          {
+            "line_start": 13,
+            "line_end": 13,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Swallows errors from Get-WmiObject with -ErrorAction SilentlyContinue",
+            "fix": "Use -ErrorAction Stop and handle exceptions"
+          },
+          {
+            "line_start": 21,
+            "line_end": 21,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Swallows errors from Get-ChildItem with -ErrorAction SilentlyContinue",
+            "fix": "Use -ErrorAction Stop and handle exceptions"
+          },
+          {
+            "line_start": 26,
+            "line_end": 26,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Swallows errors from Get-NetFirewallRule with -ErrorAction SilentlyContinue",
+            "fix": "Use -ErrorAction Stop and handle exceptions"
+          }
+        ]
+      },
+      "wall_s": 24.654
+    },
+    {
+      "id": "08-G",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1031,
+      "completion_tokens": 1667,
+      "duration_s": 22.211,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 21, \"line_end\": 24, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Inverts the logic for checking WinRM listeners; adds a problem when listeners exist, which is the opposite of intended.\", \"fix\": \"Change condition to check if $listeners.Count -eq 0 instead of -gt 0.\"}, {\"line_start\": 27, \"line_end\": 28, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Firewall rule check may miss rules with different names; relies on exact name match which may not be consistent across systems.\", \"fix\": \"Use a more flexible method to identify the firewall rule, such as filtering by description or other attributes.\"}, {\"line_start\": 13, \"line_end\": 19, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Silently continues on Get-Service errors, potentially masking issues like permissions problems or invalid service names.\", \"fix\": \"Replace -ErrorAction SilentlyContinue with -ErrorAction Stop and handle exceptions explicitly.\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 21,
+            "line_end": 24,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Inverts the logic for checking WinRM listeners; adds a problem when listeners exist, which is the opposite of intended.",
+            "fix": "Change condition to check if $listeners.Count -eq 0 instead of -gt 0."
+          },
+          {
+            "line_start": 27,
+            "line_end": 28,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Firewall rule check may miss rules with different names; relies on exact name match which may not be consistent across systems.",
+            "fix": "Use a more flexible method to identify the firewall rule, such as filtering by description or other attributes."
+          },
+          {
+            "line_start": 13,
+            "line_end": 19,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Silently continues on Get-Service errors, potentially masking issues like permissions problems or invalid service names.",
+            "fix": "Replace -ErrorAction SilentlyContinue with -ErrorAction Stop and handle exceptions explicitly."
+          }
+        ]
+      },
+      "wall_s": 22.24
+    },
+    {
+      "id": "08-B",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1070,
+      "completion_tokens": 722,
+      "duration_s": 11.546,
+      "raw": "{\n\n\"verdict\": \"revise\",\n\"findings\": [\n    {\n        \"line_start\": 29,\n        \"line_end\": 29,\n        \"category\": \"blast-radius\",\n        \"severity\": \"blocking\",\n        \"why\": \"Script enables firewall rule without user consent, modifying system state beyond checking\",\n        \"fix\": \"Remove Set-NetFirewallRule call to avoid unintended configuration changes\"\n    },\n    {\n        \"line_start\": 13,\n        \"line_end\": 13,\n        \"category\": \"error-handling\",\n        \"severity\": \"blocking\",\n        \"why\": \"Swallows errors with -ErrorAction SilentlyContinue when retrieving service status\",\n        \"fix\": \"Replace with -ErrorAction Stop and add try/catch block\"\n    },\n    {\n        \"line_start\": 21,\n        \"line_end\": 21,\n        \"category\": \"error-handling\",\n        \"severity\": \"blocking\",\n        \"why\": \"Swallows errors with -ErrorAction SilentlyContinue when checking listeners\",\n        \"fix\": \"Replace with -ErrorAction Stop and add try/catch block\"\n    },\n    {\n        \"line_start\": 26,\n        \"line_end\": 26,\n        \"category\": \"error-handling\",\n        \"severity\": \"blocking\",\n        \"why\": \"Swallows errors with -ErrorAction SilentlyContinue when checking firewall rule\",\n        \"fix\": \"Replace with -ErrorAction Stop and add try/catch block\"\n    },\n    {\n        \"line_start\": 34,\n        \"line_end\": 34,\n        \"category\": \"style\",\n        \"severity\": \"advisory\",\n        \"why\": \"Uses Write-Output for failure messages which may not be visible in all contexts\",\n        \"fix\": \"Use Write-Error or Write-Warning for failure messages instead\"\n    }\n] }",
+      "findings": 5,
+      "blocking": 4,
+      "family": "blast-radius",
+      "caught": true,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 29,
+            "line_end": 29,
+            "category": "blast-radius",
+            "severity": "blocking",
+            "why": "Script enables firewall rule without user consent, modifying system state beyond checking",
+            "fix": "Remove Set-NetFirewallRule call to avoid unintended configuration changes"
+          },
+          {
+            "line_start": 13,
+            "line_end": 13,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Swallows errors with -ErrorAction SilentlyContinue when retrieving service status",
+            "fix": "Replace with -ErrorAction Stop and add try/catch block"
+          },
+          {
+            "line_start": 21,
+            "line_end": 21,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Swallows errors with -ErrorAction SilentlyContinue when checking listeners",
+            "fix": "Replace with -ErrorAction Stop and add try/catch block"
+          },
+          {
+            "line_start": 26,
+            "line_end": 26,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "Swallows errors with -ErrorAction SilentlyContinue when checking firewall rule",
+            "fix": "Replace with -ErrorAction Stop and add try/catch block"
+          },
+          {
+            "line_start": 34,
+            "line_end": 34,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses Write-Output for failure messages which may not be visible in all contexts",
+            "fix": "Use Write-Error or Write-Warning for failure messages instead"
+          }
+        ]
+      },
+      "wall_s": 11.575
+    },
+    {
+      "id": "10-G1",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 958,
+      "completion_tokens": 1840,
+      "duration_s": 24.13,
+      "raw": "{\"verdict\": \"approve\", \"findings\": []}",
+      "findings": 0,
+      "blocking": 0,
+      "family": "logic",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "wall_s": 24.159
+    },
+    {
+      "id": "10-G2",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 958,
+      "completion_tokens": 2479,
+      "duration_s": 31.718,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 20, \"line_end\": 20, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Condition uses OR instead of AND, leading to incorrect detection of pending reboots when the registry key exists but the property is empty.\", \"fix\": \"Change `-or` to `-and` in the condition to require both $sessionManager and its property to be non-null.\"}, {\"line_start\": 13, \"line_end\": 17, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Checks for registry key existence instead of verifying specific values that indicate a reboot is pending.\", \"fix\": \"Modify checks to inspect relevant registry values (e.g., 'Reboot' or 'PendingReboot') within the keys.\"}, {\"line_start\": 26, \"line_end\": 26, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Uses `exit` without explicitly handling potential non-terminating errors in the script.\", \"fix\": \"Consider using `return` or `throw` for clearer termination logic, or ensure all paths properly exit.\"}]}",
+      "findings": 3,
+      "blocking": 1,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 20,
+            "line_end": 20,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Condition uses OR instead of AND, leading to incorrect detection of pending reboots when the registry key exists but the property is empty.",
+            "fix": "Change `-or` to `-and` in the condition to require both $sessionManager and its property to be non-null."
+          },
+          {
+            "line_start": 13,
+            "line_end": 17,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Checks for registry key existence instead of verifying specific values that indicate a reboot is pending.",
+            "fix": "Modify checks to inspect relevant registry values (e.g., 'Reboot' or 'PendingReboot') within the keys."
+          },
+          {
+            "line_start": 26,
+            "line_end": 26,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses `exit` without explicitly handling potential non-terminating errors in the script.",
+            "fix": "Consider using `return` or `throw` for clearer termination logic, or ensure all paths properly exit."
+          }
+        ]
+      },
+      "wall_s": 31.747
+    },
+    {
+      "id": "10-G3",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 958,
+      "completion_tokens": 1538,
+      "duration_s": 20.556,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 26, \"line_end\": 26, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Script exits 0 instead of 1 when reboot is pending\", \"fix\": \"Change 'exit 0' to 'exit 1'\"}, {\"line_start\": 28, \"line_end\": 28, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Script exits 0 unconditionally when no reboot is pending\", \"fix\": \"Change 'exit 0' to 'exit 0' (no change needed, but logic is unclear)\"}, {\"line_start\": 20, \"line_end\": 20, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Uses -ErrorAction SilentlyContinue without explicit error handling\", \"fix\": \"Use -ErrorAction Stop and wrap in try/catch\"}, {\"line_start\": 13, \"line_end\": 13, \"category\": \"blast-radius\", \"severity\": \"advisory\", \"why\": \"Uses Test-Path without checking for permission issues\", \"fix\": \"Add error handling for registry access\"}, {\"line_start\": 16, \"line_end\": 16, \"category\": \"blast-radius\", \"severity\": \"advisory\", \"why\": \"Uses Test-Path without checking for permission issues\", \"fix\": \"Add error handling for registry access\"}]}",
+      "findings": 5,
+      "blocking": 2,
+      "family": "logic",
+      "caught": true,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 26,
+            "line_end": 26,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Script exits 0 instead of 1 when reboot is pending",
+            "fix": "Change 'exit 0' to 'exit 1'"
+          },
+          {
+            "line_start": 28,
+            "line_end": 28,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Script exits 0 unconditionally when no reboot is pending",
+            "fix": "Change 'exit 0' to 'exit 0' (no change needed, but logic is unclear)"
+          },
+          {
+            "line_start": 20,
+            "line_end": 20,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Uses -ErrorAction SilentlyContinue without explicit error handling",
+            "fix": "Use -ErrorAction Stop and wrap in try/catch"
+          },
+          {
+            "line_start": 13,
+            "line_end": 13,
+            "category": "blast-radius",
+            "severity": "advisory",
+            "why": "Uses Test-Path without checking for permission issues",
+            "fix": "Add error handling for registry access"
+          },
+          {
+            "line_start": 16,
+            "line_end": 16,
+            "category": "blast-radius",
+            "severity": "advisory",
+            "why": "Uses Test-Path without checking for permission issues",
+            "fix": "Add error handling for registry access"
+          }
+        ]
+      },
+      "wall_s": 20.585
+    },
+    {
+      "id": "11-L",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 980,
+      "completion_tokens": 957,
+      "duration_s": 13.731,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 24, \"line_end\": 26, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Condition incorrectly skips profiles with LastUseTime older than cutoff, failing to remove them as intended.\", \"fix\": \"Reverse comparison to check if $userProfile.LastUseTime -lt $cutoff instead of -ge.\"}]}",
+      "findings": 1,
+      "blocking": 1,
+      "family": "lint-visible",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 24,
+            "line_end": 26,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Condition incorrectly skips profiles with LastUseTime older than cutoff, failing to remove them as intended.",
+            "fix": "Reverse comparison to check if $userProfile.LastUseTime -lt $cutoff instead of -ge."
+          }
+        ]
+      },
+      "wall_s": 13.758
+    },
+    {
+      "id": "11-G",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 980,
+      "completion_tokens": 953,
+      "duration_s": 13.716,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 20, \"line_end\": 20, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Extracts username from wrong path part, causing incorrect user identification\", \"fix\": \"Change -Parent to -Leaf in Split-Path\"}, {\"line_start\": 24, \"line_end\": 24, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Inverts staleness condition, skips profiles that need removal\", \"fix\": \"Change -ge $cutoff to -lt $cutoff in LastUseTime check\"}]}",
+      "findings": 2,
+      "blocking": 2,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 20,
+            "line_end": 20,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Extracts username from wrong path part, causing incorrect user identification",
+            "fix": "Change -Parent to -Leaf in Split-Path"
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Inverts staleness condition, skips profiles that need removal",
+            "fix": "Change -ge $cutoff to -lt $cutoff in LastUseTime check"
+          }
+        ]
+      },
+      "wall_s": 13.744
+    },
+    {
+      "id": "11-B",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 976,
+      "completion_tokens": 1163,
+      "duration_s": 16.902,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 24, \"line_end\": 24, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Condition incorrectly skips profiles with no LastUseTime or recent usage, failing to remove truly stale profiles.\", \"fix\": \"Change to `if ($userProfile.LastUseTime -lt $cutoff -or $userProfile.LastUseTime -eq $null)` to properly identify stale profiles.\"}]}",
+      "findings": 1,
+      "blocking": 1,
+      "family": "blast-radius",
+      "caught": false,
+      "right_reason": false,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Condition incorrectly skips profiles with no LastUseTime or recent usage, failing to remove truly stale profiles.",
+            "fix": "Change to `if ($userProfile.LastUseTime -lt $cutoff -or $userProfile.LastUseTime -eq $null)` to properly identify stale profiles."
+          }
+        ]
+      },
+      "wall_s": 16.929
+    },
+    {
+      "id": "12-L",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1170,
+      "completion_tokens": 2125,
+      "duration_s": 27.666,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 33, \"line_end\": 33, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Compares source hash to itself instead of the copy's hash\", \"fix\": \"Change $sourceHash -ne $sourceHash to $sourceHash -ne $copyHash\"}, {\"line_start\": 19, \"line_end\": 19, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Writes error but does not throw\", \"fix\": \"Replace with throw or use -ErrorAction Stop\"}, {\"line_start\": 48, \"line_end\": 48, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Redundant exit 0 after Write-Output\", \"fix\": \"Remove exit 0\"}, {\"line_start\": 27, \"line_end\": 27, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"No error handling for directory creation failure\", \"fix\": \"Wrap in try/catch or use -ErrorAction Stop\"}, {\"line_start\": 30, \"line_end\": 30, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"No check for source file existence\", \"fix\": \"Add Test-Path check before copying\"}]}",
+      "findings": 5,
+      "blocking": 1,
+      "family": "lint-visible",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 33,
+            "line_end": 33,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Compares source hash to itself instead of the copy's hash",
+            "fix": "Change $sourceHash -ne $sourceHash to $sourceHash -ne $copyHash"
+          },
+          {
+            "line_start": 19,
+            "line_end": 19,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Writes error but does not throw",
+            "fix": "Replace with throw or use -ErrorAction Stop"
+          },
+          {
+            "line_start": 48,
+            "line_end": 48,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Redundant exit 0 after Write-Output",
+            "fix": "Remove exit 0"
+          },
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "No error handling for directory creation failure",
+            "fix": "Wrap in try/catch or use -ErrorAction Stop"
+          },
+          {
+            "line_start": 30,
+            "line_end": 30,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "No check for source file existence",
+            "fix": "Add Test-Path check before copying"
+          }
+        ]
+      },
+      "wall_s": 27.698
+    },
+    {
+      "id": "12-G",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1167,
+      "completion_tokens": 3712,
+      "duration_s": 46.86,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 23, \"line_end\": 23, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Folder name uses only date, leading to conflicts if run multiple times on same day\", \"fix\": \"Include time in folder name for uniqueness\"}, {\"line_start\": 27, \"line_end\": 27, \"category\": \"error-handling\", \"severity\": \"blocking\", \"why\": \"New-Item not wrapped in try-catch, unhandled errors during folder creation\", \"fix\": \"Wrap New-Item in try-catch block\"}]}",
+      "findings": 2,
+      "blocking": 2,
+      "family": "logic",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 23,
+            "line_end": 23,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Folder name uses only date, leading to conflicts if run multiple times on same day",
+            "fix": "Include time in folder name for uniqueness"
+          },
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "New-Item not wrapped in try-catch, unhandled errors during folder creation",
+            "fix": "Wrap New-Item in try-catch block"
+          }
+        ]
+      },
+      "wall_s": 46.89
+    },
+    {
+      "id": "12-B",
+      "split": "development",
+      "control": false,
+      "prompt_tokens": 1196,
+      "completion_tokens": 2325,
+      "duration_s": 30.107,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 27, \"line_end\": 27, \"category\": \"blast-radius\", \"severity\": \"blocking\", \"why\": \"Deletes entire $Destination directory, risking data loss of all contents, not just the target folder.\", \"fix\": \"Replace with Remove-Item -LiteralPath $target -Recurse -Force to delete only the new backup folder.\"}, {\"line_start\": 27, \"line_end\": 27, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Swallows errors during deletion with -ErrorAction SilentlyContinue, hiding potential failures.\", \"fix\": \"Remove -ErrorAction SilentlyContinue and handle errors explicitly.\"}, {\"line_start\": 26, \"line_end\": 26, \"category\": \"blast-radius\", \"severity\": \"blocking\", \"why\": \"ShouldProcess block does not check for target folder existence before deletion, risking unintended deletions.\", \"fix\": \"Add Test-Path for $target before deletion and use ShouldProcess for that operation.\"}, {\"line_start\": 28, \"line_end\": 28, \"category\": \"blast-radius\", \"severity\": \"blocking\", \"why\": \"Creates new folder in $Destination after deleting it, leading to logical inconsistency.\", \"fix\": \"Move New-Item before deletion to ensure directory exists before removing it.\"}, {\"line_start\": 47, \"line_end\": 47, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Exits with code 1 on any failure, but does not distinguish between different failure types.\", \"fix\": \"Use more specific exit codes for different failure scenarios.\"}]}",
+      "findings": 5,
+      "blocking": 3,
+      "family": "blast-radius",
+      "caught": true,
+      "right_reason": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "blast-radius",
+            "severity": "blocking",
+            "why": "Deletes entire $Destination directory, risking data loss of all contents, not just the target folder.",
+            "fix": "Replace with Remove-Item -LiteralPath $target -Recurse -Force to delete only the new backup folder."
+          },
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Swallows errors during deletion with -ErrorAction SilentlyContinue, hiding potential failures.",
+            "fix": "Remove -ErrorAction SilentlyContinue and handle errors explicitly."
+          },
+          {
+            "line_start": 26,
+            "line_end": 26,
+            "category": "blast-radius",
+            "severity": "blocking",
+            "why": "ShouldProcess block does not check for target folder existence before deletion, risking unintended deletions.",
+            "fix": "Add Test-Path for $target before deletion and use ShouldProcess for that operation."
+          },
+          {
+            "line_start": 28,
+            "line_end": 28,
+            "category": "blast-radius",
+            "severity": "blocking",
+            "why": "Creates new folder in $Destination after deleting it, leading to logical inconsistency.",
+            "fix": "Move New-Item before deletion to ensure directory exists before removing it."
+          },
+          {
+            "line_start": 47,
+            "line_end": 47,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Exits with code 1 on any failure, but does not distinguish between different failure types.",
+            "fix": "Use more specific exit codes for different failure scenarios."
+          }
+        ]
+      },
+      "wall_s": 30.134
+    },
+    {
+      "id": "01-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 972,
+      "completion_tokens": 965,
+      "duration_s": 13.85,
+      "raw": "{\"verdict\": \"approve\", \"findings\": [{\"line_start\": 36, \"line_end\": 36, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Redundant exit 0 after exit 1 condition\", \"fix\": \"Remove redundant exit 0\"}, {\"line_start\": 24, \"line_end\": 24, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Using Write-Output for informational messages\", \"fix\": \"Use Write-Verbose or Write-Host instead\"}, {\"line_start\": 10, \"line_end\": 10, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Hardcoded exclude list without parameterization\", \"fix\": \"Consider making exclude list a parameter\"}]}",
+      "findings": 3,
+      "blocking": 0,
+      "false_alarm": false,
+      "review": {
+        "verdict": "approve",
+        "findings": [
+          {
+            "line_start": 36,
+            "line_end": 36,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Redundant exit 0 after exit 1 condition",
+            "fix": "Remove redundant exit 0"
+          },
+          {
+            "line_start": 24,
+            "line_end": 24,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Using Write-Output for informational messages",
+            "fix": "Use Write-Verbose or Write-Host instead"
+          },
+          {
+            "line_start": 10,
+            "line_end": 10,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Hardcoded exclude list without parameterization",
+            "fix": "Consider making exclude list a parameter"
+          }
+        ]
+      },
+      "wall_s": 13.878
+    },
+    {
+      "id": "04-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 1054,
+      "completion_tokens": 2078,
+      "duration_s": 26.981,
+      "raw": "{\"verdict\": \"approve\", \"findings\": []}",
+      "findings": 0,
+      "blocking": 0,
+      "false_alarm": false,
+      "review": {
+        "verdict": "approve",
+        "findings": []
+      },
+      "wall_s": 27.008
+    },
+    {
+      "id": "06-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 947,
+      "completion_tokens": 965,
+      "duration_s": 13.943,
+      "raw": "{\n\n\"verdict\": \"revise\",\n\"findings\": [\n    {\n        \"line_start\": 29,\n        \"line_end\": 29,\n        \"category\": \"correctness\",\n        \"severity\": \"blocking\",\n        \"why\": \"Selects non-existent property 'PrincipalSource' from local group members\",\n        \"fix\": \"Remove '-Property PrincipalSource' from Select-Object\"\n    },\n    {\n        \"line_start\": 15,\n        \"line_end\": 17,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"Does not validate OutputPath exists before Export-Csv\",\n        \"fix\": \"Add 'if (-not (Test-Path -Path $OutputPath -PathType Leaf)) { ... }' before Export-Csv\"\n    },\n    {\n        \"line_start\": 17,\n        \"line_end\": 17,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"Uses non-standard exit code 2 without documentation\",\n        \"fix\": \"Use standard exit codes (e.g., 1 for general errors)\"\n    },\n    {\n        \"line_start\": 32,\n        \"line_end\": 32,\n        \"category\": \"style\",\n        \"severity\": \"advisory\",\n        \"why\": \"Uses Write-Output for status message instead of Write-Verbose\",\n        \"fix\": \"Replace 'Write-Output' with 'Write-Verbose'\"\n    },\n    {\n        \"line_start\": 20,\n        \"line_end\": 20,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"Does not handle case where 'Administrators' group does not exist\",\n        \"fix\": \"Add error handling for empty $members after Get-LocalGroupMember\"\n    }\n] }",
+      "findings": 5,
+      "blocking": 1,
+      "false_alarm": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 29,
+            "line_end": 29,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Selects non-existent property 'PrincipalSource' from local group members",
+            "fix": "Remove '-Property PrincipalSource' from Select-Object"
+          },
+          {
+            "line_start": 15,
+            "line_end": 17,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Does not validate OutputPath exists before Export-Csv",
+            "fix": "Add 'if (-not (Test-Path -Path $OutputPath -PathType Leaf)) { ... }' before Export-Csv"
+          },
+          {
+            "line_start": 17,
+            "line_end": 17,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Uses non-standard exit code 2 without documentation",
+            "fix": "Use standard exit codes (e.g., 1 for general errors)"
+          },
+          {
+            "line_start": 32,
+            "line_end": 32,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Uses Write-Output for status message instead of Write-Verbose",
+            "fix": "Replace 'Write-Output' with 'Write-Verbose'"
+          },
+          {
+            "line_start": 20,
+            "line_end": 20,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Does not handle case where 'Administrators' group does not exist",
+            "fix": "Add error handling for empty $members after Get-LocalGroupMember"
+          }
+        ]
+      },
+      "wall_s": 13.971
+    },
+    {
+      "id": "07-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 1104,
+      "completion_tokens": 1776,
+      "duration_s": 24.328,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 42, \"line_end\": 42, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Syntax error: line ends with a slash instead of closing quote\", \"fix\": \"Replace trailing slash with closing quote\"}, {\"line_start\": 23, \"line_end\": 23, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"Non-standard exit code 2 used without explanation\", \"fix\": \"Use standard exit codes like 1 for general errors\"}, {\"line_start\": 38, \"line_end\": 38, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"No try-catch block to handle potential move failures\", \"fix\": \"Wrap Move-Item in try-catch block\"}, {\"line_start\": 34, \"line_end\": 34, \"category\": \"blast-radius\", \"severity\": \"advisory\", \"why\": \"Skips files already in archive but doesn't handle overwrites\", \"fix\": \"Add -Force parameter to Move-Item if overwrite needed\"}, {\"line_start\": 27, \"line_end\": 28, \"category\": \"style\", \"severity\": \"advisory\", \"why\": \"Pipe to Sort-Object without explicit variable assignment\", \"fix\": \"Assign sorted results to a variable for clarity\"}]}",
+      "findings": 5,
+      "blocking": 1,
+      "false_alarm": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 42,
+            "line_end": 42,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Syntax error: line ends with a slash instead of closing quote",
+            "fix": "Replace trailing slash with closing quote"
+          },
+          {
+            "line_start": 23,
+            "line_end": 23,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "Non-standard exit code 2 used without explanation",
+            "fix": "Use standard exit codes like 1 for general errors"
+          },
+          {
+            "line_start": 38,
+            "line_end": 38,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "No try-catch block to handle potential move failures",
+            "fix": "Wrap Move-Item in try-catch block"
+          },
+          {
+            "line_start": 34,
+            "line_end": 34,
+            "category": "blast-radius",
+            "severity": "advisory",
+            "why": "Skips files already in archive but doesn't handle overwrites",
+            "fix": "Add -Force parameter to Move-Item if overwrite needed"
+          },
+          {
+            "line_start": 27,
+            "line_end": 28,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Pipe to Sort-Object without explicit variable assignment",
+            "fix": "Assign sorted results to a variable for clarity"
+          }
+        ]
+      },
+      "wall_s": 24.356
+    },
+    {
+      "id": "08-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 1031,
+      "completion_tokens": 1831,
+      "duration_s": 25.141,
+      "raw": "{\n\n\"verdict\": \"revise\",\n\"findings\": [\n    {\n        \"line_start\": 27,\n        \"line_end\": 27,\n        \"category\": \"correctness\",\n        \"severity\": \"blocking\",\n        \"why\": \"Compares boolean $rule.Enabled to string 'True', which will never be true\",\n        \"fix\": \"Change -ne 'True' to -ne $true\"\n    },\n    {\n        \"line_start\": 13,\n        \"line_end\": 13,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"SilentlyContinue hides errors from Get-Service\",\n        \"fix\": \"Remove -ErrorAction SilentlyContinue to surface errors\"\n    },\n    {\n        \"line_start\": 21,\n        \"line_end\": 21,\n        \"category\": \"error-handling\",\n        \"severity\": \"advisory\",\n        \"why\": \"SilentlyContinue hides errors from Get-ChildItem\",\n        \"fix\": \"Remove -ErrorAction SilentlyContinue to surface errors\"\n    },\n    {\n        \"line_start\": 26,\n        \"line_end\": 26,\n        \"category\": \"correctness\",\n        \"severity\": \"advisory\",\n        \"why\": \"Assumes firewall rule name 'WINRM-HTTP-In-TCP' exists\",\n        \"fix\": \"Add fallback for different rule names or use wildcard matching\"\n    },\n    {\n        \"line_start\": 35,\n        \"line_end\": 35,\n        \"category\": \"style\",\n        \"severity\": \"advisory\",\n        \"why\": \"Unnecessary exit 0 after implicit script exit\",\n        \"fix\": \"Remove redundant exit 0\"\n    }\n]}",
+      "findings": 5,
+      "blocking": 1,
+      "false_alarm": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Compares boolean $rule.Enabled to string 'True', which will never be true",
+            "fix": "Change -ne 'True' to -ne $true"
+          },
+          {
+            "line_start": 13,
+            "line_end": 13,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "SilentlyContinue hides errors from Get-Service",
+            "fix": "Remove -ErrorAction SilentlyContinue to surface errors"
+          },
+          {
+            "line_start": 21,
+            "line_end": 21,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "SilentlyContinue hides errors from Get-ChildItem",
+            "fix": "Remove -ErrorAction SilentlyContinue to surface errors"
+          },
+          {
+            "line_start": 26,
+            "line_end": 26,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Assumes firewall rule name 'WINRM-HTTP-In-TCP' exists",
+            "fix": "Add fallback for different rule names or use wildcard matching"
+          },
+          {
+            "line_start": 35,
+            "line_end": 35,
+            "category": "style",
+            "severity": "advisory",
+            "why": "Unnecessary exit 0 after implicit script exit",
+            "fix": "Remove redundant exit 0"
+          }
+        ]
+      },
+      "wall_s": 25.172
+    },
+    {
+      "id": "10-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 958,
+      "completion_tokens": 1205,
+      "duration_s": 17.109,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 28, \"line_end\": 28, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"Exit command includes invalid '/think' parameter which will cause an error\", \"fix\": \"Remove '/think' from exit 0 command\"}]}",
+      "findings": 1,
+      "blocking": 1,
+      "false_alarm": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 28,
+            "line_end": 28,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "Exit command includes invalid '/think' parameter which will cause an error",
+            "fix": "Remove '/think' from exit 0 command"
+          }
+        ]
+      },
+      "wall_s": 17.141
+    },
+    {
+      "id": "11-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 980,
+      "completion_tokens": 2405,
+      "duration_s": 32.196,
+      "raw": "{\"verdict\": \"approve\", \"findings\": [{\"line_start\": 24, \"line_end\": 26, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Condition incorrectly skips profiles with LastUseTime older than cutoff, inverting intended logic.\", \"fix\": \"Change condition to check if LastUseTime is less than cutoff instead of greater than or equal.\"}, {\"line_start\": 20, \"line_end\": 23, \"category\": \"correctness\", \"severity\": \"advisory\", \"why\": \"Extracting username from LocalPath may not reliably identify user accounts, risking incorrect profile retention.\", \"fix\": \"Validate username matches actual user account names using additional checks.\"}, {\"line_start\": 28, \"line_end\": 29, \"category\": \"error-handling\", \"severity\": \"advisory\", \"why\": \"No error handling for Remove-CimInstance failure, risking unhandled exceptions.\", \"fix\": \"Wrap removal in try/catch block to handle and log errors.\"}]}",
+      "findings": 3,
+      "blocking": 0,
+      "false_alarm": false,
+      "review": {
+        "verdict": "approve",
+        "findings": [
+          {
+            "line_start": 24,
+            "line_end": 26,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Condition incorrectly skips profiles with LastUseTime older than cutoff, inverting intended logic.",
+            "fix": "Change condition to check if LastUseTime is less than cutoff instead of greater than or equal."
+          },
+          {
+            "line_start": 20,
+            "line_end": 23,
+            "category": "correctness",
+            "severity": "advisory",
+            "why": "Extracting username from LocalPath may not reliably identify user accounts, risking incorrect profile retention.",
+            "fix": "Validate username matches actual user account names using additional checks."
+          },
+          {
+            "line_start": 28,
+            "line_end": 29,
+            "category": "error-handling",
+            "severity": "advisory",
+            "why": "No error handling for Remove-CimInstance failure, risking unhandled exceptions.",
+            "fix": "Wrap removal in try/catch block to handle and log errors."
+          }
+        ]
+      },
+      "wall_s": 32.226
+    },
+    {
+      "id": "12-C",
+      "split": "development",
+      "control": true,
+      "prompt_tokens": 1170,
+      "completion_tokens": 3801,
+      "duration_s": 52.769,
+      "raw": "{\"verdict\": \"revise\", \"findings\": [{\"line_start\": 27, \"line_end\": 27, \"category\": \"error-handling\", \"severity\": \"blocking\", \"why\": \"New-Item is not in a try-catch block, causing unhandled exceptions on directory creation.\", \"fix\": \"Wrap New-Item in a try-catch block to handle errors.\"}, {\"line_start\": 28, \"line_end\": 30, \"category\": \"correctness\", \"severity\": \"blocking\", \"why\": \"The script does not validate that $Path items are files, risking unintended directory copies.\", \"fix\": \"Add Test-Path -PathType Leaf checks for each $file before copying.\"}]}",
+      "findings": 2,
+      "blocking": 2,
+      "false_alarm": true,
+      "review": {
+        "verdict": "revise",
+        "findings": [
+          {
+            "line_start": 27,
+            "line_end": 27,
+            "category": "error-handling",
+            "severity": "blocking",
+            "why": "New-Item is not in a try-catch block, causing unhandled exceptions on directory creation.",
+            "fix": "Wrap New-Item in a try-catch block to handle errors."
+          },
+          {
+            "line_start": 28,
+            "line_end": 30,
+            "category": "correctness",
+            "severity": "blocking",
+            "why": "The script does not validate that $Path items are files, risking unintended directory copies.",
+            "fix": "Add Test-Path -PathType Leaf checks for each $file before copying."
+          }
+        ]
+      },
+      "wall_s": 52.808
+    }
+  ],
+  "model_digest": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8",
+  "started": "2026-10-23T19:08:55Z"
+}

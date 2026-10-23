@@ -1,0 +1,34 @@
+{
+  "about": "P03 build step 2a (ADR 0029): the defect-family pattern per script and the held-out draw, committed BEFORE any defect is written or any reviewer reads the set.",
+  "families_per_pattern": {
+    "mixed": ["lint-visible", "logic", "blast-radius"],
+    "all-logic": ["logic", "logic", "logic"]
+  },
+  "why_two_patterns": "36 slots at 9 lint-visible / 18 logic / 9 blast-radius = 9 mixed scripts (9/9/9) + 3 all-logic scripts (0/9/0). Drawing 3 mixed + 1 all-logic for held-out gives exactly 3/6/3 there - the same proportions as the whole set. The all-logic scripts are the three that change nothing on the machine (a report and two exports/checks), where a blast-radius defect would be contrived.",
+  "pattern": {
+    "01-Start-StoppedAutoServices.ps1": "mixed",
+    "02-Clear-OldLogFiles.ps1": "mixed",
+    "03-Get-LowDiskReport.ps1": "all-logic",
+    "04-Test-TimeOffset.ps1": "mixed",
+    "05-Set-ServiceStartupType.ps1": "mixed",
+    "06-Export-LocalAdminMembers.ps1": "all-logic",
+    "07-Move-OldFilesToArchive.ps1": "mixed",
+    "08-Test-WinRMReadiness.ps1": "mixed",
+    "09-Register-CleanupTask.ps1": "mixed",
+    "10-Test-PendingReboot.ps1": "all-logic",
+    "11-Remove-StaleProfiles.ps1": "mixed",
+    "12-Backup-ConfigFiles.ps1": "mixed"
+  },
+  "draw": {
+    "method": "python random.Random(seed): sorted(rng.sample(mixed, 3)), then rng.sample(all_logic, 1); mixed and all_logic listed in script-number order",
+    "seed_source": "int('af9c31e', 16) - the build step 1 commit, fixed before the draw, so neither Jose nor Claude chose which scripts are held out",
+    "seed": 184140574,
+    "reproduce": "python3 -c \"import random; r=random.Random(184140574); print(sorted(r.sample(['01','02','04','05','07','08','09','11','12'],3)), r.sample(['03','06','10'],1))\""
+  },
+  "held_out": ["02-Clear-OldLogFiles.ps1", "03-Get-LowDiskReport.ps1", "05-Set-ServiceStartupType.ps1", "09-Register-CleanupTask.ps1"],
+  "development": ["01-Start-StoppedAutoServices.ps1", "04-Test-TimeOffset.ps1", "06-Export-LocalAdminMembers.ps1", "07-Move-OldFilesToArchive.ps1", "08-Test-WinRMReadiness.ps1", "10-Test-PendingReboot.ps1", "11-Remove-StaleProfiles.ps1", "12-Backup-ConfigFiles.ps1"],
+  "counts": {
+    "held_out": {"scripts": 4, "lint-visible": 3, "logic": 6, "blast-radius": 3, "controls": 4},
+    "development": {"scripts": 8, "lint-visible": 6, "logic": 12, "blast-radius": 6, "controls": 8}
+  }
+}

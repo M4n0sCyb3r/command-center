@@ -1,0 +1,13 @@
+@{
+    # Role capability: WHAT a connected account can run.
+    # Must sit in a RoleCapabilities folder inside a module on the target;
+    # JEA finds it by file name ('AgentReader').
+
+    Description      = 'P01 agent: read-only checks we wrote and reviewed. No wildcards.'
+
+    ModulesToImport  = @('AgentReader')
+
+    # The allow-list the agent's registry is compared against at startup
+    # (ADR 0003, drift control). One entry per function, never a wildcard.
+    VisibleFunctions = @('Get-AgentAuditPolicy')
+}

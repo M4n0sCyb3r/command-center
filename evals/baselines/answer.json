@@ -1,0 +1,671 @@
+{
+  "record_version": 7,
+  "header": {
+    "suite_path": "evals/suites/answer.jsonl",
+    "suite_sha256": "63919195c152cd6dce379372881c53c2fbb7964f7ce83a6dd2a2c2c3dcece796",
+    "suite_header_sha256": "1aa8f756a579582330fad4e79bfa0d1553eac99842818ccd58710406f81c64f9",
+    "tier_selection": "fixed",
+    "scorer": "answer",
+    "model_name": "qwen3:8b + index",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41 index:e6930b75be1f6c013471eb706d7804839816d04778d68d48d05b18292ce7d46c",
+    "host_target": "none - local index (data/index.json, gitignored) + Ollama generation",
+    "sampling": {
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95,
+      "repeat_penalty": 1.0,
+      "seed": 42,
+      "num_predict": 2048,
+      "num_ctx": 16384
+    },
+    "rebaseline": {
+      "replaced": "2026-10-09T21:20:24Z",
+      "removed": []
+    },
+    "started_at": "2026-10-18T02:32:25Z",
+    "incomplete": null,
+    "record_version": 7
+  },
+  "cases": [
+    {
+      "id": "restart-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/service-restart.md#symptoms",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/service-restart.md#symptoms"
+        ],
+        "retrieved": [
+          "data/runbooks/service-restart.md#symptoms",
+          "sops/lab-session-closeout.md#scope-and-non-scope",
+          "sops/lab-session-closeout.md#overview"
+        ],
+        "top_score": 0.5511,
+        "errors": [],
+        "warnings": [],
+        "answer": "Print jobs piling up with no output typically indicates a stopped service (e.g., print spooler) causing dependent features to fail silently. The event log shows one entry at failure time, with no subsequent entries, as stopped services stop writing logs. This aligns with the described symptoms of a stuck service impacting print queues."
+      },
+      "note": "",
+      "case_sha256": "9561d1113d34489ef5b1e104ca9c874fff5d2a7be108e1db43e1ee703051a166"
+    },
+    {
+      "id": "restart-procedure",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/service-restart.md#procedure",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/service-restart.md#recovery-options"
+        ],
+        "retrieved": [
+          "sops/jea-read-only-endpoint.md#safety",
+          "sops/jea-read-only-endpoint.md#preconditions",
+          "data/runbooks/service-restart.md#recovery-options"
+        ],
+        "top_score": 0.6469,
+        "errors": [],
+        "warnings": [],
+        "answer": "To safely bounce a service, if it stops repeatedly within minutes, set the recovery action to \"restart on first failure only\" and collect the failure event before the next attempt. A service that stops repeatedly likely has an underlying cause such as a missing dependency or changed permissions that need to be addressed."
+      },
+      "note": "",
+      "case_sha256": "1f0ac6a19d21c8157bcf4f5baa766f566e65dd4b423bf0829a63ae2d92a952ec"
+    },
+    {
+      "id": "restart-recovery",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/service-restart.md#recovery-options",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/service-restart.md#recovery-options"
+        ],
+        "retrieved": [
+          "data/runbooks/service-restart.md#recovery-options",
+          "data/runbooks/service-restart.md#symptoms",
+          "data/runbooks/service-restart.md#procedure"
+        ],
+        "top_score": 0.5932,
+        "errors": [],
+        "warnings": [],
+        "answer": "If the service stops again within minutes after restarting, set the recovery action to 'restart on first failure only' to prevent repeated restarts. Collect the failure event log entry before the next attempt. Repeated stops typically indicate a missing dependency or changed permissions affecting the service."
+      },
+      "note": "",
+      "case_sha256": "1f7f64f760ef035a7d8017b17d89a0f7a6fd60371490f3d45fcc4d10b3443872"
+    },
+    {
+      "id": "disk-procedure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/disk-space.md#procedure",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/disk-space.md#procedure",
+          "data/microsoft/cleanmgr.md#overview"
+        ],
+        "retrieved": [
+          "data/runbooks/disk-space.md#procedure",
+          "data/runbooks/disk-space.md#thresholds",
+          "data/microsoft/cleanmgr.md#overview"
+        ],
+        "top_score": 0.664,
+        "errors": [],
+        "warnings": [],
+        "answer": "First, clear the update cache and rotate logs, as these regenerate and are not critical evidence. Then use Cleanmgr to delete Temp files, Internet files, downloaded files, and Recycle Bin files. Always verify ownership of files before deletion."
+      },
+      "note": "",
+      "case_sha256": "41438892c16c9090891416729e629e4d6a9da573bb3618efba742b586ab84a37"
+    },
+    {
+      "id": "disk-thresholds",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/disk-space.md#thresholds",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/disk-space.md#thresholds"
+        ],
+        "retrieved": [
+          "data/runbooks/disk-space.md#thresholds",
+          "sops/bench-startup.md#4-failure-modes-seen-in-practice",
+          "sops/lab-session-closeout.md#failure-modes"
+        ],
+        "top_score": 0.6498,
+        "errors": [],
+        "warnings": [],
+        "answer": "The host is treated as failed rather than degraded when disk space falls below five percent free space."
+      },
+      "note": "",
+      "case_sha256": "75d2ffd059aab456e8accc48eec7850266767b5b2f54dacb68f4cbd9f705cc26"
+    },
+    {
+      "id": "timesync-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/time-sync.md#symptoms",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/time-sync.md#symptoms"
+        ],
+        "retrieved": [
+          "data/runbooks/time-sync.md#symptoms",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings",
+          "sops/jea-read-only-endpoint.md#preconditions"
+        ],
+        "top_score": 0.7147,
+        "errors": [],
+        "warnings": [],
+        "answer": "Kerberos authentication failures with correct credentials often relate to time drift. Drift above five minutes breaks Kerberos outright, while smaller drift can cause intermittent failures. Verify time synchronization with the domain controller using NTP (Network Time Protocol) to resolve this issue."
+      },
+      "note": "",
+      "case_sha256": "955c2843c34db6bdd1275935dd539808958c723e342482097f63cb3a6c4d3395"
+    },
+    {
+      "id": "timesync-escalation",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/time-sync.md#escalation",
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/time-sync.md#escalation",
+          "data/runbooks/time-sync.md#procedure",
+          "data/runbooks/service-restart.md#symptoms"
+        ],
+        "top_score": 0.6126,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not address ownership responsibilities or accountability for a member server after it has been fixed. The content focuses on technical troubleshooting procedures for time synchronization and service restarts, but does not specify organizational ownership or escalation protocols beyond technical fault diagnosis."
+      },
+      "note": "",
+      "case_sha256": "b2edf8992aa0e30e8e6357ee2e4da149f0b5fc3c69f069d77ca056a4e9d97156"
+    },
+    {
+      "id": "winrm-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/winrm-remoting.md#symptoms",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/winrm-remoting.md#symptoms",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings"
+        ],
+        "retrieved": [
+          "data/runbooks/winrm-remoting.md#symptoms",
+          "sops/identify-the-shell.md#purpose",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings"
+        ],
+        "top_score": 0.6634,
+        "errors": [],
+        "warnings": [],
+        "answer": "Remote PowerShell failure while ping works could stem from: 1) Firewall blocking WinRM port 5985 (default), 2) WinRM listener misconfiguration (e.g., non-default port/auth types), or 3) Authentication issues (Kerberos/Negotiate disabled). Check firewall rules for port 5985, verify WinRM listener settings via `winrm help config`, and ensure both Kerberos and Negotiate are enabled."
+      },
+      "note": "",
+      "case_sha256": "2733ed38efd9fa0083ad47841f225f27a415c9a2426055884144639b5b951292"
+    },
+    {
+      "id": "winrm-firewall",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/winrm-remoting.md#firewall-notes",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/winrm-remoting.md#firewall-notes"
+        ],
+        "retrieved": [
+          "data/runbooks/winrm-remoting.md#firewall-notes",
+          "data/runbooks/disk-space.md#thresholds",
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings"
+        ],
+        "top_score": 0.6409,
+        "errors": [],
+        "warnings": [],
+        "answer": "The firewall rule for management traffic must be scoped specifically to the management network. Opening the rule to any address is considered a finding during audits, even if remoting functionality works. The rule should not be broadly open; it must restrict traffic to the intended management network segment."
+      },
+      "note": "",
+      "case_sha256": "9938576287f69094ff238f8d51710d51a82bd79cb91138c0577097ab544895c3"
+    },
+    {
+      "id": "patching-symptoms",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/patching-window.md#symptoms",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/patching-window.md#symptoms",
+          "data/microsoft/3-approve-and-deploy-updates-in-wsus.md#overview"
+        ],
+        "retrieved": [
+          "data/runbooks/patching-window.md#symptoms",
+          "data/microsoft/3-approve-and-deploy-updates-in-wsus.md#overview",
+          "data/runbooks/patching-window.md#procedure"
+        ],
+        "top_score": 0.6998,
+        "errors": [],
+        "warnings": [],
+        "answer": "The compliance report may show missing updates while the server appears fine because: (1) The update service might be in a manual start state, preventing patches from installing automatically. (2) Updates may not have been properly approved and deployed via WSUS to the target computer group, or the deployment might have failed. Verify the update service status and WSUS deployment tracking to resolve the discrepancy."
+      },
+      "note": "",
+      "case_sha256": "25c6f8d58760eeb6243625f0fa0530b2233855ea0db43da2f92a3ec1f3a1f0f2"
+    },
+    {
+      "id": "patching-change-control",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/patching-window.md#change-control",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/patching-window.md#change-control"
+        ],
+        "retrieved": [
+          "data/runbooks/patching-window.md#change-control",
+          "data/runbooks/patching-window.md#procedure",
+          "data/runbooks/patching-window.md#symptoms"
+        ],
+        "top_score": 0.7253,
+        "errors": [],
+        "warnings": [],
+        "answer": "No patch is applied outside the agreed window without a written exception. The exception must name the requester, the reason, and include a rollback step. An undocumented patch is indistinguishable from an incident."
+      },
+      "note": "",
+      "case_sha256": "062847ab784bc2a6b87a8acb6fcd53ef42b8bb5472a3835eb9b9c88607d365f4"
+    },
+    {
+      "id": "patching-procedure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "data/runbooks/patching-window.md#procedure",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "data/runbooks/patching-window.md#procedure"
+        ],
+        "retrieved": [
+          "data/runbooks/patching-window.md#procedure",
+          "data/runbooks/winrm-remoting.md#procedure",
+          "data/runbooks/service-restart.md#procedure"
+        ],
+        "top_score": 0.6642,
+        "errors": [],
+        "warnings": [],
+        "answer": "Confirm the build number changed after the reboot. A reboot that does not alter the build number indicates that no updates were applied."
+      },
+      "note": "",
+      "case_sha256": "0a2a697c419e33a69652e803a2644952f33cbdd888462128c5be4cac61707538"
+    },
+    {
+      "id": "sop-bench-failure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "sops/bench-startup.md#4-failure-modes-seen-in-practice",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "sops/bench-startup.md#4-failure-modes-seen-in-practice"
+        ],
+        "retrieved": [
+          "data/runbooks/service-restart.md#symptoms",
+          "sops/bench-startup.md#4-failure-modes-seen-in-practice",
+          "sops/bench-startup.md#2-procedure"
+        ],
+        "top_score": 0.6295,
+        "errors": [],
+        "warnings": [],
+        "answer": "Closing the PowerShell window killed the Ollama process. Verify with `Get-Process ollama` and check if the server is listening on port 11434. Restart the service using `Start-Process ollama serve` in its own window or via the tray app (which runs detached)."
+      },
+      "note": "",
+      "case_sha256": "c948a4c648d0c60acfd718cb93d1c64d18e7897ce00d48b882d51ad361eae6be"
+    },
+    {
+      "id": "sop-shell-failure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "sops/identify-the-shell.md#failure-modes",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "sops/identify-the-shell.md#failure-modes"
+        ],
+        "retrieved": [
+          "sops/identify-the-shell.md#failure-modes",
+          "sops/identify-the-shell.md#scope-and-limits",
+          "sops/identify-the-shell.md#procedure"
+        ],
+        "top_score": 0.6819,
+        "errors": [],
+        "warnings": [],
+        "answer": "Run `Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned` to allow script loading for your user account. Then open a new terminal window to apply the change."
+      },
+      "note": "",
+      "case_sha256": "2719479edd0f85efbad960258af09b0c588c78b124dd53e0fc328b7fde224e55"
+    },
+    {
+      "id": "sop-jea-failure",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "answerable",
+        "expect": "sops/jea-read-only-endpoint.md#failure-modes",
+        "outcome": "answered",
+        "attempts": 1,
+        "cited": [
+          "sops/jea-read-only-endpoint.md#failure-modes"
+        ],
+        "retrieved": [
+          "data/runbooks/winrm-remoting.md#symptoms",
+          "sops/identify-the-shell.md#failure-modes",
+          "sops/jea-read-only-endpoint.md#failure-modes"
+        ],
+        "top_score": 0.6224,
+        "errors": [],
+        "warnings": [],
+        "answer": "JEA sessions have no providers — `$env:X` is empty. Build paths with `[System.IO.Path]` / `[System.Environment]`, never a provider."
+      },
+      "note": "",
+      "case_sha256": "1f478b1bedf40e93f03fc283f137ec5a54b7239d461c2f60962e03019ea6e633"
+    },
+    {
+      "id": "sop-closeout-failure",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "category": "answerable",
+        "expect": "sops/lab-session-closeout.md#failure-modes",
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/patching-window.md#change-control",
+          "data/runbooks/patching-window.md#procedure",
+          "data/runbooks/patching-window.md#symptoms"
+        ],
+        "top_score": 0.5796,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not address the specific scenario where a log indicates a change was shipped but the file remains unchanged. The sources focus on patching windows, compliance reporting, and service states, but not on log discrepancies versus file modifications."
+      },
+      "note": "",
+      "case_sha256": "f041eafb8ea1799564a22da8b5a546ee8f357ecabd7babac2feae628a2b685c6"
+    },
+    {
+      "id": "unanswerable-out-of-domain",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "out-of-domain",
+        "expect": null,
+        "outcome": "refused-no-retrieval",
+        "attempts": 0,
+        "cited": [],
+        "retrieved": [],
+        "top_score": null,
+        "errors": [],
+        "warnings": [],
+        "answer": ""
+      },
+      "note": "",
+      "case_sha256": "fa48be887f614787909684fd108e557543eefa3e39b56cf144a62bb7edd96fe7"
+    },
+    {
+      "id": "unanswerable-cooking",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "out-of-domain",
+        "expect": null,
+        "outcome": "refused-no-retrieval",
+        "attempts": 0,
+        "cited": [],
+        "retrieved": [],
+        "top_score": null,
+        "errors": [],
+        "warnings": [],
+        "answer": ""
+      },
+      "note": "",
+      "case_sha256": "fc6f3d10c155e4a3df469f88d2158686a228a79572636918cf609c30d38c6a42"
+    },
+    {
+      "id": "unanswerable-sports",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "out-of-domain",
+        "expect": null,
+        "outcome": "refused-no-retrieval",
+        "attempts": 0,
+        "cited": [],
+        "retrieved": [],
+        "top_score": null,
+        "errors": [],
+        "warnings": [],
+        "answer": ""
+      },
+      "note": "",
+      "case_sha256": "f194c113cdc6dfa3908202f72fc2e1107ebb6e4fd5b9677ae5a748d99e7fa33b"
+    },
+    {
+      "id": "unanswerable-sourdough",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "out-of-domain",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/service-restart.md#procedure",
+          "data/runbooks/service-restart.md#recovery-options",
+          "data/runbooks/patching-window.md#procedure"
+        ],
+        "top_score": 0.5825,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources discuss Windows Server operational procedures like restarting services and patching, but none address sourdough starter maintenance. This question is unrelated to the topics covered in the sources."
+      },
+      "note": "",
+      "case_sha256": "4c13dc6b086dc486da7609d9c56da0cf42d2b6a490594703ddf64474e9a995a4"
+    },
+    {
+      "id": "unanswerable-no-runbook",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "sops/jea-read-only-endpoint.md#safety",
+          "data/runbooks/service-restart.md#procedure",
+          "sops/jea-read-only-endpoint.md#procedure"
+        ],
+        "top_score": 0.5364,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not include information on resetting a user password in Active Directory."
+      },
+      "note": "",
+      "case_sha256": "4aa367db19667ede0b80dd0e03fa518ab87f65fbfbe32e801201fbb6aa3d13ab"
+    },
+    {
+      "id": "unanswerable-startup-type",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/service-restart.md#procedure",
+          "data/runbooks/service-restart.md#recovery-options",
+          "data/microsoft/Windows-Time-Service-Tools-and-Settings.md#overview"
+        ],
+        "top_score": 0.707,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not include instructions on changing a Windows service's startup type (Manual to Automatic). The sources focus on service restart procedures and Windows Time service settings, but not on modifying service configuration properties like startup type."
+      },
+      "note": "",
+      "case_sha256": "f16401232eed2a72f727bd421f5fb20be3139f053dbe19445ff77cf0b22983bf"
+    },
+    {
+      "id": "unanswerable-disk-quota",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/microsoft/diskpart.md#syntax",
+          "data/microsoft/diskpart.md#overview",
+          "data/runbooks/disk-space.md#procedure"
+        ],
+        "top_score": 0.6378,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not mention how to set disk quotas for users on Windows Server volumes."
+      },
+      "note": "",
+      "case_sha256": "d44a69a5affc673bfcddbba8d329aaf5617e7c048f02f1c9880fb5d0b9ad3adc"
+    },
+    {
+      "id": "unanswerable-patch-rollback",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/patching-window.md#change-control",
+          "data/runbooks/service-restart.md#recovery-options",
+          "data/runbooks/patching-window.md#procedure"
+        ],
+        "top_score": 0.7121,
+        "errors": [],
+        "warnings": [],
+        "answer": "The sources mention that an exception to the patching window must include a rollback step, but they do not provide specific instructions on how to perform the rollback. The exact procedure for reverting a patch is not detailed in the provided materials."
+      },
+      "note": "",
+      "case_sha256": "9edcf4d3342113eebf6600b4f43a9888b98a781be5005f7a32c0c480f6179534"
+    },
+    {
+      "id": "unanswerable-time-zone",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/time-sync.md#procedure",
+          "data/microsoft/Windows-Time-Service-Tools-and-Settings.md#command-line-parameters-for-w32time~3",
+          "data/microsoft/Windows-Time-Service-Tools-and-Settings.md#overview"
+        ],
+        "top_score": 0.6452,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not address time zone configuration or correction. They focus on time synchronization, NTP server configuration, and clock drift correction algorithms. To fix the time zone, you would need to adjust the regional settings in the operating system's control panel or group policy settings."
+      },
+      "note": "",
+      "case_sha256": "156c6f18a4d3a2cbf1cd8a180907132da1c166b4ecee1e598dd71047e677411a"
+    },
+    {
+      "id": "unanswerable-winrm-https",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/microsoft/configure-remote-management-in-server-manager.md#windows-remote-management-winrm-listener-settings",
+          "data/runbooks/winrm-remoting.md#symptoms",
+          "data/runbooks/winrm-remoting.md#procedure"
+        ],
+        "top_score": 0.7387,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not address how to replace the HTTPS certificate used by WinRM for remote connections. They focus on listener settings, firewall configuration, and connectivity troubleshooting but do not mention certificate management procedures."
+      },
+      "note": "",
+      "case_sha256": "973a3b11495047555e9635dc0bb641c71f1096dcc0aca34b5abfbf1848647516"
+    },
+    {
+      "id": "unanswerable-page-file",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "category": "near-miss",
+        "expect": null,
+        "outcome": "refused-not-in-sources",
+        "attempts": 1,
+        "cited": [],
+        "retrieved": [
+          "data/runbooks/disk-space.md#procedure",
+          "sops/lab-session-closeout.md#purpose",
+          "sops/lab-session-closeout.md#scope-and-non-scope"
+        ],
+        "top_score": 0.5642,
+        "errors": [],
+        "warnings": [],
+        "answer": "The provided sources do not address moving the page file or disk space management strategies specific to the page file. They focus on general disk space procedures and lab session closeout protocols, not Windows page file configuration."
+      },
+      "note": "",
+      "case_sha256": "408a9fd57f59843f0e232c5a2973d1a614c46a8b5362ade1cee8f9b8bad11fcb"
+    }
+  ]
+}

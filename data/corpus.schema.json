@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "p2-corpus-manifest",
+  "description": "data/corpus.jsonl - line 1 is the header, every later line is one document. ADRs 0015, 0016.",
+  "$defs": {
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "manifest",
+        "upstream",
+        "decoy_rule"
+      ],
+      "properties": {
+        "manifest": {
+          "const": "p2-corpus"
+        },
+        "upstream": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repo",
+            "commit",
+            "licence",
+            "attribution"
+          ],
+          "properties": {
+            "repo": {
+              "type": "string",
+              "minLength": 1
+            },
+            "commit": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{7,40}$"
+            },
+            "licence": {
+              "type": "string",
+              "minLength": 1
+            },
+            "attribution": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "decoy_rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._/-]+\\.md$",
+      "not": {
+        "pattern": "(^/|\\.\\.)"
+      }
+    },
+    "ours": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "authorship"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "authorship": {
+          "const": "ours"
+        }
+      }
+    },
+    "competitor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "authorship",
+        "role",
+        "upstream_path",
+        "targets",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "authorship": {
+          "const": "microsoft"
+        },
+        "role": {
+          "const": "competitor"
+        },
+        "upstream_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targets": {
+          "$ref": "#/$defs/path"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "sha256 of the vendored file's content, CRLF folded to LF (ADR 0027 amendment 4). A changed page refuses to load until the hash is updated in a reviewed commit."
+        }
+      }
+    },
+    "decoy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "authorship",
+        "role",
+        "upstream_path",
+        "targets",
+        "shared_keyword",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "$ref": "#/$defs/path"
+        },
+        "authorship": {
+          "const": "microsoft"
+        },
+        "role": {
+          "const": "decoy"
+        },
+        "upstream_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "targets": {
+          "$ref": "#/$defs/path"
+        },
+        "shared_keyword": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "sha256 of the vendored file's content, CRLF folded to LF (ADR 0027 amendment 4). A changed page refuses to load until the hash is updated in a reviewed commit."
+        }
+      }
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "authorship"
+      ],
+      "properties": {
+        "authorship": {
+          "enum": [
+            "ours",
+            "microsoft"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "authorship": {
+                "const": "ours"
+              }
+            },
+            "required": [
+              "authorship"
+            ]
+          },
+          "then": {
+            "$ref": "#/$defs/ours"
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "authorship": {
+                "const": "microsoft"
+              }
+            },
+            "required": [
+              "authorship"
+            ]
+          },
+          "then": {
+            "required": [
+              "role"
+            ],
+            "properties": {
+              "role": {
+                "enum": [
+                  "competitor",
+                  "decoy"
+                ]
+              }
+            },
+            "if": {
+              "properties": {
+                "role": {
+                  "const": "decoy"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            },
+            "then": {
+              "$ref": "#/$defs/decoy"
+            },
+            "else": {
+              "$ref": "#/$defs/competitor"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

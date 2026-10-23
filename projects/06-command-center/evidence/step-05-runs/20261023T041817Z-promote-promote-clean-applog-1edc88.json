@@ -1,0 +1,59 @@
+{
+  "kind": "promote-run",
+  "schema": 1,
+  "script": "projects/06-command-center/samples/promote-clean-applog.ps1",
+  "script_sha256": "af181269c3090c1b49ed9f59b44b6f17af5ebcc501cf51c5615563c60295e996",
+  "bench": "SRV01 (srv01, 10.10.10.20) via the QE lab's Ansible inventory as Administrator; checkpoint/restore by a person at the Hyper-V host",
+  "reviewer": "qwen3:14b",
+  "started": "2026-10-23T04:18:17Z",
+  "ended": "2026-10-23T04:19:16Z",
+  "state": "blocked",
+  "live_started": false,
+  "checkpoint": null,
+  "steps": [
+    {
+      "step": "read",
+      "result": "ok",
+      "at": "2026-10-23T04:18:17Z",
+      "bytes": 202
+    },
+    {
+      "step": "classify",
+      "result": "ok",
+      "at": "2026-10-23T04:18:17Z",
+      "note": "no DC-only token found (a floor, not a classifier)"
+    },
+    {
+      "step": "review",
+      "result": "revise",
+      "at": "2026-10-23T04:18:29Z",
+      "findings": [
+        {
+          "line_start": 4,
+          "line_end": 4,
+          "category": "correctness",
+          "severity": "blocking",
+          "why": "Uses forward slash for parameter instead of hyphen, causing syntax error",
+          "fix": "Replace '/MaximumSize' with '-MaximumSize'"
+        }
+      ],
+      "meta": {
+        "model": "qwen3:14b",
+        "model_digest": "bdbd181c33f2ed1b31c972991882db3cf4d192569092138a7d29e973cd9debe8",
+        "ollama_version": "0.40.8",
+        "script_sha256": "f28050d21d3fc8a325c63013ffd39ac23ce030d61d6054e42b864ac44383b736"
+      }
+    },
+    {
+      "step": "review-override",
+      "result": "declined",
+      "at": "2026-10-23T04:19:16Z"
+    }
+  ],
+  "qe_before": null,
+  "qe_after": null,
+  "qe_restored": null,
+  "promoted_to": null,
+  "exit_code": 1,
+  "reason": "reviewer: revise"
+}

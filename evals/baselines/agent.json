@@ -1,0 +1,335 @@
+{
+  "record_version": 7,
+  "header": {
+    "suite_path": "evals/suites/agent.jsonl",
+    "suite_sha256": "31e1cce5036ef36cce5ff7e653da5db06cb772a85a8985afc21f890772432333",
+    "suite_header_sha256": "bee2659b4ae6e9a70084cda42231d628c673fbfa237170df89a6fe095b9b7822",
+    "tier_selection": "fixed",
+    "scorer": "agent",
+    "model_name": "qwen3:8b",
+    "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+    "host_target": "fake host (src/tools.py, in-process)",
+    "sampling": {
+      "temperature": 0.6,
+      "top_k": 20,
+      "top_p": 0.95,
+      "repeat_penalty": 1.0,
+      "seed": 42,
+      "num_predict": 2048
+    },
+    "rebaseline": {
+      "replaced": null,
+      "removed": []
+    },
+    "started_at": "2026-09-29T03:29:54Z",
+    "incomplete": null,
+    "record_version": 7
+  },
+  "cases": [
+    {
+      "id": "status-spooler",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 0,
+        "answer": "The Print Spooler service is currently stopped. It is set to start automatically when the system boots.",
+        "expected": {
+          "Spooler": "stopped"
+        },
+        "extracted": {
+          "Spooler": "stopped"
+        }
+      },
+      "note": "",
+      "case_sha256": "aceb364c83a51ec55b65e716cdb1ee18264323b485c4f09227399e8c7cb7db17"
+    },
+    {
+      "id": "status-w32time",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 0,
+        "answer": "Yes, the W32Time service is running and set to start automatically.",
+        "expected": {
+          "W32Time": "running"
+        },
+        "extracted": {
+          "W32Time": "running"
+        }
+      },
+      "note": "",
+      "case_sha256": "1d8e4cae7f0996f2a4a0e854e7e8636bfe94201caeeabc15b61701aa73c3cbc7"
+    },
+    {
+      "id": "status-winrm",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 0,
+        "answer": "Yes, the WinRM service is running and set to start automatically.",
+        "expected": {
+          "WinRM": "running"
+        },
+        "extracted": {
+          "WinRM": "running"
+        }
+      },
+      "note": "",
+      "case_sha256": "20227a8ed7da801bb3e8c4b77941c0eed945f087f3472bc27a296eefcb83e801"
+    },
+    {
+      "id": "status-wuauserv",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 0,
+        "answer": "The wuauserv service is currently stopped.",
+        "expected": {
+          "wuauserv": "stopped"
+        },
+        "extracted": {
+          "wuauserv": "stopped"
+        }
+      },
+      "note": "",
+      "case_sha256": "a7a063d42cd08fec480471871ed8c84074e3396f69ac62625219e0265ae1bc31"
+    },
+    {
+      "id": "aggregate-down",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 1,
+        "answer": "The following services are currently stopped: Spooler (automatic startup) and wuauserv (manual startup).",
+        "expected": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        },
+        "extracted": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        }
+      },
+      "note": "",
+      "case_sha256": "ff2a87eecb0f39ae8384fb4f39dd4a4828ca94edd8d508795cbbcb3b6f363f8b"
+    },
+    {
+      "id": "aggregate-automatic",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 1,
+        "answer": "The services set to start automatically are Spooler, W32Time, and WinRM.",
+        "expected": {
+          "automatic": [
+            "Spooler",
+            "W32Time",
+            "WinRM"
+          ]
+        },
+        "extracted": {
+          "automatic": [
+            "Spooler",
+            "W32Time",
+            "WinRM"
+          ]
+        }
+      },
+      "note": "",
+      "case_sha256": "8fd687a5e605810b8b2c1be16ef692a32cd47ba74ae5fcfc408b8ab5e5090eec"
+    },
+    {
+      "id": "negative-unknown-service",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 1,
+        "answer": "The Fax service is not running. It was not found in the list of available services on this system.",
+        "expected": null,
+        "extracted": null
+      },
+      "note": "",
+      "case_sha256": "805b5eb7fc7fa1e45ef3cfffc54dcb37692ad16462e66439ba004503ed86b63e"
+    },
+    {
+      "id": "any-down-2",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "outcome": false,
+        "trajectory": false,
+        "judged": true,
+        "missing": [
+          "get_service_status({\"name\": \"W32Time\"})",
+          "get_service_status({\"name\": \"WinRM\"})",
+          "get_service_status({\"name\": \"wuauserv\"})"
+        ],
+        "extra": 0,
+        "answer": "The 'Spooler' service is currently stopped. Would you like me to check the status of other services as well?",
+        "expected": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        },
+        "extracted": {
+          "down": [
+            "Spooler"
+          ]
+        }
+      },
+      "note": "",
+      "case_sha256": "5e721c40a36361f3145852d7e69de4f35d5da79c902bb0dcd0a6b14ee55aba42"
+    },
+    {
+      "id": "any-down-3",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 1,
+        "answer": "Yes, the following services are not running: Spooler (status: stopped, start type: automatic) and wuauserv (status: stopped, start type: manual).",
+        "expected": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        },
+        "extracted": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        }
+      },
+      "note": "",
+      "case_sha256": "31ad00a86227e65a507c70613017cedb6c49595052b34c3ec48d96547b67870d"
+    },
+    {
+      "id": "any-down-4",
+      "tier": "fixed",
+      "result": "fail",
+      "detail": {
+        "outcome": false,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 2,
+        "answer": "The following services are currently stopped: Spooler (automatic start) and wuauserv (manual start). Other services like W32Time and WinRM are running. If these stopped services are critical for your operations, you may need to investigate further.",
+        "expected": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        },
+        "extracted": null
+      },
+      "note": "",
+      "case_sha256": "1ec6900bdfbcf6109b4737907c2ecdc012100eb82ca1e741cbe3a8289dce2af2"
+    },
+    {
+      "id": "any-down-5",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 1,
+        "answer": "The following services are currently stopped: Spooler (automatic startup) and wuauserv (manual startup).",
+        "expected": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        },
+        "extracted": {
+          "down": [
+            "Spooler",
+            "wuauserv"
+          ]
+        }
+      },
+      "note": "",
+      "case_sha256": "6a667dc42862f2987432194535a91d44405171f2f44bb93a7a3b98323d145fe7"
+    },
+    {
+      "id": "spooler-status-2",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 0,
+        "answer": "The print spooler service (Spooler) is currently stopped. It is configured to start automatically when needed.",
+        "expected": {
+          "Spooler": "stopped"
+        },
+        "extracted": {
+          "Spooler": "stopped"
+        }
+      },
+      "note": "",
+      "case_sha256": "cf4bd9c136989623d35edd9604190075b253667de6bfeeb8381eba0814e8c5f9"
+    },
+    {
+      "id": "spooler-status-3",
+      "tier": "fixed",
+      "result": "pass",
+      "detail": {
+        "outcome": true,
+        "trajectory": true,
+        "judged": true,
+        "missing": [],
+        "extra": 0,
+        "answer": "The Spooler service is currently stopped and set to start automatically when the system boots.",
+        "expected": {
+          "Spooler": "stopped"
+        },
+        "extracted": {
+          "Spooler": "stopped"
+        }
+      },
+      "note": "",
+      "case_sha256": "b2f14bc8ff5ec07da259459ea8477f2791351e672deb0a0a4b17b1ab9ceeac5a"
+    }
+  ]
+}

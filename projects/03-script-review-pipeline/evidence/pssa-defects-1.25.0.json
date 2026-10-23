@@ -1,0 +1,98 @@
+﻿{
+    "analyzer":  "PSScriptAnalyzer 1.25.0",
+    "folder":  "set/defects",
+    "files":  [
+                  "01-Start-StoppedAutoServices__01-B.ps1",
+                  "01-Start-StoppedAutoServices__01-G.ps1",
+                  "01-Start-StoppedAutoServices__01-L.ps1",
+                  "02-Clear-OldLogFiles__02-B.ps1",
+                  "02-Clear-OldLogFiles__02-G.ps1",
+                  "02-Clear-OldLogFiles__02-L.ps1",
+                  "03-Get-LowDiskReport__03-G1.ps1",
+                  "03-Get-LowDiskReport__03-G2.ps1",
+                  "03-Get-LowDiskReport__03-G3.ps1",
+                  "04-Test-TimeOffset__04-B.ps1",
+                  "04-Test-TimeOffset__04-G.ps1",
+                  "04-Test-TimeOffset__04-L.ps1",
+                  "05-Set-ServiceStartupType__05-B.ps1",
+                  "05-Set-ServiceStartupType__05-G.ps1",
+                  "05-Set-ServiceStartupType__05-L.ps1",
+                  "06-Export-LocalAdminMembers__06-G1.ps1",
+                  "06-Export-LocalAdminMembers__06-G2.ps1",
+                  "06-Export-LocalAdminMembers__06-G3.ps1",
+                  "07-Move-OldFilesToArchive__07-B.ps1",
+                  "07-Move-OldFilesToArchive__07-G.ps1",
+                  "07-Move-OldFilesToArchive__07-L.ps1",
+                  "08-Test-WinRMReadiness__08-B.ps1",
+                  "08-Test-WinRMReadiness__08-G.ps1",
+                  "08-Test-WinRMReadiness__08-L.ps1",
+                  "09-Register-CleanupTask__09-B.ps1",
+                  "09-Register-CleanupTask__09-G.ps1",
+                  "09-Register-CleanupTask__09-L.ps1",
+                  "10-Test-PendingReboot__10-G1.ps1",
+                  "10-Test-PendingReboot__10-G2.ps1",
+                  "10-Test-PendingReboot__10-G3.ps1",
+                  "11-Remove-StaleProfiles__11-B.ps1",
+                  "11-Remove-StaleProfiles__11-G.ps1",
+                  "11-Remove-StaleProfiles__11-L.ps1",
+                  "12-Backup-ConfigFiles__12-B.ps1",
+                  "12-Backup-ConfigFiles__12-G.ps1",
+                  "12-Backup-ConfigFiles__12-L.ps1"
+              ],
+    "findings":  [
+                     {
+                         "ScriptName":  "01-Start-StoppedAutoServices__01-L.ps1",
+                         "RuleName":  "PSAvoidUsingEmptyCatchBlock",
+                         "Severity":  1,
+                         "Line":  26
+                     },
+                     {
+                         "ScriptName":  "02-Clear-OldLogFiles__02-L.ps1",
+                         "RuleName":  "PSUseDeclaredVarsMoreThanAssignments",
+                         "Severity":  1,
+                         "Line":  20
+                     },
+                     {
+                         "ScriptName":  "04-Test-TimeOffset__04-L.ps1",
+                         "RuleName":  "PSAvoidUsingInvokeExpression",
+                         "Severity":  1,
+                         "Line":  17
+                     },
+                     {
+                         "ScriptName":  "05-Set-ServiceStartupType__05-L.ps1",
+                         "RuleName":  "PSUseDeclaredVarsMoreThanAssignments",
+                         "Severity":  1,
+                         "Line":  25
+                     },
+                     {
+                         "ScriptName":  "07-Move-OldFilesToArchive__07-L.ps1",
+                         "RuleName":  "PSUseDeclaredVarsMoreThanAssignments",
+                         "Severity":  1,
+                         "Line":  29
+                     },
+                     {
+                         "ScriptName":  "08-Test-WinRMReadiness__08-L.ps1",
+                         "RuleName":  "PSAvoidUsingWMICmdlet",
+                         "Severity":  1,
+                         "Line":  13
+                     },
+                     {
+                         "ScriptName":  "09-Register-CleanupTask__09-L.ps1",
+                         "RuleName":  "PSAvoidUsingPlainTextForPassword",
+                         "Severity":  1,
+                         "Line":  16
+                     },
+                     {
+                         "ScriptName":  "11-Remove-StaleProfiles__11-L.ps1",
+                         "RuleName":  "PSAvoidUsingWMICmdlet",
+                         "Severity":  1,
+                         "Line":  17
+                     },
+                     {
+                         "ScriptName":  "12-Backup-ConfigFiles__12-L.ps1",
+                         "RuleName":  "PSUseDeclaredVarsMoreThanAssignments",
+                         "Severity":  1,
+                         "Line":  32
+                     }
+                 ]
+}
