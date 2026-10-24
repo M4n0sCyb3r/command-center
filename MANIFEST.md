@@ -1,6 +1,6 @@
 # MANIFEST
 
-Built by `tools/showcase.py` from the private repo `agentic-lab` at commit `a2eb8c3ff9bd`.
+Built by `tools/showcase.py` from the private repo `agentic-lab` at commit `4b93f8a10377`.
 The include list, the rewrite table and the allow-list are in that repo; the employer
 deny-list is not in any repo by design. Every file below passed the scrub and the link check.
 
@@ -11,7 +11,7 @@ deny-list is not in any repo by design. Every file below passed the scrub and th
 | `.github/workflows/checks.yml` | `d529b77717112f08` |  |
 | `.gitignore` | `791ee083ff47f13d` |  |
 | `LICENSE` | `d0e94bd109f78714` |  |
-| `README.md` | `5e59707a36fec282` |  |
+| `README.md` | `7a769011cc273df5` |  |
 | `bench-pin.json` | `1514ef973b54bd6e` |  |
 | `data/corpus.jsonl` | `f922eb34787141ec` |  |
 | `data/corpus.schema.json` | `fa97f4168f61ac73` |  |
@@ -129,7 +129,7 @@ deny-list is not in any repo by design. Every file below passed the scrub and th
 | `projects/03-script-review-pipeline/set/split.json` | `d520497238a8d01b` |  |
 | `projects/04-agent-evaluation-harness/README.md` | `518b249a3ebccd57` |  |
 | `projects/05-remediation-agent/README.md` | `5293dbe0f8c8f4d2` |  |
-| `projects/06-command-center/README.md` | `ea388f469fbb472e` | 3 |
+| `projects/06-command-center/README.md` | `d0acf33f86aa17c9` | 3 |
 | `projects/06-command-center/evidence/build-step-05-promote-on-srv01.md` | `60aff9a23395b148` |  |
 | `projects/06-command-center/evidence/recording-run/20261024T052053Z-cc-promote-4df59f.json` | `ccbb5f293e3ef9c3` | 2 |
 | `projects/06-command-center/evidence/recording-run/20261024T052055Z-promote-promote-bad-syslog-1a274d.json` | `592b17b75f8c0b6b` |  |
@@ -286,5 +286,5 @@ Allow-listed scrub matches (reviewed, kept):
 - tests/test_audit_and_screen.py:134 (private key)
 - tests/test_provenance.py:44 (e-mail address)
 - tests/test_validate.py:37 (credential assignment)
-- projects/06-command-center/README.md:128 (credential assignment)
+- projects/06-command-center/README.md:132 (credential assignment)
 - projects/06-command-center/recording/p06-promote-recording.mp4 (binary, pinned by sha256)

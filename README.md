@@ -15,6 +15,10 @@ hardware against a personal lab. No employer systems, data, networks or credenti
 > real, and the server is checked again. If it still passes, the script and its evidence are filed
 > for a person to run in production; if not, the server is rolled back and the system *proves* the
 > rollback worked before it says so.
+>
+> **In one line, for a résumé:** an evidence-driven multi-model AI system that runs Windows Server
+> automation through measured-best local models, promoting a script only after review, a
+> checkpointed canary run and a QE suite, with proven rollback, versioned ADRs and a gated CI suite.
 
 ---
 
