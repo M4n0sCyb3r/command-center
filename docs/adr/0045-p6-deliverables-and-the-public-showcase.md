@@ -61,3 +61,16 @@ one thing a stranger can open, without publishing what the boundary exists to ke
 
 - **B.** The résumé line would point at nothing a reader can open.
 - **C.** Publishes employer references and personal notes.
+
+## Amendment 1 — 2026-10-23: the recording goes in pinned by hash
+
+The showcase tool refused the recording, as built: it publishes only UTF-8 text it can scrub.
+**Jose's pick (recommended):** `showcase/binaries.tsv` lists each binary allowed out, pinned by
+its full sha256, with the reason. The person's frame-by-frame review is the scrub (OCR of sampled
+frames, the host name masked on every frame; `evidence/build-step-07-recording.md`). A changed file
+or a stale pin is a hit, and file-by-file approval still applies. Rejected: uploading through
+GitHub's web editor (a file outside the built, approved set), and keeping the video private
+(this ADR committed to linking it).
+This supersedes "Linked, not committed (size)" above, because the cut is 1.4 MB. The recording shows
+the bad script only (caught, restored, confirmed, exit 1). The clean script's promotion is run A
+in `evidence/build-step-05-promote-on-srv01.md`, and a 90-second cut can't hold both runs clearly.

@@ -288,6 +288,14 @@ reporting ALL HOLD. Only then run `promote` again.
 
 Run B is kept in the evidence on purpose: it's the one run where the system said yes and was wrong.
 
+**Watch it (81 s):** [`recording/p06-promote-recording.mp4`](recording/p06-promote-recording.mp4).
+It's a fresh real run of the bad script on the evening of 2026-10-23 (the lab's local time; the run record's UTC stamps read 10-24), the same flow as B2: the reviewer blocks
+it on an invented defect, a person overrides, a person takes the checkpoint, QE after goes red,
+SRV01 is restored, and the restore is confirmed against the before report. Exit 1. It uses hard cuts
+at real speed, and every frame of the run is stamped with its time in the 12-minute take. The run record is in
+[`evidence/recording-run/`](evidence/recording-run/). The host machine's name is masked as `<host>`. The
+video *shows* the evidence; it isn't the evidence (ADR 0044).
+
 ## The original design, and what measurement changed
 
 The first plan (2026-09-05) was an org chart: a small model drafts, a second model (Hermes)

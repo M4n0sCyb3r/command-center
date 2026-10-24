@@ -1,17 +1,17 @@
 # MANIFEST
 
-Built by `tools/showcase.py` from the private repo `agentic-lab` at commit `eed609cb96b1`.
+Built by `tools/showcase.py` from the private repo `agentic-lab` at commit `a2eb8c3ff9bd`.
 The include list, the rewrite table and the allow-list are in that repo; the employer
 deny-list is not in any repo by design. Every file below passed the scrub and the link check.
 
-**268 files.** Rewrites (personal paths -> `<repo>`) applied: 41 in 20 files. Reviewed allow-list entries used: 5.
+**271 files.** Rewrites (personal paths -> `<repo>`) applied: 43 in 21 files. Reviewed allow-list entries used: 6.
 
 | File | sha256 (first 16) | rewrites |
 |---|---|---|
 | `.github/workflows/checks.yml` | `d529b77717112f08` |  |
 | `.gitignore` | `791ee083ff47f13d` |  |
 | `LICENSE` | `d0e94bd109f78714` |  |
-| `README.md` | `747f9e4c309c69a8` |  |
+| `README.md` | `5e59707a36fec282` |  |
 | `bench-pin.json` | `1514ef973b54bd6e` |  |
 | `data/corpus.jsonl` | `f922eb34787141ec` |  |
 | `data/corpus.schema.json` | `fa97f4168f61ac73` |  |
@@ -39,7 +39,7 @@ deny-list is not in any repo by design. Every file below passed the scrub and th
 | `docs/adr/0042-p6-the-promotion-flow.md` | `aabf8a75a5ea7d4e` |  |
 | `docs/adr/0043-p6-models-per-role.md` | `23bcd65e139b135a` |  |
 | `docs/adr/0044-p6-exit-codes-and-harness-entry.md` | `bb88deda5e5665c5` |  |
-| `docs/adr/0045-p6-deliverables-and-the-public-showcase.md` | `89c19dbfecd32249` |  |
+| `docs/adr/0045-p6-deliverables-and-the-public-showcase.md` | `9044cb99584e1fe2` |  |
 | `docs/adr/0046-p6-bench-runtime-ollama-0408.md` | `466619d7efe65e50` |  |
 | `evals/baselines/agent.json` | `b1502d90536ef689` |  |
 | `evals/baselines/answer.json` | `e5db5912da1cc9ea` |  |
@@ -129,8 +129,10 @@ deny-list is not in any repo by design. Every file below passed the scrub and th
 | `projects/03-script-review-pipeline/set/split.json` | `d520497238a8d01b` |  |
 | `projects/04-agent-evaluation-harness/README.md` | `518b249a3ebccd57` |  |
 | `projects/05-remediation-agent/README.md` | `5293dbe0f8c8f4d2` |  |
-| `projects/06-command-center/README.md` | `747f9e4c309c69a8` | 3 |
+| `projects/06-command-center/README.md` | `ea388f469fbb472e` | 3 |
 | `projects/06-command-center/evidence/build-step-05-promote-on-srv01.md` | `60aff9a23395b148` |  |
+| `projects/06-command-center/evidence/recording-run/20261024T052053Z-cc-promote-4df59f.json` | `ccbb5f293e3ef9c3` | 2 |
+| `projects/06-command-center/evidence/recording-run/20261024T052055Z-promote-promote-bad-syslog-1a274d.json` | `592b17b75f8c0b6b` |  |
 | `projects/06-command-center/evidence/step-05-runs/20261023T034703Z-cc-promote-dc1b44.json` | `858a28eac97876c3` | 2 |
 | `projects/06-command-center/evidence/step-05-runs/20261023T034704Z-promote-promote-clean-applog-5b4808.json` | `9d141fa8606a4dbf` |  |
 | `projects/06-command-center/evidence/step-05-runs/20261023T035641Z-cc-promote-7d08b9.json` | `9fb08c53dee99d17` | 2 |
@@ -148,6 +150,7 @@ deny-list is not in any repo by design. Every file below passed the scrub and th
 | `projects/06-command-center/evidence/step-05-runs/false-promotion/NOTE.md` | `85bdf08d3232a92d` |  |
 | `projects/06-command-center/evidence/step-05-runs/false-promotion/promote-bad-syslog-2bb632b1/evidence.json` | `8406705cf81411b1` |  |
 | `projects/06-command-center/evidence/step-05-runs/false-promotion/promote-bad-syslog-2bb632b1/promote-bad-syslog.ps1` | `2bb632b1fe737a36` |  |
+| `projects/06-command-center/recording/p06-promote-recording.mp4` | `c4211c6dcbba570f` |  |
 | `projects/06-command-center/samples/clean-spooler-disabled.ps1` | `7e3e56efec63c426` |  |
 | `projects/06-command-center/samples/promote-bad-syslog.ps1` | `2bb632b1fe737a36` |  |
 | `projects/06-command-center/samples/promote-clean-applog.ps1` | `af181269c3090c1b` |  |
@@ -284,3 +287,4 @@ Allow-listed scrub matches (reviewed, kept):
 - tests/test_provenance.py:44 (e-mail address)
 - tests/test_validate.py:37 (credential assignment)
 - projects/06-command-center/README.md:128 (credential assignment)
+- projects/06-command-center/recording/p06-promote-recording.mp4 (binary, pinned by sha256)
